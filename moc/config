@@ -1,0 +1,8 @@
+# Themes are by default in /usr/share/moc/themes/
+# but moc also searches in ~/.moc/themes/
+# Theme when X is not running
+Theme = red_theme
+# Theme when X is running
+XTermTheme = black_theme
+SoundDriver = pulseaudio
+Keymap = keymap

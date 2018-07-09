@@ -1,0 +1,96 @@
+##############################
+# Defining aliases
+##############################
+
+# sudo alias
+alias sudo='sudo -H'
+
+# mupdf alias
+function __mupdf_function { mupdf 2>/dev/null "$1" & }
+alias mu='__mupdf_function'
+
+# evince alias
+function __evince_function { evince 2>/dev/null "$1" & }
+alias ev='__evince_function'
+
+# rm/cp/mv alias
+
+alias rm='rm -I'
+alias cp='cp -i'
+alias mv='mv -i'
+
+# shutdown alias
+alias shut='sudo shutdown -P now'
+alias restart='sudo shutdown -r now'
+
+# emacs alias
+
+function __emacs_function { emacs -mm "$@" & }
+alias e='__emacs_function'
+alias enox='emacs -nw'
+
+# some color aliases
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    alias ls='ls --color=auto --group-directories-first'
+
+    alias grep='grep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias egrep='egrep --color=auto'
+fi
+
+# some ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+alias myls='ls -lhav'
+
+# xfst alias
+alias xfst='~/tools/xfsm_api/linux64/bin/xfst'
+
+# lexc alias
+alias lexc='~/tools/xfsm_api/linux64/bin/lexc'
+
+# Clear screen
+alias c='clear && printf "\033c" && echo $(uname -srm)'
+# screen clear alias that works for tmux too
+alias ct='clear && printf "\033c" && tmux clearhist && echo $(uname -srm)'
+
+# startx
+alias x='startx'
+
+# apache2 aliases
+#alias apache2start='/usr/local/apache2/bin/apachectl -k start'
+#alias apache2stop='/usr/local/apache2/bin/apachectl -k stop'
+#alias apache2restart='/usr/local/apache2/bin/apachectl -k restart'
+
+# aliases for tar
+alias targz='tar -czf'
+alias untargz='tar -xzf'
+alias tarxz='tar -cJf'
+alias untarxz='tar -xJf'
+alias tarbz2='tar -cjf'
+alias untarbz2='tar -xjf'
+
+# alias for suspending
+alias suspend='systemctl suspend'
+
+# alias for wifi hotspot
+alias hotspot='sudo sh ~/bin/start-hotspot.sh'
+
+# alias for restarting wicd daemon
+alias wicd-restart='sudo wicd restart'
+
+# alias for connecting with projectors
+alias projector-connect='mons -m'
+alias projector-reset='mons -o'
+
+# update mirror list
+alias updatemirrorlist='sudo reflector --verbose -l 5 --sort rate --save /etc/pacman.d/mirrorlist'
+
+# aliases for pacman
+alias showaurpkgs='pacman -Qm'
+alias del-orphans='sudo pacman -Rsn $(pacman -Qdtq)'
+
+# git aliases
+alias g='git'

@@ -1,0 +1,70 @@
+conky.config = {
+
+background=true,
+use_xft=true,
+font='Inconsolata:size=9',
+xftalpha=0.8,
+update_interval=1.0,
+total_run_times=0,
+own_window=true,
+own_window_class='Conky',
+own_window_type='override',
+own_window_transparent=true,
+own_window_colour='black',
+own_window_hints='undecorated,sticky,skip_taskbar,skip_pager',
+own_window_argb_visual=true,
+double_buffer=true,
+text_buffer_size=2048,
+-- minimum_size 260 5,
+draw_shades=false,
+draw_outline=false,
+draw_borders=false,
+draw_graph_borders=true,
+stippled_borders=0,
+border_width=1.0,
+default_color='white',
+default_shade_color='black',
+default_outline_color='black',
+alignment='top_right',
+gap_x=60,
+gap_y=30,
+uppercase=false,
+cpu_avg_samples=1,
+net_avg_samples=1,
+override_utf8_locale=false,
+use_spacer='none',
+mpd_host='localhost',
+-- mpd_password,
+}
+
+conky.text = [[
+
+$font$color${exec i3 -v | cut -d ' ' -f1,2,3} shortcuts ${color #009bf9}$hr
+
+${color lightgrey}MOD=[Super]
+
+${color lightgrey}[MOD]+[Enter]${alignr}Start default terminal
+[MOD]+[Number]${alignr}Switch to tag [Number]
+[Shift]+[MOD]+[Number]${alignr}Move active window
+${alignr}...to tag [Number]
+[MOD]+[Arrow_Left]|[Arrow_Right]${alignr}Toogle windows
+[MOD]+[h]|[v]${alignr}Open next window in horizontal
+${alignr}...or vertical view
+[Shift]+[MOD]+[q]${alignr}Cancel active window
+[MOD]+[f]${alignr}Activate fullscreen
+[MOD]+[s]${alignr}Activate stack mode
+[MOD]+[e]${alignr}Activate splitting mode
+[MOD]+[w]${alignr}Activate tabbed mode
+[Shift]+[MOD]+[r]${alignr}Reload i3
+[Shift]+[MOD]+[e]${alignr}Exit i3
+
+${font}${color}Floating mode options $stippled_hr
+
+${color lightgrey}[MOD]+[r]${alignr}Rezise window
+[MOD]+[Mouse_Button_Left]${alignr}Move window
+
+$font$color${exec dmenu -v} options ${color #009bf9}$hr
+
+${color lightgrey}[MOD]+[d]${alignr}Search for application
+[MOD]+[Insert]${alignr}Show clipboard
+]]

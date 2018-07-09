@@ -1,0 +1,24 @@
+# Show all 256 colors with color number
+function spectrum_ls() {
+  for code in {000..255}; do
+    print -P -- "$code: %F{$code}Text%{$reset_color%}"
+  done
+}
+
+# Helper function, simply prints current cursor position
+function get_cursor_pos() {
+    echo -ne "\033[6n"
+    read -s -d\[ garbage
+    read -s -d R pos
+}
+
+# Function for getting the number of stripped dirs in the prompt
+function get_stripped_dir_count() {
+	COUNT=$(echo $PWD | grep -o "/" | wc -l)
+	SUB=$1
+	RES=$(($COUNT - $SUB))
+	echo $RES
+	unset COUNT
+	unset SUB
+	unset RES
+}

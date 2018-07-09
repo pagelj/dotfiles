@@ -1,0 +1,20 @@
+##################
+#### Basics ######
+##################
+
+# Source ~/.zshrc
+source ~/.zshrc
+
+# Set path
+typeset -U path
+# Add ~/bin to path
+# Add ruby scripts to path
+path=(~/bin $(ruby -e 'print Gem.user_dir')/bin $path[@])
+
+################
+## Variables ###
+################
+
+# set EDITOR and VISUAL variable
+export EDITOR="vim"
+export VISUAL="vim"

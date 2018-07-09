@@ -1,0 +1,71 @@
+conky.config = {
+
+background=true,
+use_xft=true,
+font='Inconsolata:size=9',
+xftalpha=0.8,
+update_interval=1.0,
+total_run_times=0,
+own_window=true,
+own_window_class='Conky',
+own_window_type='override',
+own_window_transparent=true,
+own_window_colour='black',
+own_window_hints='undecorated,sticky,skip_taskbar,skip_pager',
+own_window_argb_visual=true,
+double_buffer=true,
+text_buffer_size=2048,
+-- minimum_size 260 5,
+draw_shades=false,
+draw_outline=false,
+draw_borders=false,
+draw_graph_borders=true,
+stippled_borders=0,
+border_width=1.0,
+default_color='white',
+default_shade_color='black',
+default_outline_color='black',
+alignment='top_right',
+gap_x=60,
+gap_y=30,
+uppercase=false,
+cpu_avg_samples=1,
+net_avg_samples=1,
+override_utf8_locale=false,
+use_spacer='none',
+mpd_host='localhost',
+-- mpd_password,
+}
+
+conky.text = [[
+
+${font}${color}dwm-6.1 shortcuts ${color #009bf9}$hr
+
+${color lightgrey}[Shift]+[Alt]+[Enter]${alignr}Start default terminal
+[Alt]+[Number]${alignr}Switch to tag [Number]
+[Shift]+[Alt]+[Number]${alignr}Move active window
+${alignr}...to tag [Number]
+[Shift]+[Alt]+[v]${alignr}Paste from clipboard
+[Alt]+[Enter]${alignr}Toggle master and stack
+[Alt]+[l]|[h]${alignr}Rezise master area
+[Alt]+[j]|[k]${alignr}Toogle windows
+[Alt]+[d]|[i]${alignr}Switch between horizontal
+${alignr}...and vertical view
+[Shift]+[Alt]+[c]${alignr}Cancel active window
+[Alt]+[t]${alignr}Activate tiled mode
+[Alt]+[f]${alignr}Activate floating mode
+[Alt]+[m]${alignr}Activate monocle mode
+[Shift]+[Alt]+[q]${alignr}Quit dwm
+
+${font}${color}Floating mode options $stippled_hr
+
+${color lightgrey}[Alt]+[right mouse button]${alignr}Rezise window
+[Alt]+[left mouse button]${alignr}Move window
+[Shift]+[Alt]+[Space]${alignr}Let window float
+${alignr}...in tiled mode
+
+${font}${color}${exec dmenu -v} options ${color #009bf9}$hr
+
+${color lightgrey}[Alt]+[p]${alignr}Search for application
+[Alt]+[Insert]${alignr}Show clipboard
+]]

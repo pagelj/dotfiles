@@ -1,0 +1,224 @@
+# i3 config file
+#
+# Please see https://i3wm.org/docs/userguide.html for a complete reference
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango:Inconsolata 10
+
+# Set mod keys
+set $MOD Mod4
+set $SECONDARYMOD Mod1
+
+# use these keys for focus, movement, and resize directions when reaching for
+# the arrows is not convenient
+set $up l
+set $down k
+set $left j
+set $right semicolon
+
+# use Mouse+$MOD to drag floating windows to their wanted position
+floating_modifier $MOD
+
+# Define terminal to be used by i3
+set $TERM urxvt
+# start a terminal
+bindsym $MOD+Return exec $TERM
+# kill focused window
+bindsym $MOD+Shift+q kill
+
+# start dmenu
+bindsym $MOD+d exec dmenu_run
+
+# change focus
+bindsym $MOD+$left focus left
+bindsym $MOD+$down focus down
+bindsym $MOD+$up focus up
+bindsym $MOD+$right focus right
+
+# alternatively, you can use the cursor keys:
+bindsym $MOD+Left focus left
+bindsym $MOD+Down focus down
+bindsym $MOD+Up focus up
+bindsym $MOD+Right focus right
+
+# move focused window
+bindsym $MOD+Shift+$left move left
+bindsym $MOD+Shift+$down move down
+bindsym $MOD+Shift+$up move up
+bindsym $MOD+Shift+$right move right
+
+# alternatively, you can use the cursor keys:
+bindsym $MOD+Shift+Left move left
+bindsym $MOD+Shift+Down move down
+bindsym $MOD+Shift+Up move up
+bindsym $MOD+Shift+Right move right
+
+# split in horizontal orientation
+bindsym $MOD+h split h
+
+# split in vertical orientation
+bindsym $MOD+v split v
+
+# enter fullscreen mode for the focused container
+bindsym $MOD+f fullscreen toggle
+
+# change container layout (stacked, tabbed, toggle split)
+bindsym $MOD+s layout stacking
+bindsym $MOD+w layout tabbed
+bindsym $MOD+e layout toggle split
+
+# toggle tiling / floating
+bindsym $MOD+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $MOD+space focus mode_toggle
+
+# focus the parent container
+bindsym $MOD+a focus parent
+
+# focus the child container
+bindsym $MOD+x focus child
+
+# move the currently focused window to the scratchpad
+bindsym $MOD+Shift+minus move scratchpad
+
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $MOD+minus scratchpad show
+
+# define workspaces
+set $WS1 1:desk
+set $WS2 2:term
+set $WS3 3
+set $WS4 4
+set $WS5 5
+set $WS6 6
+set $WS7 7
+set $WS8 8
+set $WS9 9
+set $WS0 0:misc
+set $WSCODE c:code
+set $WSMAIL m:mail
+set $WSWEB b:web
+set $WSYT y:yt
+set $WSTOP t:htop
+
+# switch to workspace
+bindsym $MOD+1 workspace $WS1
+bindsym $MOD+2 workspace $WS2
+bindsym $MOD+3 workspace $WS3
+bindsym $MOD+4 workspace $WS4
+bindsym $MOD+5 workspace $WS5
+bindsym $MOD+6 workspace $WS6
+bindsym $MOD+7 workspace $WS7
+bindsym $MOD+8 workspace $WS8
+bindsym $MOD+9 workspace $WS9
+bindsym $MOD+0 workspace $WS0
+bindsym $MOD+c workspace $WSCODE
+bindsym $MOD+m workspace $WSMAIL
+bindsym $MOD+b workspace $WSWEB
+bindsym $MOD+y workspace $WSYT
+bindsym $MOD+t workspace $WSTOP
+
+# move focused container to workspace
+bindsym $MOD+Shift+1 move container to workspace $WS1
+bindsym $MOD+Shift+2 move container to workspace $WS2
+bindsym $MOD+Shift+3 move container to workspace $WS3
+bindsym $MOD+Shift+4 move container to workspace $WS4
+bindsym $MOD+Shift+5 move container to workspace $WS5
+bindsym $MOD+Shift+6 move container to workspace $WS6
+bindsym $MOD+Shift+7 move container to workspace $WS7
+bindsym $MOD+Shift+8 move container to workspace $WS8
+bindsym $MOD+Shift+9 move container to workspace $WS9
+bindsym $MOD+Shift+0 move container to workspace $WS0
+bindsym $MOD+Shift+c move container to workspace $WSCODE
+bindsym $MOD+Shift+m move container to workspace $WSMAIL
+bindsym $MOD+Shift+b move container to workspace $WSWEB
+bindsym $MOD+Shift+y move container to workspace $WSYT
+
+# reload the configuration file
+#bindsym $MOD+Shift+c reload
+# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+bindsym $MOD+Shift+r restart
+# exit i3 (logs you out of your X session)
+bindsym $MOD+Shift+e exit
+
+# resize window (you can also use the mouse for that)
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym $left       resize shrink width 10 px or 10 ppt
+        bindsym $down       resize grow height 10 px or 10 ppt
+        bindsym $up         resize shrink height 10 px or 10 ppt
+        bindsym $right      resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left        resize shrink width 10 px or 10 ppt
+        bindsym Down        resize grow height 10 px or 10 ppt
+        bindsym Up          resize shrink height 10 px or 10 ppt
+        bindsym Right       resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+# Enter resize mode
+bindsym $MOD+r mode "resize"
+
+# Use keybinding to call the dmenu based clipmenu (ARCH AUR)
+bindsym $MOD+Insert exec clipmenu
+
+# b like browser
+bindsym $SECONDARYMOD+b exec firefox-nightly
+# m like mail
+bindsym $SECONDARYMOD+m exec --no-startup-id "i3-msg 'workspace $WSMAIL; exec $TERM -e mutt'" 
+# y like youtube
+bindsym $SECONDARYMOD+y exec --no-startup-id "i3-msg 'workspace $WSYT; layout tabbed; exec $TERM -e mpsyt'"
+# c like code
+bindsym $SECONDARYMOD+c exec geany
+
+# Autostart
+exec --no-startup-id "i3-msg 'workspace $WSTOP; exec $TERM -e htop; workspace back_and_forth'"
+
+# Assigments
+# Puts window classes on specific workspaces
+assign [class="Firefox"] $WSWEB
+assign [class="Nightly"] $WSWEB
+assign [class="Thunderbird"] $WSMAIL
+assign [class="Atom"] $WSCODE
+assign [class="RStudio"] $WSCODE
+assign [class="Eclipse"] $WSCODE
+assign [class="Geany"] $WSCODE
+
+# Make i3 handle tab-less browsers
+for_window [class="Surf"] focus child, layout stacking, focus
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+        position top status_command i3status
+
+	colors {
+		background #222222
+		statusline #cccccc
+	}
+}
+
+# Make config i3-gaps-compatible by disabling window title bar and setting new border
+for_window [class="^.*"] border pixel 1
+
+#################################
+# Configuration for i3-gaps
+# Comment, if not using i3-gaps
+#################################
+
+smart_gaps on # only display gaps when there is more than one container
+smart_borders no_gaps # only draw borders if container is not the only one and gap size to edge is 0
+gaps inner 15 # set gap size
+gaps outer 0 # Additional gap to screen border
