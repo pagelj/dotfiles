@@ -25,3 +25,5 @@ rsync -ac --progress $GIT_REPO/conky/conkyrc_vim ~/.conky/.conkyrc_vim
 rsync -ac --progress $GIT_REPO/tmux.conf ~/.tmux.conf
 
 rsync -ac --progress $GIT_REPO/taskrc ~/.taskrc
+
+rsync -ac --progress $GIT_REPO/vimrc ~/.vimrc
