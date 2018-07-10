@@ -93,8 +93,16 @@ fi
 ##### Misc ######
 #################
 
-# If tmux is running
-if [ -n "$TMUX" ]; then
+# TMUX
+if [[ -z "$TMUX" ]] ;then
+    ID="$( tmux ls | grep -vm1 attached | cut -d: -f1 )" # get the id of a deattached session
+    if [[ -z "$ID" ]] ;then # if not available create a new one
+        tmux new-session
+    else
+        tmux attach-session -t "$ID" # if available attach to it
+    fi
+fi
+if [ -n "$TMUX" ]; then # If tmux is running
     # create a global per-pane variable that holds the pane's PWD
     export PS1=$PS1'$( [ -n $TMUX ] && tmux setenv -g TMUX_PWD_$(tmux display -p "#D" | tr -d %) $PWD)'
 fi
