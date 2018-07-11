@@ -72,9 +72,8 @@ colors
 ####### Prompt #######
 ######################
 
-# set prompt, with the extra functionality to strip leading dirs in the path
-NUMOFTAILDIRS=2 # Setting it to e.g. 2 will result in only maximally two trailing dirs showing in path
-PROMPT='%B[%b%n@%m %($((NUMOFTAILDIRS+1))~|<$(get_stripped_dir_count $NUMOFTAILDIRS)>/%$NUMOFTAILDIRS~|%~)%B]%b%# %E'
+# set prompt
+PROMPT='%B[%b%n@%m %1~%B]%b%# %E'
 
 # Print greeting message
 echo $(uname -srm)
