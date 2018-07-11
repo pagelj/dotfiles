@@ -21,7 +21,7 @@ set $right semicolon
 floating_modifier $MOD
 
 # Define terminal to be used by i3
-set $TERM urxvt
+set $TERM st
 # start a terminal
 bindsym $MOD+Return exec $TERM
 # kill focused window
