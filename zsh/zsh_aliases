@@ -93,4 +93,11 @@ alias showaurpkgs='pacman -Qm'
 alias del-orphans='sudo pacman -Rsn $(pacman -Qdtq)'
 
 # git aliases
-alias g='git'
+alias gits='git status'
+alias gitcv='git commit -S -v'
+alias gitcm='git commit -S -m'
+alias gitc='git commit -S'
+alias gita='git add'
+alias gitps='git push'
+alias gitpl='git pull'
+alias gitl='git log'
