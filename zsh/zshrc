@@ -73,7 +73,7 @@ colors
 ######################
 
 # set prompt
-PROMPT='%B[%b%n@%m %1~%B]%b%# %E'
+PROMPT='%b%# %E'
 
 # Print greeting message
 echo $(uname -srm)
