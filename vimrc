@@ -19,6 +19,11 @@ set nocompatible
 set wildmode=longest,list,full
 set wildmenu
 
+" reopening a file at same position
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+endif
+
 " vim-plug section
 call plug#begin('~/.vim/plugged')
 Plug 'vimwiki/vimwiki'
