@@ -183,9 +183,6 @@ bindsym $SECONDARYMOD+y exec --no-startup-id "i3-msg 'workspace $WSYT; layout ta
 # c like code
 bindsym $SECONDARYMOD+c exec geany
 
-# Autostart
-exec --no-startup-id "i3-msg 'workspace $WSTOP; exec $TERM -e htop; workspace back_and_forth'"
-
 # Assigments
 # Puts window classes on specific workspaces
 assign [class="Firefox"] $WSWEB
