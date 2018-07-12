@@ -47,9 +47,12 @@ ${color lightgrey}[MOD] [|]${alignr}Split window vertically
 ${color lightgrey}[MOD] [-]${alignr}Split window horizontally
 ${color lightgrey}[MOD] [ArrowKeys]${alignr}Switch between panes
 ${color lightgrey}[MOD] [PageUp|PageDown]${alignr}Scroll history
+${color lightgrey}[MOD] [$]${alignr}Rename session
 ${color lightgrey}[MOD] [d]${alignr}Detach current session
 ${color lightgrey}[MOD] [s]${alignr}List sessions
 ${color lightgrey}[MOD] [w]${alignr}List windows
 ${color lightgrey}[MOD] [Number]${alignr}Goto window [Number]
-
+${color lightgrey}[MOD] [c]${alignr}Create window
+${color lightgrey}[MOD] [&]${alignr}Kill window
+${color lightgrey}[MOD] [x]${alignr}Kill pane
 ]]
