@@ -41,31 +41,34 @@ conky.text = [[
 
 ${font}${color}dwm-6.1 shortcuts ${color #009bf9}$hr
 
-${color lightgrey}[Shift]+[Alt]+[Enter]${alignr}Start default terminal
-[Alt]+[Number]${alignr}Switch to tag [Number]
-[Shift]+[Alt]+[Number]${alignr}Move active window
+${color lightgrey}MOD=[Super]
+
+${color lightgrey}[MOD]+[Enter]${alignr}Start default terminal
+[MOD]+[Number]${alignr}Switch to tag [Number]
+[Shift]+[MOD]+[Number]${alignr}Move active window
 ${alignr}...to tag [Number]
-[Shift]+[Alt]+[v]${alignr}Paste from clipboard
-[Alt]+[Enter]${alignr}Toggle master and stack
-[Alt]+[l]|[h]${alignr}Rezise master area
-[Alt]+[j]|[k]${alignr}Toogle windows
-[Alt]+[d]|[i]${alignr}Switch between horizontal
+[Shift]+[MOD]+[v]${alignr}Paste from clipboard
+[MOD]+[z]${alignr}Toggle master and stack
+[MOD]+[l]|[h]${alignr}Rezise master area
+[MOD]+[j]|[k]${alignr}Toogle windows
+[MOD]+[s]|[i]${alignr}Switch between horizontal
 ${alignr}...and vertical view
-[Shift]+[Alt]+[c]${alignr}Cancel active window
-[Alt]+[t]${alignr}Activate tiled mode
-[Alt]+[f]${alignr}Activate floating mode
-[Alt]+[m]${alignr}Activate monocle mode
-[Shift]+[Alt]+[q]${alignr}Quit dwm
+[Shift]+[MOD]+[c]${alignr}Cancel active window
+[MOD]+[t]${alignr}Activate tiled mode
+[MOD]+[f]${alignr}Activate floating mode
+[MOD]+[m]${alignr}Activate monocle mode
+[Shift]+[MOD]+[q]${alignr}Quit dwm
 
 ${font}${color}Floating mode options $stippled_hr
 
-${color lightgrey}[Alt]+[right mouse button]${alignr}Rezise window
-[Alt]+[left mouse button]${alignr}Move window
-[Shift]+[Alt]+[Space]${alignr}Let window float
+${color lightgrey}[MOD]+[right mouse button]${alignr}Rezise window
+[MOD]+[left mouse button]${alignr}Move window
+[Shift]+[MOD]+[Space]${alignr}Let window float
 ${alignr}...in tiled mode
 
 ${font}${color}${exec dmenu -v} options ${color #009bf9}$hr
 
-${color lightgrey}[Alt]+[p]${alignr}Search for application
-[Alt]+[Insert]${alignr}Show clipboard
+${color lightgrey}[MOD]+[d]${alignr}Search for application
+[MOD]+[c]${alignr}Show clipboard
+[MOD]+[p]${alignr}Show pass manager
 ]]
