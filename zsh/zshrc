@@ -6,11 +6,22 @@
 autoload -Uz compinit
 compinit
 
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+bindkey '^i' expand-or-complete-prefix # Complete inside of string
+zstyle ':completion:*' completer _complete _match _approximate # Enable fuzzy matching
+zstyle ':completion:*:match:*' original only
+zstyle -e ':completion:*:approximate:*' max-errors 'reply=( $(( ($#PREFIX+$#SUFFIX)/3 )) numeric )' # Tolerance of approximate increases by amount of characters typed so far
+zstyle ':completion:*:(rm|kill|diff):*' ignore-line yes # Avoid getting the same file offered again with certain programs
 zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*:descriptions' format "- %d -"
+zstyle ':completion:*:corrections' format "- %d - (errors %e})"
+zstyle ':completion:*:default' list-prompt '%S%M matches%s'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*:manuals' separate-sections true
+zstyle ':completion:*:manuals.(^1*)' insert-sections true
+zstyle ':completion:*' menu select
+zstyle ':completion:*' verbose yes
 zstyle ':completion:*' rehash true
-# Speed up completion
-zstyle ':completion:*' accept-exact '*(N)'
+# Speed up completion by setting cache
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
 
@@ -93,7 +104,7 @@ fi
 #################
 
 # TMUX
-if [[ -z "$TMUX" ]] ;then
+if [[ -z "$TMUX" ]] ;then # Test if tmux is running
     ID="$( tmux ls | grep -vm1 attached | cut -d: -f1 )" # get the id of a deattached session
     if [[ -z "$ID" ]] ;then # if not available create a new one
         tmux new-session
