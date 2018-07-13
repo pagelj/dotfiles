@@ -53,11 +53,11 @@ ${alignr}...to tag [Number]
 [MOD]+[j]|[k]${alignr}Toogle windows
 [MOD]+[s]|[i]${alignr}Switch between horizontal
 ${alignr}...and vertical view
-[Shift]+[MOD]+[c]${alignr}Cancel active window
+[Shift]+[MOD]+[q]${alignr}Cancel active window
 [MOD]+[t]${alignr}Activate tiled mode
 [MOD]+[f]${alignr}Activate floating mode
 [MOD]+[m]${alignr}Activate monocle mode
-[Shift]+[MOD]+[q]${alignr}Quit dwm
+[Shift]+[MOD]+[e]${alignr}Quit dwm
 
 ${font}${color}Floating mode options $stippled_hr
 
