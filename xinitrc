@@ -23,11 +23,6 @@ clipmenud & # Nice clipboard using dmenu
 pgrep redshift &> /dev/null || redshift -l 48:9 &> /dev/null & # For dimmed display at night
 compton -bCG & # start compton
 nohup mons -a > /dev/null 2>&1 & # Re-establishs the display if it detects only one monitor
-#if tmux info &> /dev/null; then # if tmux server already running, attach to current session
-#   hash st && st -e tmux a &
-#else
-#   hash st && st -e tmux &
-#fi
 
 # Set status line for dwm
 while true
