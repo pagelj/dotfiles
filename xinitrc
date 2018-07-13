@@ -42,12 +42,21 @@ do
 	LOCALTIME=$(TZ=Europe/Berlin date +%Z\=%Y-%m-%dW%V%a%H:%M:%S)
 	UTC="("$(TZ=UTC date +%Z\=%Y-%m-%dW%V%a%H:%M:%S)")"
 	IP="IP=$(for i in `ip r`; do echo $i; done | grep -A 1 src | tail -n1)"
-	TEMP="Temp=$(($(cat /sys/class/thermal/thermal_zone0/temp) / 1000))°C"
+	if [ $(($(cat /sys/class/thermal/thermal_zone0/temp) / 1000)) -ge 100 ]
+	then
+	    TEMP="Temp=$(($(cat /sys/class/thermal/thermal_zone0/temp) / 1000))°C"
+        else
+	    TEMP=""
+	fi
 	VERSION=$(echo 'dwm-6.1') # dwm -v does not work :(
-	BAT="Bat=$(acpi -b | awk '{ print $4 " " }' | tr -d ',' | tr -d ' ')"
-
+	if [ "$(acpi -b | awk '{ print $3 " " }' | tr -d ',' | tr -d ' ')" != "Full" ]
+	then
+	    BAT="Bat=$(acpi -b | awk '{ print $4 " " }' | tr -d ',' | tr -d ' ')"
+	else
+	    BAT=""
+	fi
 	xsetroot -name "$IP $VOL $BAT $TEMP $LOCALTIME $VERSION"
-	sleep 1s
+	sleep 0.1s
 done &
 
 # Call conky depending on window manager
