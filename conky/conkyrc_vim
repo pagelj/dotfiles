@@ -26,7 +26,7 @@ default_shade_color='black',
 default_outline_color='black',
 alignment='top_left',
 gap_x=60,
-gap_y=30,
+gap_y=0,
 uppercase=false,
 cpu_avg_samples=1,
 net_avg_samples=1,
@@ -60,8 +60,12 @@ ${alignr}in the whole document
 [N]${alignr}Repeat search in opposite direction
 [u]${alignr}Undo
 [Ctrl]+[r]${alignr}Redo
+[:sp]${alignr}Split horizontally
+[:vsp]${alignr}Split vertically
+[Ctrl]+[ww]${alignr}Change window
+[:e PATH]|[:e]${alignr}Open file|Reload
 [:w]${alignr}Save file
-[:wq]${alignr}Save and quit
+[:wq]|[:x]${alignr}Save and quit
 [:q]${alignr}Quit
 [:q!]${alignr}Force quit
 
