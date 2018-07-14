@@ -27,3 +27,5 @@ rsync -ac --progress $GIT_REPO/tmux.conf ~/.tmux.conf
 rsync -ac --progress $GIT_REPO/taskrc ~/.taskrc
 
 rsync -ac --progress $GIT_REPO/vimrc ~/.vimrc
+
+rsync -ac --progress $GIT_REPO/scripts/tmux_pane_current_path.sh ~/scripts/tmux_pane_current_path.sh
