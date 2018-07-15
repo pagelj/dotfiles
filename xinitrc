@@ -14,14 +14,14 @@ fi
 xrdb -merge ~/.Xresources
 xmodmap ~/.Xmodmap
 setxkbmap -layout de # Set keyboard layout
-sh ~/.fehbg & # Set background image
+sh ~/.fehbg & # Set wallpaper
 xbindkeys # Use cumstomized keybindings
 
 # Autostart
 xautolock -time 30 -locker slock & # Automatic screen lock
 clipmenud & # Nice clipboard using dmenu
 pgrep redshift &> /dev/null || redshift -l 48:9 &> /dev/null & # For dimmed display at night
-compton -bCG & # start compton
+xcompmgr & # start composition manager
 nohup mons -a > /dev/null 2>&1 & # Re-establishs the display if it detects only one monitor
 
 # Set status line for dwm
