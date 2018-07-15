@@ -54,10 +54,6 @@ do
 	sleep 0.1s
 done &
 
-# Call conky depending on window manager
-#conky -b -c ~/.conky/.conkyrc_i3 && conky -b -c ~/.conky/.conkyrc_tmux && conky -b -c ~/.conky/.conkyrc_vim &
-conky -b -c ~/.conky/.conkyrc_dwm && conky -b -c ~/.conky/.conkyrc_tmux && conky -b -c ~/.conky/.conkyrc_vim & 
-
 # Set window/desktop manager
 exec dwm
 #exec i3
