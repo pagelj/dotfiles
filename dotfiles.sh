@@ -34,6 +34,9 @@ rsync -ac --progress $GIT_REPO/scripts/tmux_pane_current_path.sh ~/scripts/tmux_
 
 rsync -ac --progress $GIT_REPO/bin/start_conky_dwm.sh ~/bin/start_conky_dwm.sh
 rsync -ac --progress $GIT_REPO/bin/start_conky_i3.sh ~/bin/start_conky_i3.sh
+rsync -ac --progress $GIT_REPO/bin/mpsyt.sh ~/bin/mpsyt.sh
+rsync -ac --progress $GIT_REPO/bin/mutt.sh ~/bin/mutt.sh
+rsync -ac --progress $GIT_REPO/bin/top.sh ~/bin/top.sh
 
 rsync -ac --progress ~/suckless/dwm-6.1/config.h $GIT_REPO/suckless/dwm/config.h
 rsync -ac --progress ~/suckless/st-0.8.1/config.h $GIT_REPO/suckless/st/config.h
