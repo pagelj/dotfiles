@@ -13,6 +13,8 @@ rsync -ac --progress $GIT_REPO/xinitrc ~/.xinitrc
 rsync -ac --progress $GIT_REPO/i3/config ~/.config/i3/config
 rsync -ac --progress $GIT_REPO/i3status/config ~/.config/i3status/config
 
+rsync -ac --progress ~/.config/procps/toprc $GIT_REPO/toprc
+
 rsync -ac --progress $GIT_REPO/Xresources ~/.Xresources
 
 rsync -ac --progress $GIT_REPO/moc/config ~/.moc/config
@@ -29,3 +31,7 @@ rsync -ac --progress $GIT_REPO/taskrc ~/.taskrc
 rsync -ac --progress $GIT_REPO/vimrc ~/.vimrc
 
 rsync -ac --progress $GIT_REPO/scripts/tmux_pane_current_path.sh ~/scripts/tmux_pane_current_path.sh
+
+rsync -ac --progress ~/suckless/dwm-6.1/config.h $GIT_REPO/suckless/dwm/config.h
+rsync -ac --progress ~/suckless/st-0.8.1/config.h $GIT_REPO/suckless/st/config.h
+rsync -ac --progress ~/suckless/st-0.8.1/st.info $GIT_REPO/suckless/st/st.info
