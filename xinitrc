@@ -37,7 +37,7 @@ do
 	LOCALTIME=$(TZ=Europe/Berlin date +%Z\=%Y-%m-%dW%V%a%H:%M:%S)
 	UTC="("$(TZ=UTC date +%Z\=%Y-%m-%dW%V%a%H:%M:%S)")"
 	IP="IP=$(for i in `ip r`; do echo $i; done | grep -A 1 src | tail -n1)"
-	if [ $(($(cat /sys/class/thermal/thermal_zone0/temp) / 1000)) -ge 100 ]
+	if [ $(($(cat /sys/class/thermal/thermal_zone0/temp) / 1000)) -ge 50 ]
 	then
 	    TEMP="Temp=$(($(cat /sys/class/thermal/thermal_zone0/temp) / 1000))°C"
         else
