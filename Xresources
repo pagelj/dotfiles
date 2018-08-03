@@ -2,7 +2,6 @@
 URxvt.termName: rxvt-unicode
 URxvt.scrollBar: false
 URxvt.scrollTtyOutput: false
-URxvt.internalBorder: 20
 !! Font preferenes
 URxvt.font: xft:Inconsolata:size=14
 !! Larger history limit
