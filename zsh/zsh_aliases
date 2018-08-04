@@ -14,7 +14,6 @@ function __evince_function { evince 2>/dev/null "$1" & }
 alias ev='__evince_function'
 
 # rm/cp/mv alias
-
 alias rm='rm -I'
 alias cp='cp -i'
 alias mv='mv -i'
@@ -24,7 +23,6 @@ alias shut='sudo shutdown -P now'
 alias restart='sudo shutdown -r now'
 
 # emacs alias
-
 function __emacs_function { emacs -mm "$@" & }
 alias e='__emacs_function'
 alias enox='emacs -nw'
@@ -38,6 +36,7 @@ if [ -x /usr/bin/dircolors ]; then
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
+alias tmux='tmux -2' # Force tmux to use 256 colors
 
 # some ls aliases
 alias ll='ls -alF'
