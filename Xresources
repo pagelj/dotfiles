@@ -8,21 +8,54 @@ URxvt.font: xft:Inconsolata:size=14
 URxvt.saveLines: 1000000
 URxvt*urgentOnBell: true
 !! Molokai color scheme
-URxvt*background: #101010
-URxvt*foreground: #d0d0d0
-URxvt*color0:     #101010
-URxvt*color1:     #960050
-URxvt*color2:     #66aa11
-URxvt*color3:     #c47f2c
-URxvt*color4:     #30309b
-URxvt*color5:     #7e40a5
-URxvt*color6:     #3579a8
-URxvt*color7:     #9999aa
-URxvt*color8:     #303030
-URxvt*color9:     #ff0090
-URxvt*color10:    #80ff00
-URxvt*color11:    #ffba68
-URxvt*color12:    #5f5fee
-URxvt*color13:    #bb88dd
-URxvt*color14:    #4eb4fa
-URxvt*color15:    #d0d0d0
+!URxvt*background: #101010
+!URxvt*foreground: #d0d0d0
+!URxvt*color0:     #101010
+!URxvt*color1:     #960050
+!URxvt*color2:     #66aa11
+!URxvt*color3:     #c47f2c
+!URxvt*color4:     #30309b
+!URxvt*color5:     #7e40a5
+!URxvt*color6:     #3579a8
+!URxvt*color7:     #9999aa
+!URxvt*color8:     #303030
+!URxvt*color9:     #ff0090
+!URxvt*color10:    #80ff00
+!URxvt*color11:    #ffba68
+!URxvt*color12:    #5f5fee
+!URxvt*color13:    #bb88dd
+!URxvt*color14:    #4eb4fa
+!URxvt*color15:    #d0d0d0
+
+!! Obsidian color scheme
+URxvt*foreground:  #cdcdcd
+URxvt*background:  #283033
+URxvt*cursorColor: #c0cad0
+!! Black
+URxvt*color0:      #000000
+URxvt*color8:      #555555
+!! Red
+URxvt*color1:      #a60001
+URxvt*color9:      #ff0003
+!! Green
+URxvt*color2:      #00bb00
+URxvt*color10:     #93c863
+!! Yellow
+URxvt*color3:      #fecd22
+URxvt*color11:     #fef874
+!! Blue
+URxvt*color4:      #3a9bdb
+URxvt*color12:     #a1d7ff
+!! Magenta
+URxvt*color5:      #bb00bb
+URxvt*color13:     #ff55ff
+!! Cyan
+URxvt*color6:      #00bbbb
+URxvt*color14:     #55ffff
+!! White
+URxvt*color7:      #bbbbbb
+URxvt*color15:     #ffffff
+!! Bold, Italic, Underline
+URxvt*colorBD:     #ffffff
+!URxvt*colorIT:
+!URxvt*colorUL:
