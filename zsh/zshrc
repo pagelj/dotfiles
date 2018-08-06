@@ -86,10 +86,6 @@ colors
 # set prompt
 PROMPT='%b%# %E'
 
-# Print greeting message
-echo $(uname -srm)
-c # Clear screen
-
 #################
 ### Functions ###
 #################
