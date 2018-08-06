@@ -34,7 +34,7 @@ do
 	then
 	    VOL="Vol=muted"
 	fi
-	LOCALTIME=$(TZ=Europe/Berlin date +%Z\=%Y-%m-%dW%V%a%H:%M:%S)
+	LOCALTIME=$(date +%Z\=%Y-%m-%dW%V%a%H:%M:%S)
 	UTC="("$(TZ=UTC date +%Z\=%Y-%m-%dW%V%a%H:%M:%S)")"
 	IP="IP=$(for i in `ip r`; do echo $i; done | grep -A 1 src | tail -n1)"
 	if [ -d "/proc/sys/net/ipv4/conf/tun0" ]
