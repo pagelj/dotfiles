@@ -101,3 +101,5 @@ alias gitps='git push'
 alias gitpl='git pull'
 alias gitl='git log'
 alias gitd='git diff'
+
+alias settimezone='timedatectl set-timezone'
