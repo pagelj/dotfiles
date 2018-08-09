@@ -43,7 +43,7 @@ do
 	else
 		VPN="VPN=no"
 	fi
-	if [ $(($(cat /sys/class/thermal/thermal_zone0/temp) / 1000)) -ge 50 ]
+	if [ $(($(cat /sys/class/thermal/thermal_zone0/temp) / 1000)) -ge 60 ]
 	then
 	    TEMP="Temp=$(($(cat /sys/class/thermal/thermal_zone0/temp) / 1000))°C"
         else
