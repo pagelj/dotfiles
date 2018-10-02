@@ -29,6 +29,7 @@ static const Rule rules[] = {
 	{ "de-unistuttgart-ims-coref-annotator-Annotator", NULL, NULL, 0, 1,   -1 },
 	{ "Firefox",        NULL,       NULL,       1<<8,         0,           -1 },
         { "Nightly",        NULL,       NULL,       1<<8,         0,           -1 },
+	{ "qutebrowser",    NULL,       NULL,       1<<8,         0,           -1 },
 	{ NULL,             NULL,       "mpsyt",    1<<8,         0,           -1 },
 	{ "Thunderbird",    NULL,       NULL,       1<<7,         0,           -1 },
 	{ NULL,             NULL,       "mutt",     1<<7,         0,           -1 },
