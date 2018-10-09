@@ -28,4 +28,5 @@ endif
 " vim-plug section
 call plug#begin('~/.vim/plugged')
 Plug 'vimwiki/vimwiki'
+Plug 'chrisbra/csv.vim'
 call plug#end()
