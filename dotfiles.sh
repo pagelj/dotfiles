@@ -30,6 +30,11 @@ rsync -ac --progress $GIT_REPO/taskrc ~/.taskrc
 
 rsync -ac --progress $GIT_REPO/vim/vimrc ~/.vimrc
 rsync -ac --progress $GIT_REPO/vim/colors/obsidian.vim ~/.vim/colors/obsidian.vim
+rsync -ac --progress $GIT_REPO/vim/autoload/plug.vim ~/.vim/autoload/plug.vim
+rsync -ac --progress $GIT_REPO/vim/ftdetect/text.vim ~/.vim/ftdetect/text.vim
+rsync -ac --progress $GIT_REPO/vim/ftdetect/markdown.vim ~/.vim/ftdetect/markdown.vim
+rsync -ac --progress $GIT_REPO/vim/ftplugin/text.vim ~/.vim/ftplugin/text.vim
+rsync -ac --progress $GIT_REPO/vim/ftplugin/markdown.vim ~/.vim/ftplugin/markdown.vim
 
 rsync -ac --progress $GIT_REPO/scripts/tmux_pane_current_path.sh ~/scripts/tmux_pane_current_path.sh
 
