@@ -102,5 +102,6 @@ alias gitpl='git pull'
 alias gitl='git log'
 alias gitd='git diff'
 alias gitb='git branch'
+alias gitch='git checkout'
 
 alias settimezone='timedatectl set-timezone'
