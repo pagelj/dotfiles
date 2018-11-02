@@ -41,8 +41,7 @@ alias tmux='tmux -2' # Force tmux to use 256 colors
 # some ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
-alias l='ls -CF'
-alias myls='ls -lhav'
+alias l='ls -lhav'
 
 # xfst alias
 alias xfst='~/tools/xfsm_api/linux64/bin/xfst'
