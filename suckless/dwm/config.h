@@ -17,7 +17,7 @@ static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 
 /* tagging */
-static const char *tags[] = { "1:desk", "2:term", "3:code", "4:top", "5", "6", "7", "8:mail", "9:web" };
+static const char *tags[] = { "1:desk", "2:term", "3:code", "4:ssh", "5:top", "6", "7", "8:mail", "9:web" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -36,7 +36,7 @@ static const Rule rules[] = {
 	{ "Geany",          NULL,       NULL,       1<<2,         0,           -1 },
 	{ "RStudio",        NULL,       NULL,       1<<2,         0,           -1 },
 	{ "Eclipse",        NULL,       NULL,       1<<2,         0,           -1 },
-	{ NULL,             NULL,       "top",      1<<3,         0,           -1 },
+	{ NULL,             NULL,       "top",      1<<4,         0,           -1 },
 };
 
 /* layout(s) */
