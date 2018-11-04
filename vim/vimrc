@@ -1,5 +1,4 @@
 set encoding=utf-8 " Encoding
-set ruler
 set number " Display line numbers
 set relativenumber " Display relative line numbers
 
@@ -24,6 +23,19 @@ set wildmenu
 if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
+
+" status line
+set laststatus=2
+set statusline=
+set statusline+=%7*\[%n]                                  "buffernr
+set statusline+=%1*\ %<./%t\                              "Filename
+set statusline+=%2*\ %y\                                  "FileType
+set statusline+=%3*\ %{''.(&fenc!=''?&fenc:&enc).''}      "Encoding
+set statusline+=%3*\ %{(&bomb?\",BOM\":\"\")}\            "Encoding2
+set statusline+=%4*\ %{&ff}\                              "FileFormat (dos/unix..) 
+set statusline+=%5*\ %{&spelllang}\                       "Spellanguage
+set statusline+=%8*\ %=\ %l:%v\                           "Rownr:Colnr
+set statusline+=%0*\ \ %m%r%w\ %P\ \                      "Modified? Readonly? Top/bot.
 
 " vim-plug section
 call plug#begin('~/.vim/plugged')
