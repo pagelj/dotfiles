@@ -35,6 +35,7 @@ rsync -ac --progress $GIT_REPO/vim/ftdetect/text.vim ~/.vim/ftdetect/text.vim
 rsync -ac --progress $GIT_REPO/vim/ftdetect/markdown.vim ~/.vim/ftdetect/markdown.vim
 rsync -ac --progress $GIT_REPO/vim/ftplugin/text.vim ~/.vim/ftplugin/text.vim
 rsync -ac --progress $GIT_REPO/vim/ftplugin/markdown.vim ~/.vim/ftplugin/markdown.vim
+rsync -ac --progress $GIT_REPO/vim/ftplugin/vimwiki.vim ~/.vim/ftplugin/vimwiki.vim
 
 rsync -ac --progress $GIT_REPO/scripts/tmux_pane_current_path.sh ~/scripts/tmux_pane_current_path.sh
 
