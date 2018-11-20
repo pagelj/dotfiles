@@ -70,14 +70,16 @@ static const char *clipcmd[] = { "clipmenu", "-m", dmenumon, "-fn", dmenufont, "
 static const char *passcmd[] = { "passmenu", "--type", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL }; /* Define passmenu command */
 static const char *firefoxcmd[] = { "firefox-nightly", NULL}; /* Define firefox command */
 static const char *muttcmd[] = { "urxvt", "-e", "mutt", NULL }; /* Define mutt command */
+static const char *statusbarcmd[] = { "dmenu_statusbar.sh", NULL}; /* Define command for starting dmenu-based statusbar */
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_c,      spawn,          {.v = clipcmd } }, /* Define shortcut for clipmenu */
 	{ MODKEY,                       XK_p,      spawn,          {.v = passcmd } }, /* Define shortcut for passmenu */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
-	{ MODKEY          ,             XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_b,      togglebar,      {0} },
+	{ MODKEY,             		XK_Return, spawn,          {.v = termcmd } },
+	/*{ MODKEY,                       XK_b,      togglebar,      {0} },*/
+	{ MODKEY,			XK_b,	   spawn,	   {.v = statusbarcmd } },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_Left,   focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
