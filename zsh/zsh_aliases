@@ -104,3 +104,5 @@ alias gitb='git branch'
 alias gitch='git checkout'
 
 alias settimezone='timedatectl set-timezone'
+
+alias n='nnn'
