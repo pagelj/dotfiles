@@ -41,4 +41,5 @@ set statusline+=%0*\ \ %m%r%w\ %P\ \                      "Modified? Readonly? T
 call plug#begin('~/.vim/plugged')
 Plug 'vimwiki/vimwiki'
 Plug 'chrisbra/csv.vim'
+Plug 'w0rp/ale'
 call plug#end()
