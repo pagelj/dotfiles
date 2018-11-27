@@ -71,6 +71,7 @@ static const char *passcmd[] = { "passmenu", "--type", "-m", dmenumon, "-fn", dm
 static const char *firefoxcmd[] = { "firefox-nightly", NULL}; /* Define firefox command */
 static const char *muttcmd[] = { "urxvt", "-e", "mutt", NULL }; /* Define mutt command */
 static const char *statusbarcmd[] = { "dmenu_statusbar.sh", NULL}; /* Define command for starting dmenu-based statusbar */
+static const char *lockcmd[] = { "slock", NULL}; /* Define command for locking screen */
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -78,7 +79,8 @@ static Key keys[] = {
 	{ MODKEY,                       XK_p,      spawn,          {.v = passcmd } }, /* Define shortcut for passmenu */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,             		XK_Return, spawn,          {.v = termcmd } },
-	/*{ MODKEY,                       XK_b,      togglebar,      {0} },*/
+	{ MODKEY,                       XK_l,      spawn,          {.v = lockcmd } }, /* Define shortcut for lockcmd */
+	{ MODKEY,                       XK_x,      togglebar,      {0} },
 	{ MODKEY,			XK_b,	   spawn,	   {.v = statusbarcmd } },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_Left,   focusstack,     {.i = +1 } },
@@ -87,7 +89,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_s,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
+	{ MODKEY,                       XK_g,      setmfact,       {.f = +0.05} },
 	{ MODKEY,                       XK_z,      zoom,           {0} },
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_q,      killclient,     {0} },
