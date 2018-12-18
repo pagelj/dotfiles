@@ -106,3 +106,6 @@ alias gitch='git checkout'
 alias settimezone='timedatectl set-timezone'
 
 alias n='nnn'
+
+alias tx='tmux'
+alias txa='tmux a'
