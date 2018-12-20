@@ -57,11 +57,6 @@ alias ct='clear && printf "\033c" && tmux clearhist'
 # startx
 alias x='startx'
 
-# apache2 aliases
-#alias apache2start='/usr/local/apache2/bin/apachectl -k start'
-#alias apache2stop='/usr/local/apache2/bin/apachectl -k stop'
-#alias apache2restart='/usr/local/apache2/bin/apachectl -k restart'
-
 # aliases for tar
 alias targz='tar -czf'
 alias untargz='tar -xzf'
@@ -76,19 +71,12 @@ alias suspend='systemctl suspend'
 # alias for wifi hotspot
 alias hotspot='sudo sh ~/bin/start-hotspot.sh'
 
-# alias for restarting wicd daemon
-alias wicd-restart='sudo wicd restart'
-
-# alias for connecting with projectors
-alias projector-connect='mons -m'
-alias projector-reset='mons -o'
-
 # update mirror list
 alias updatemirrorlist='sudo reflector --verbose -l 5 --sort rate --save /etc/pacman.d/mirrorlist'
 
 # aliases for pacman
-alias showaurpkgs='pacman -Qm'
-alias del-orphans='sudo pacman -Rsn $(pacman -Qdtq)'
+alias aurpkgs-show='pacman -Qm'
+alias orphans-rm='sudo pacman -Rsn $(pacman -Qdtq)'
 
 # git aliases
 alias gits='git status'
@@ -109,3 +97,5 @@ alias n='nnn'
 
 alias tx='tmux'
 alias txa='tmux a'
+
+alias yt='mpsyt'
