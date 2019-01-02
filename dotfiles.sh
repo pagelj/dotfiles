@@ -30,6 +30,7 @@ rsync -ac --progress $GIT_REPO/taskrc ~/.taskrc
 
 rsync -ac --progress $GIT_REPO/vim/vimrc ~/.vimrc
 rsync -ac --progress $GIT_REPO/vim/colors/obsidian.vim ~/.vim/colors/obsidian.vim
+rsync -ac --progress $GIT_REPO/vim/colors/true-monochrome.vim ~/.vim/colors/true-monochrome.vim
 rsync -ac --progress $GIT_REPO/vim/autoload/plug.vim ~/.vim/autoload/plug.vim
 rsync -ac --progress $GIT_REPO/vim/ftdetect/text.vim ~/.vim/ftdetect/text.vim
 rsync -ac --progress $GIT_REPO/vim/ftdetect/markdown.vim ~/.vim/ftdetect/markdown.vim

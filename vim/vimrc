@@ -5,7 +5,7 @@ set relativenumber " Display relative line numbers
 " Enable syntax highlighting
 if has("syntax")
   syntax on
-  colorscheme obsidian
+  colorscheme true-monochrome
 endif
 
 " Enable plugins
