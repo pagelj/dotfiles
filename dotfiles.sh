@@ -18,6 +18,8 @@ rsync -ac --progress ~/.config/procps/toprc $GIT_REPO/toprc
 rsync -ac --progress $GIT_REPO/Xresources ~/.Xresources
 
 rsync -ac --progress $GIT_REPO/moc/config ~/.moc/config
+rsync -ac --progress $GIT_REPO/mpd.conf ~/.config/mpd/mpd.conf
+rsync -ac --progress $GIT_REPO/ncmpcpp/config ~/.config/ncmpcpp/config
 
 rsync -ac --progress $GIT_REPO/conky/conkyrc_dwm ~/.conky/conkyrc_dwm
 rsync -ac --progress $GIT_REPO/conky/conkyrc_i3 ~/.conky/conkyrc_i3
