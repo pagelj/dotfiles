@@ -65,11 +65,11 @@ static const Layout layouts[] = {
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
-static const char *termcmd[]  = { "urxvt", NULL };
+static const char *termcmd[]  = { "st", NULL };
 static const char *clipcmd[] = { "clipmenu", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL }; /* Define clipmenu command */
 static const char *passcmd[] = { "passmenu", "--type", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL }; /* Define passmenu command */
 static const char *firefoxcmd[] = { "firefox-nightly", NULL}; /* Define firefox command */
-static const char *muttcmd[] = { "urxvt", "-e", "mutt", NULL }; /* Define mutt command */
+static const char *muttcmd[] = { "st", "-e", "mutt", NULL }; /* Define mutt command */
 static const char *statusbarcmd[] = { "dmenu_statusbar.sh", NULL}; /* Define command for starting dmenu-based statusbar */
 static const char *lockcmd[] = { "slock", NULL}; /* Define command for locking screen */
 
