@@ -14,6 +14,8 @@ rsync -ac --progress $GIT_REPO/zsh/zsh_aliases ~/.zsh_aliases
 
 echo "$GIT_REPO/xinitrc --> ~/.xinitrc"
 rsync -ac --progress $GIT_REPO/xinitrc ~/.xinitrc
+echo "$GIT_REPO/xbindkeysrc --> ~/.xbindkeysrc"
+rsync -ac --progress $GIT_REPO/xbindkeysrc ~/.xbindkeysrc
 
 echo "$GIT_REPO/i3/config --> ~/.config/i3/config"
 rsync -ac --progress $GIT_REPO/i3/config ~/.config/i3/config

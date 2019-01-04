@@ -1,0 +1,23 @@
+# Increase volume
+"pactl set-sink-volume 0 +1%"
+   XF86AudioRaiseVolume
+
+# Decrease volume
+"pactl set-sink-volume 0 -1%"
+   XF86AudioLowerVolume
+
+# Mute
+"amixer -q -D pulse sset Master toggle"
+   XF86AudioMute
+
+# Increase backlight
+"xbacklight -inc 10"
+   XF86MonBrightnessUp
+
+# Decrease backlight
+"xbacklight -dec 10"
+   XF86MonBrightnessDown
+
+# Display time
+"start_conky_time.sh"
+   Mod4+F1 
