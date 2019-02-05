@@ -85,13 +85,13 @@ rsync -ac --progress $GIT_REPO/bin/top.sh ~/bin/top.sh
 echo "$GIT_REPO/bin/dmenu_statusbar.sh --> ~/bin/dmenu_statusbar.sh"
 rsync -ac --progress $GIT_REPO/bin/dmenu_statusbar.sh ~/bin/dmenu_statusbar.sh
 
-echo "$GIT_REPO/suckless/dwm/config.h --> ~/build/suckless/dwm-6.1/config.h"
-rsync -ac --progress $GIT_REPO/suckless/dwm/config.h ~/build/suckless/dwm-6.1/config.h
+echo "$GIT_REPO/suckless/dwm/config.h --> ~/build/suckless/dwm-6.2/config.h"
+rsync -ac --progress $GIT_REPO/suckless/dwm/config.h ~/build/suckless/dwm-6.2/config.h
 echo "$GIT_REPO/suckless/st/config.h --> ~/build/suckless/st-0.8.1/config.h"
 rsync -ac --progress $GIT_REPO/suckless/st/config.h ~/build/suckless/st-0.8.1/config.h
 echo "$GIT_REPO/suckless/st/st.info --> ~/build/suckless/st-0.8.1/st.info"
 rsync -ac --progress $GIT_REPO/suckless/st/st.info ~/build/suckless/st-0.8.1/st.info
-echo "$GIT_REPO/suckless/dmenu/config.h --> ~/build/suckless/dmenu-4.8/config.h"
-rsync -ac --progress $GIT_REPO/suckless/dmenu/config.h ~/build/suckless/dmenu-4.8/config.h
+echo "$GIT_REPO/suckless/dmenu/config.h --> ~/build/suckless/dmenu-4.9/config.h"
+rsync -ac --progress $GIT_REPO/suckless/dmenu/config.h ~/build/suckless/dmenu-4.9/config.h
 echo "$GIT_REPO/suckless/slock/config.h --> ~/build/suckless/slock-1.4/config.h"
 rsync -ac --progress $GIT_REPO/suckless/slock/config.h ~/build/suckless/slock-1.4/config.h
