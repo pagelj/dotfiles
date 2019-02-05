@@ -16,7 +16,7 @@ xmodmap ~/.Xmodmap
 setxkbmap -layout de # Set keyboard layout
 sh ~/.fehbg & # Set wallpaper
 xbindkeys # Use cumstomized keybindings
-xbacklight -set 40 # Dim screen
+xbacklight -set 60 # Dim screen
 
 # Autostart
 xautolock -time 30 -locker slock & # Automatic screen lock
