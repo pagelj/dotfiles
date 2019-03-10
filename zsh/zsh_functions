@@ -29,6 +29,7 @@ function bg_process() {
 	if [ ! "$NUM_BG" -eq "0" ]; then
 		echo "[bg: $NUM_BG]"
 	fi
+	unset NUM_BG
 }
 
 # Git
