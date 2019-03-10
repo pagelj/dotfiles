@@ -25,7 +25,7 @@ function get_stripped_dir_count() {
 
 # Function to parse the number of background processes
 function bg_process() {
-	NUM_BG=$(jobs -l | wc -l)
+	NUM_BG=$(jobs -l | grep "\[[0-9]\+\]" | wc -l)
 	if [ ! "$NUM_BG" -eq "0" ]; then
 		echo "[bg: $NUM_BG]"
 	fi
