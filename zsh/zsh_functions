@@ -23,6 +23,14 @@ function get_stripped_dir_count() {
 	unset RES
 }
 
+# Function to parse the number of background processes
+function bg_process() {
+	NUM_BG=$(jobs -l | wc -l)
+	if [ ! "$NUM_BG" -eq "0" ]; then
+		echo "[bg: $NUM_BG]"
+	fi
+}
+
 # Git
 
 parse_git_branch() {
