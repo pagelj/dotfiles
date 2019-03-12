@@ -28,7 +28,7 @@ static const Rule rules[] = {
 	 */
 	/* class         instance    title       tags mask     isfloating   monitor */
 	{ "Gimp",           NULL,       NULL,       0,            1,           -1 },
-	{ "de-unistuttgart-ims-coref-annotator-Annotator", NULL, NULL, 0, 1,   -1 },
+	/*{ "de-unistuttgart-ims-coref-annotator-Annotator", NULL, NULL, 0, 1,   -1 },*/
 	{ "Firefox",        NULL,       NULL,       1<<8,         0,           -1 },
         { "Nightly",        NULL,       NULL,       1<<8,         0,           -1 },
 	{ "qutebrowser",    NULL,       NULL,       1<<8,         0,           -1 },
