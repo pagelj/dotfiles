@@ -19,5 +19,5 @@
    XF86MonBrightnessDown
 
 # Display time
-"start_conky_time.sh"
+"tty-clock.sh"
    Mod4+F1 
