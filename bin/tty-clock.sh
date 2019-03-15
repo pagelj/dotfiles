@@ -1,1 +1,1 @@
-st -e tty-clock -c
+st -e tty-clock -cs -C 2
