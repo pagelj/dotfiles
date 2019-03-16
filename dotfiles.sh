@@ -84,6 +84,15 @@ echo "$GIT_REPO/bin/top.sh --> ~/bin/top.sh"
 rsync -ac --progress $GIT_REPO/bin/top.sh ~/bin/top.sh
 echo "$GIT_REPO/bin/dmenu_statusbar.sh --> ~/bin/dmenu_statusbar.sh"
 rsync -ac --progress $GIT_REPO/bin/dmenu_statusbar.sh ~/bin/dmenu_statusbar.sh
+echo "$GIT_REPO/bin/cowsay_battery.sh --> ~/bin/cowsay_battery.sh"
+rsync -ac --progress $GIT_REPO/bin/cowsay_battery.sh ~/bin/cowsay_battery.sh
+echo "$GIT_REPO/bin/cowsay_ip.sh --> ~/bin/cowsay_ip.sh"
+rsync -ac --progress $GIT_REPO/bin/cowsay_ip.sh ~/bin/cowsay_ip.sh
+echo "$GIT_REPO/bin/cowsay_temperatur.sh --> ~/bin/cowsay_temperatur.sh"
+rsync -ac --progress $GIT_REPO/bin/cowsay_temperatur.sh ~/bin/cowsay_temperatur.sh
+echo "$GIT_REPO/bin/cowsay_volume.sh --> ~/bin/cowsay_volume.sh"
+rsync -ac --progress $GIT_REPO/bin/cowsay_volume.sh ~/bin/cowsay_volume.sh
+
 echo "$GIT_REPO/newsboat/config --> ~/.config/newsboat/config"
 rsync -ac --progress $GIT_REPO/newsboat/config ~/.config/newsboat/config
 
