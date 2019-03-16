@@ -106,3 +106,8 @@ echo "$GIT_REPO/suckless/dmenu/config.h --> ~/build/suckless/dmenu-4.9/config.h"
 rsync -ac --progress $GIT_REPO/suckless/dmenu/config.h ~/build/suckless/dmenu-4.9/config.h
 echo "$GIT_REPO/suckless/slock/config.h --> ~/build/suckless/slock-1.4/config.h"
 rsync -ac --progress $GIT_REPO/suckless/slock/config.h ~/build/suckless/slock-1.4/config.h
+
+echo "$GIT_REPO/systemd/mbsync.service --> ~/.config/systemd/user/mbsync.service"
+rsync -ac --progress $GIT_REPO/systemd/mbsync.service ~/.config/systemd/user/mbsync.service
+echo "$GIT_REPO/systemd/mbsync.timer --> ~/.config/systemd/user/mbsync.timer"
+rsync -ac --progress $GIT_REPO/systemd/mbsync.timer ~/.config/systemd/user/mbsync.timer
