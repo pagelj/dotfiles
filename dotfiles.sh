@@ -84,6 +84,8 @@ echo "$GIT_REPO/bin/top.sh --> ~/bin/top.sh"
 rsync -ac --progress $GIT_REPO/bin/top.sh ~/bin/top.sh
 echo "$GIT_REPO/bin/dmenu_statusbar.sh --> ~/bin/dmenu_statusbar.sh"
 rsync -ac --progress $GIT_REPO/bin/dmenu_statusbar.sh ~/bin/dmenu_statusbar.sh
+echo "$GIT_REPO/newsboat/config --> ~/.config/newsboat/config"
+rsync -ac --progress $GIT_REPO/newsboat/config ~/.config/newsboat/config
 
 echo "$GIT_REPO/suckless/dwm/config.h --> ~/build/suckless/dwm-6.2/config.h"
 rsync -ac --progress $GIT_REPO/suckless/dwm/config.h ~/build/suckless/dwm-6.2/config.h
