@@ -77,6 +77,9 @@ alias updatemirrorlist='sudo reflector --verbose -l 5 --sort rate --save /etc/pa
 # aliases for pacman
 alias aurpkgs-show='pacman -Qm'
 alias orphans-rm='sudo pacman -Rsn $(pacman -Qdtq)'
+alias pacu='sudo pacman -Syu'
+alias pacs='sudo pacman -S'
+alias pacr='sudo pacman -Rns'
 
 # git aliases
 alias gits='git status'
