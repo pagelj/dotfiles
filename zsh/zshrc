@@ -107,7 +107,7 @@ PROMPT='%b%{$fg[green]%}%# %{$reset_color%}%E'
 ######
 
 # Modify the colors and symbols in these variables as desired.
-GIT_PROMPT_SYMBOL="%{$fg[green]%}±"                              # plus/minus - clean repo
+GIT_PROMPT_SYMBOL="%{$fg[green]%}"                              # clean repo
 GIT_PROMPT_PREFIX="%{$fg[green]%}[%{$reset_color%}"
 GIT_PROMPT_SUFFIX="%{$fg[green]%}]%{$reset_color%}"
 GIT_PROMPT_AHEAD="%{$fg[green]%}ANUM%{$reset_color%}"           # A"NUM" - ahead by "NUM" commits
