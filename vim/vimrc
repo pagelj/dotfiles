@@ -53,5 +53,5 @@ call plug#end()
 command! -nargs=* RunSilent
 	\ | execute ':silent !'.'<args>'
 	\ | execute ':redraw!'
-nmap <Leader>pc :RunSilent pandoc -f markdown -o /tmp/vim-pandoc-out.pdf %<CR>
+nmap <Leader>pc :RunSilent pandoc -f markdown -o /tmp/vim-pandoc-out.pdf % &<CR>
 nmap <Leader>pp :RunSilent xdg-open /tmp/vim-pandoc-out.pdf &<CR> 
