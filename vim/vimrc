@@ -43,3 +43,10 @@ Plug 'vimwiki/vimwiki'
 Plug 'chrisbra/csv.vim'
 Plug 'w0rp/ale'
 call plug#end()
+
+" markdown preview with pandoc
+command! -nargs=* RunSilent
+	\ | execute ':silent !'.'<args>'
+	\ | execute ':redraw!'
+nmap <Leader>pc :RunSilent pandoc -o /tmp/vim-pandoc-out.pdf %<CR>
+nmap <Leader>pp :RunSilent xdg-open /tmp/vim-pandoc-out.pdf &<CR> 
