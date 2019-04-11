@@ -24,6 +24,11 @@ if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
+" Change leader key
+let mapleader = ','
+" Set the time the leader key is active (in ms)
+set timeoutlen=4000
+
 " status line
 set laststatus=2
 set statusline=
@@ -48,5 +53,5 @@ call plug#end()
 command! -nargs=* RunSilent
 	\ | execute ':silent !'.'<args>'
 	\ | execute ':redraw!'
-nmap <Leader>pc :RunSilent pandoc -o /tmp/vim-pandoc-out.pdf %<CR>
+nmap <Leader>pc :RunSilent pandoc -f markdown -o /tmp/vim-pandoc-out.pdf %<CR>
 nmap <Leader>pp :RunSilent xdg-open /tmp/vim-pandoc-out.pdf &<CR> 
