@@ -42,16 +42,18 @@ set statusline+=%5*\ %{&spelllang}\                       "Spellanguage
 set statusline+=%8*\ %=\ %l:%v\                           "Rownr:Colnr
 set statusline+=%0*\ \ %m%r%w\ %P\ \                      "Modified? Readonly? Top/bot.
 
+" run programs silently
+command! -nargs=* RunSilent
+	\ | execute ':silent !'.'<args>'
+	\ | execute ':redraw!'
+
+" markdown preview with pandoc
+autocmd BufEnter *.markdown,*.md,*.wiki :RunSilent pandoc -f markdown -o /tmp/vim-pandoc-out.pdf % && xdg-open /tmp/vim-pandoc-out.pdf &
+autocmd BufWritePost *.markdown,*.md,*.wiki :RunSilent pandoc -f markdown -o /tmp/vim-pandoc-out.pdf % && pkill -1 mupdf
+
 " vim-plug section
 call plug#begin('~/.vim/plugged')
 Plug 'vimwiki/vimwiki'
 Plug 'chrisbra/csv.vim'
 Plug 'w0rp/ale'
 call plug#end()
-
-" markdown preview with pandoc
-command! -nargs=* RunSilent
-	\ | execute ':silent !'.'<args>'
-	\ | execute ':redraw!'
-nmap <Leader>pc :RunSilent pandoc -f markdown -o /tmp/vim-pandoc-out.pdf % &<CR>
-nmap <Leader>pp :RunSilent xdg-open /tmp/vim-pandoc-out.pdf &<CR> 
