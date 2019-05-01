@@ -91,34 +91,30 @@ if [ -f /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substrin
     bindkey '^[[B' history-substring-search-down
 fi
 
-# Enable colors
-autoload -U colors
-colors
-
 ######################
 ####### Prompt #######
 ######################
 
 # set left prompt
-PROMPT='%b%{$fg[green]%}%(!.#.>>) %{$reset_color%}%E'
+PROMPT='%(!.#.>>) %E'
 
 ######
 # This whole git prompt stuff was taken from Manjaro's zsh setup, slightly modified
 ######
 
 # Modify the colors and symbols in these variables as desired.
-GIT_PROMPT_SYMBOL="%{$fg[green]%}"                              # clean repo
-GIT_PROMPT_PREFIX="%{$fg[green]%}[%{$reset_color%}"
-GIT_PROMPT_SUFFIX="%{$fg[green]%}]%{$reset_color%}"
-GIT_PROMPT_AHEAD="%{$fg[green]%}ANUM%{$reset_color%}"           # A"NUM" - ahead by "NUM" commits
-GIT_PROMPT_BEHIND="%{$fg[red]%}BNUM%{$reset_color%}"            # B"NUM" - behind by "NUM" commits
-GIT_PROMPT_MERGING="%{$fg_bold[magenta]%}!%{$reset_color%}"     # merge conflict
-GIT_PROMPT_UNTRACKED="%{$fg_bold[red]%}+%{$reset_color%}"       # untracked files
-GIT_PROMPT_MODIFIED="%{$fg_bold[yellow]%}+%{$reset_color%}"     # tracked files modified
-GIT_PROMPT_STAGED="%{$fg_bold[green]%}->%{$reset_color%}"       # staged changes present = ready for "git push"
+GIT_PROMPT_SYMBOL=""                                            # clean repo
+GIT_PROMPT_PREFIX="["
+GIT_PROMPT_SUFFIX="]"
+GIT_PROMPT_AHEAD="ANUM"                                         # A"NUM" - ahead by "NUM" commits
+GIT_PROMPT_BEHIND="BNUM"                                        # B"NUM" - behind by "NUM" commits
+GIT_PROMPT_MERGING="!"                                          # merge conflict
+GIT_PROMPT_UNTRACKED="++"                                       # untracked files
+GIT_PROMPT_MODIFIED="+"                                         # tracked files modified
+GIT_PROMPT_STAGED="->"                                          # staged changes present = ready for "git push"
 
 # Right prompt with exit status of previous command if not successful
-RPROMPT='%{$fg[green]%}$(bg_process)%{$reset_color%} $(git_prompt_string) %{$fg[red]%}%(?..[%?])%{$reset_color%} %{$fg[green]%}(%*)%{$reset_color%}'
+RPROMPT='$(bg_process) $(git_prompt_string) %(?..[%?]) (%*)'
 
 #################
 ##### Misc ######
