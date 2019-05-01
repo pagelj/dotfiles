@@ -100,7 +100,7 @@ colors
 ######################
 
 # set left prompt
-PROMPT='%b%{$fg[green]%}%# %{$reset_color%}%E'
+PROMPT='%b%{$fg[green]%}%(!.#.>>) %{$reset_color%}%E'
 
 ######
 # This whole git prompt stuff was taken from Manjaro's zsh setup, slightly modified
