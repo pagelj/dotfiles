@@ -48,7 +48,8 @@ command! -nargs=* RunSilent
 	\ | execute ':redraw!'
 
 " markdown preview with pandoc
-autocmd BufEnter *.markdown,*.md,*.wiki :RunSilent pandoc -f markdown -o /tmp/vim-pandoc-out.pdf % && mupdf /tmp/vim-pandoc-out.pdf &
+nmap <Leader>pc :RunSilent pandoc -f markdown -o /tmp/vim-pandoc-out.pdf % &<CR>
+nmap <Leader>pp :RunSilent mupdf /tmp/vim-pandoc-out.pdf &<CR>
 autocmd BufWritePost *.markdown,*.md,*.wiki :RunSilent pandoc -f markdown -o /tmp/vim-pandoc-out.pdf % && pkill -1 mupdf
 
 " vim-plug section
