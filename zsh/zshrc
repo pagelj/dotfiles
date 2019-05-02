@@ -41,7 +41,7 @@ _hosts() { compadd $(getent hosts | tr -s ' ' '\t' | cut -f2) }
 if [ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
 	source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 	ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-	ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=8'
+	ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'
 fi
 
 #######################
@@ -73,11 +73,6 @@ SAVEHIST=500
 # Source aliases
 if [ -f ~/.zsh_aliases ]; then
     source ~/.zsh_aliases
-fi
-
-# Source fish-like syntax highlighting
-if [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
-    source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 fi
 
 # Use history substring search
@@ -165,5 +160,6 @@ if [ "$TERM" = "linux" ]; then
 	printf '\033]PDE62EA9'; # bright magenta
 	printf '\033]PE2EE6E6'; # bright cyan
 	printf '\003]PFE6D7AB'; # bright white
+	setterm --foreground green --bold on --store # set foreground color
 	clear;
 fi
