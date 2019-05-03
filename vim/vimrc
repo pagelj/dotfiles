@@ -42,6 +42,10 @@ set statusline+=%5*\ %{&spelllang}\                       "Spellanguage
 set statusline+=%8*\ %=\ %l:%v\                           "Rownr:Colnr
 set statusline+=%0*\ \ %m%r%w\ %P\ \                      "Modified? Readonly? Top/bot.
 
+" Show tabs
+set list
+set listchars=tab:>-
+
 " run programs silently
 command! -nargs=* RunSilent
 	\ | execute ':silent !'.'<args>'
