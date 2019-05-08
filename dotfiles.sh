@@ -69,6 +69,9 @@ rsync -ac --progress $GIT_REPO/vim/ftplugin/markdown.vim ~/.vim/ftplugin/markdow
 echo "$GIT_REPO/vim/ftplugin/vimwiki.vim --> ~/.vim/ftplugin/vimwiki.vim"
 rsync -ac --progress $GIT_REPO/vim/ftplugin/vimwiki.vim ~/.vim/ftplugin/vimwiki.vim
 
+echo "$GIT_REPO/emacs --> ~/.emacs"
+rysnc -ac --progress $GIT_REPO/emacs ~/.emacs
+
 echo "$GIT_REPO/scripts/tmux_pane_current_path.sh --> ~/scripts/tmux_pane_current_path.sh"
 rsync -ac --progress $GIT_REPO/scripts/tmux_pane_current_path.sh ~/scripts/tmux_pane_current_path.sh
 
@@ -106,6 +109,8 @@ echo "$GIT_REPO/suckless/dmenu/config.h --> ~/build/suckless/dmenu-4.9/config.h"
 rsync -ac --progress $GIT_REPO/suckless/dmenu/config.h ~/build/suckless/dmenu-4.9/config.h
 echo "$GIT_REPO/suckless/slock/config.h --> ~/build/suckless/slock-1.4/config.h"
 rsync -ac --progress $GIT_REPO/suckless/slock/config.h ~/build/suckless/slock-1.4/config.h
+echo "$GIT_REPO/suckless/surf/config.h --> ~/build/suckless/surf-2.0/config.h"
+rsync -ac --progress $GIT_REPO/suckless/surf/config.h ~/build/suckless/surf-2.0/config.h
 
 echo "$GIT_REPO/systemd/mbsync.service --> ~/.config/systemd/user/mbsync.service"
 rsync -ac --progress $GIT_REPO/systemd/mbsync.service ~/.config/systemd/user/mbsync.service
