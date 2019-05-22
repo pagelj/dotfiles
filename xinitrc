@@ -11,12 +11,17 @@ then
 	SSH_ASKPASS=/usr/lib/openssh/x11-ssh-askpass ssh-add < /dev/null
 fi
 
+xrandr --setprovideroutputsource modesetting NVIDIA-0
+xrandr --auto
+xrandr --dpi 96
+
 xrdb -merge ~/.Xresources # Read Xresources
 xmodmap ~/.Xmodmap
 setxkbmap -layout de # Set keyboard layout
 sh ~/.fehbg & # Set wallpaper
 xbindkeys # Use cumstomized keybindings
 xbacklight -set 60 # Dim screen
+wmname LG3D # Trick java into behaving reasonably
 
 # Autostart
 xautolock -time 30 -locker slock & # Automatic screen lock
