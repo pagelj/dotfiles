@@ -27,18 +27,10 @@ function __emacs_function { emacs -mm "$@" & }
 alias e='__emacs_function'
 alias enox='emacs -nw'
 
-# some color aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls -F --color=auto --group-directories-first'
-
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
-fi
 alias tmux='tmux -2' # Force tmux to use 256 colors
 
 # some ls aliases
+alias ls='ls -F --group-directories-first'
 alias ll='ls -al'
 alias la='ls -A'
 alias l='ls -lhav'
@@ -102,3 +94,5 @@ alias tx='tmux'
 alias txa='tmux a'
 
 alias yt='mpsyt'
+
+alias mk='make'
