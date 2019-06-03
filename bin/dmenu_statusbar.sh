@@ -1,3 +1,5 @@
+#!/bin/dash
+
 if [ $(amixer get Master | tail -1 | awk '{ print $6 " " }' | tr -d '[' | tr -d ']') = 'on' ]
 then
 	VOL="$(amixer get Master | tail -1 | sed 's/.*\[\([0-9]*%\)\].*/\1/')"
@@ -17,4 +19,4 @@ fi
 TEMP="$(($(cat /sys/class/thermal/thermal_zone0/temp) / 1000))°C"
 BAT="$(acpi -b | awk '{ print $4 " " }' | tr -d ',' | tr -d ' ')"
 
-echo -e "time=$LOCALTIME\nvol=$VOL\nip=$IP\nvpn=$VPN\ntemp=$TEMP\nbat=$BAT\nutc=$UTC" | dmenu -fn "Sans:size=11"
+echo "time=$LOCALTIME\nvol=$VOL\nip=$IP\nvpn=$VPN\ntemp=$TEMP\nbat=$BAT\nutc=$UTC" | dmenu -p System\ Info: -l 8 -fn "Sans:size=11"
