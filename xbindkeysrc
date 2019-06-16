@@ -10,6 +10,22 @@
 "amixer -q -D pulse sset Master toggle"
    XF86AudioMute
 
+# Start/Pause playback
+"mpc toggle"
+   XF86AudioPlay
+
+# Next song
+"mpc next"
+   Mod4+n
+
+# Seek song forwards
+"mpc seek +1%"
+   Mod4+Shift+greater
+
+# Seek song backwards
+"mpc seek -1%"
+   Mod4+less
+
 # Increase backlight
 "xbacklight -inc 10"
    XF86MonBrightnessUp
