@@ -6,7 +6,7 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 0;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "Sans:size=9" };
-static const char dmenufont[]       = "Sans:size=9";
+static const char dmenufont[]       = "Sans:size=11";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -66,14 +66,15 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-p", "Run:", "-l", "20", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
-static const char *clipcmd[] = { "clipmenu", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; /* Define clipmenu command */
-static const char *passcmd[] = { "passmenu", "--type", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; /* Define passmenu command */
+static const char *clipcmd[] = { "clipmenu", "-p", "Clipboard:", "-l", "20", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; /* Define clipmenu command */
+static const char *passcmd[] = { "passmenu", "--type", "-p", "Pass:", "-l", "20",  "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; /* Define passmenu command */
 static const char *firefoxcmd[] = { "firefox-nightly", NULL}; /* Define firefox command */
 static const char *muttcmd[] = { "st", "-e", "mutt", NULL }; /* Define mutt command */
-static const char *statusbarcmd[] = { "dmenu_statusbar.sh", NULL}; /* Define command for starting dmenu-based statusbar */
+static const char *statusbarcmd[] = { "dmenu_statusbar", NULL}; /* Define command for starting dmenu-based statusbar */
 static const char *lockcmd[] = { "slock", NULL}; /* Define command for locking screen */
+static const char *musiccmd[] = { "mpdmenu", "::", "-p", "Music:", "-l", "20", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; /* Define command for browsing music collection */
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -82,6 +83,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,             		XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_l,      spawn,          {.v = lockcmd } }, /* Define shortcut for lockcmd */
+	{ MODKEY,                       XK_u,      spawn,          {.v = musiccmd } },
 	{ MODKEY,                       XK_x,      togglebar,      {0} },
 	{ MODKEY,			XK_b,	   spawn,	   {.v = statusbarcmd } },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
