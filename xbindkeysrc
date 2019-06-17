@@ -53,3 +53,7 @@
 # Display temperatur
 "cowsay_temperatur.sh"
    Mod4+F5
+
+# Currently played song
+"cowsay_current_song.sh"
+   Mod4+F6
