@@ -85,8 +85,8 @@ echo "$GIT_REPO/bin/mutt.sh --> ~/bin/mutt.sh"
 rsync -ac --progress $GIT_REPO/bin/mutt.sh ~/bin/mutt.sh
 echo "$GIT_REPO/bin/top.sh --> ~/bin/top.sh"
 rsync -ac --progress $GIT_REPO/bin/top.sh ~/bin/top.sh
-echo "$GIT_REPO/bin/dmenu_statusbar.sh --> ~/bin/dmenu_statusbar.sh"
-rsync -ac --progress $GIT_REPO/bin/dmenu_statusbar.sh ~/bin/dmenu_statusbar.sh
+echo "$GIT_REPO/bin/dmenu_statusbar --> ~/bin/dmenu_statusbar"
+rsync -ac --progress $GIT_REPO/bin/dmenu_statusbar ~/bin/dmenu_statusbar
 echo "$GIT_REPO/bin/cowsay_battery.sh --> ~/bin/cowsay_battery.sh"
 rsync -ac --progress $GIT_REPO/bin/cowsay_battery.sh ~/bin/cowsay_battery.sh
 echo "$GIT_REPO/bin/cowsay_ip.sh --> ~/bin/cowsay_ip.sh"
