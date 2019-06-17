@@ -75,8 +75,8 @@ static const char *firefoxcmd[] = { "firefox-nightly", NULL}; /* Define firefox 
 static const char *muttcmd[] = { "st", "-e", "mutt", NULL }; /* Define mutt command */
 static const char *statusbarcmd[] = { "dmenu_statusbar", NULL}; /* Define command for starting dmenu-based statusbar */
 static const char *lockcmd[] = { "slock", NULL}; /* Define command for locking screen */
-static const char *musiclibcmd[] = { "mpdmenu", "::", "-l", dmenuln, "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; /* Define command for browsing music collection */
-static const char *musicplcmd[] = { "mpdmenu", "-p", "::", "-l", dmenuln, "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; /* Define command for browsing music collection */
+static const char *musiclibcmd[] = { "mpdmenu", "::", "-i", "-l", dmenuln, "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; /* Define command for browsing music collection */
+static const char *musicplcmd[] = { "mpdmenu", "-p", "::", "-i", "-l", dmenuln, "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; /* Define command for browsing music collection */
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
