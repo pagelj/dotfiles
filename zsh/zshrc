@@ -142,6 +142,9 @@ export LESS=-r
 # Add support for GnuPG
 export GPG_TTY=$(tty)
 
+# Disable graphical interface for SSH password
+unset SSH_ASKPASS
+
 # Customize tty
 if [ "$TERM" = "linux" ]; then
 	printf '\033]P01a1813'; # black 
