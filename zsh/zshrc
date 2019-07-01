@@ -91,7 +91,7 @@ fi
 ######################
 
 # set left prompt
-PROMPT='%(!.#.>>) %E'
+PROMPT='%(!.#.$>) %E'
 
 ######
 # This whole git prompt stuff was taken from Manjaro's zsh setup, slightly modified
