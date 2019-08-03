@@ -3,9 +3,10 @@ set number " Display line numbers
 set relativenumber " Display relative line numbers
 
 " Enable syntax highlighting
+let g:solarized_termcolors=256 " If using solarized color scheme
 if has("syntax")
   syntax on
-  colorscheme true-green
+  colorscheme true-monochrome
 endif
 
 " Enable plugins
@@ -14,6 +15,7 @@ if has("autocmd")
 endif
 
 set nocompatible
+set nomodeline
 
 " Enable autocompletion
 set wildmode=longest,list,full
@@ -27,13 +29,13 @@ endif
 " Change leader key
 let mapleader = ','
 " Set the time the leader key is active (in ms)
-set timeoutlen=4000
+set timeoutlen=2000
 
 " status line
 set laststatus=2
 set statusline=
-set statusline+=%7*\[%n]                                  "buffernr
-set statusline+=%1*\ %<./%t\                              "Filename
+"set statusline+=%7*\[%n]                                  "buffernr
+set statusline+=%1*\ %<%t\                                "Filename
 set statusline+=%2*\ %y\                                  "FileType
 set statusline+=%3*\ %{''.(&fenc!=''?&fenc:&enc).''}      "Encoding
 set statusline+=%3*\ %{(&bomb?\",BOM\":\"\")}\            "Encoding2
@@ -51,13 +53,24 @@ command! -nargs=* RunSilent
 	\ | execute ':redraw!'
 
 " markdown preview with pandoc
-nmap <Leader>pc :RunSilent pandoc -f markdown -o /tmp/vim-pandoc-out.pdf % &<CR>
+nmap <Leader>pc :RunSilent pandoc -f markdown -o /tmp/vim-pandoc-out.pdf % && pkill -1 mupdf &<CR>
 nmap <Leader>pp :RunSilent mupdf /tmp/vim-pandoc-out.pdf &<CR>
-autocmd BufWritePost *.markdown,*.md,*.wiki :RunSilent pandoc -f markdown -o /tmp/vim-pandoc-out.pdf % && pkill -1 mupdf
+
+" Create commands for activating customized write and code modes
+command Writemode colorscheme solarized | set background=light | set linebreak | Goyo 70
+command Codemode colorscheme nord | set background=dark | set nolinebreak | set nospell | Goyo!
+nmap <Leader>wm :Writemode<CR>
+nmap <Leader>cm :Codemode<CR>
+
+" Macro for inserting current date
+nmap <Leader>d "=strftime("%Y-%m-%d")<CR>P
 
 " vim-plug section
 call plug#begin('~/.vim/plugged')
 Plug 'vimwiki/vimwiki'
 Plug 'chrisbra/csv.vim'
 Plug 'w0rp/ale'
+Plug 'wincent/command-t'
+Plug 'junegunn/goyo.vim'
+Plug 'arcticicestudio/nord-vim'
 call plug#end()
