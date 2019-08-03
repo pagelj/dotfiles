@@ -56,6 +56,8 @@ echo "$GIT_REPO/vim/colors/obsidian.vim --> ~/.vim/colors/obsidian.vim"
 rsync -ac --progress $GIT_REPO/vim/colors/obsidian.vim ~/.vim/colors/obsidian.vim
 echo "$GIT_REPO/vim/colors/true-monochrome.vim --> ~/.vim/colors/true-monochrome.vim"
 rsync -ac --progress $GIT_REPO/vim/colors/true-monochrome.vim ~/.vim/colors/true-monochrome.vim
+echo "$GIT_REPO/vim/colors/solarized.vim --> ~/.vim/colors/solarized.vim"
+rsync -ac --progress $GIT_REPO/vim/colors/solarized.vim ~/.vim/colors/solarized.vim
 echo "$GIT_REPO/vim/autoload/plug.vim --> ~/.vim/autoload/plug.vim"
 rsync -ac --progress $GIT_REPO/vim/autoload/plug.vim ~/.vim/autoload/plug.vim
 echo "$GIT_REPO/vim/ftdetect/text.vim --> ~/.vim/ftdetect/text.vim"
