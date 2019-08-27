@@ -71,12 +71,14 @@ static const char *dmenucmd[] = { "dmenu_run", "-p", "Run:", "-l", dmenuln, "-m"
 static const char *termcmd[]  = { "st", NULL };
 static const char *clipcmd[] = { "clipmenu", "-p", "Clipboard:", "-l", dmenuln, "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; /* Define clipmenu command */
 static const char *passcmd[] = { "passmenu", "--type", "-p", "Pass:", "-l", dmenuln,  "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; /* Define passmenu command */
-static const char *firefoxcmd[] = { "firefox-nightly", NULL}; /* Define firefox command */
+static const char *firefoxcmd[] = { "firefox-nightly", NULL }; /* Define firefox command */
 static const char *muttcmd[] = { "st", "-e", "mutt", NULL }; /* Define mutt command */
-static const char *statusbarcmd[] = { "dmenu_statusbar", NULL}; /* Define command for starting dmenu-based statusbar */
-static const char *lockcmd[] = { "slock", NULL}; /* Define command for locking screen */
+static const char *statusbarcmd[] = { "dmenu_statusbar", NULL }; /* Define command for starting dmenu-based statusbar */
+static const char *histcmd[] = { "dmenu_hist", NULL }; /* Define command for searching the command history */
+static const char *lockcmd[] = { "slock", NULL }; /* Define command for locking screen */
 static const char *musiclibcmd[] = { "mpdmenu", "::", "-i", "-l", dmenuln, "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; /* Define command for browsing music collection */
 static const char *musicplcmd[] = { "mpdmenu", "-p", "::", "-i", "-l", dmenuln, "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; /* Define command for browsing music collection */
+static const char *addressbookcmd[] = { "dmenu_addressbook", NULL }; /* Define command to show addressbook */
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -87,8 +89,10 @@ static Key keys[] = {
 	{ MODKEY,                       XK_l,      spawn,          {.v = lockcmd } }, /* Define shortcut for lockcmd */
 	{ MODKEY,                       XK_u,      spawn,          {.v = musiclibcmd } }, /* Add from music library to playlist */
 	{ MODKEY,                       XK_y,      spawn,          {.v = musicplcmd } }, /* Choose from music playlist */
+	{ MODKEY,                       XK_a,      spawn,          {.v = addressbookcmd } }, /* Show email addressbook */
 	{ MODKEY,                       XK_x,      togglebar,      {0} },
 	{ MODKEY,			XK_b,	   spawn,	   {.v = statusbarcmd } },
+	{ MODKEY,                       XK_r,      spawn,          {.v = histcmd } },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_Left,   focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },

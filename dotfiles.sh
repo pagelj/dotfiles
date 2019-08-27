@@ -99,7 +99,8 @@ echo "$GIT_REPO/bin/cowsay_volume.sh --> ~/bin/cowsay_volume.sh"
 rsync -ac --progress $GIT_REPO/bin/cowsay_volume.sh ~/bin/cowsay_volume.sh
 echo "$GIT_REPO/bin/cowsay_current_song.sh --> ~/bin/cowsay_current_song.sh"
 rsync -ac --progress $GIT_REPO/bin/cowsay_current_song.sh ~/bin/cowsay_current_song.sh
-
+echo "$GIT_REPO/bin/dmenu_addressbook --> ~/bin/dmenu_addressbook"
+rsync -ac --progress $GIT_REPO/bin/dmenu_addressbook ~/bin/dmenu_addressbook
 
 echo "$GIT_REPO/newsboat/config --> ~/.config/newsboat/config"
 rsync -ac --progress $GIT_REPO/newsboat/config ~/.config/newsboat/config
