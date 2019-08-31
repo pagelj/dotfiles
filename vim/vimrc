@@ -1,6 +1,5 @@
 set encoding=utf-8 " Encoding
 set number " Display line numbers
-set relativenumber " Display relative line numbers
 
 " Enable syntax highlighting
 let g:solarized_termcolors=256 " If using solarized color scheme
@@ -57,8 +56,10 @@ nmap <Leader>pc :RunSilent pandoc -f markdown -o /tmp/vim-pandoc-out.pdf % && pk
 nmap <Leader>pp :RunSilent mupdf /tmp/vim-pandoc-out.pdf &<CR>
 
 " Create commands for activating customized write and code modes
-command Writemode colorscheme solarized | set background=light | set linebreak | Goyo 70
-command Codemode colorscheme nord | set background=dark | set nolinebreak | set nospell | Goyo!
+command Normalmode set background=dark | colorscheme true-monochrome | Goyo! | set nolinebreak | set norelativenumber | set nospell
+command Writemode set background=light | colorscheme solarized | set linebreak | set spell | Goyo 70
+command Codemode set background=dark | colorscheme obsidian | Goyo! | set nolinebreak | set nospell
+nmap <Leader>nm :Normalmode<CR>
 nmap <Leader>wm :Writemode<CR>
 nmap <Leader>cm :Codemode<CR>
 
