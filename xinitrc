@@ -29,8 +29,8 @@ clipmenud & # Nice clipboard using dmenu
 pgrep redshift &> /dev/null || redshift -l 48:9 &> /dev/null & # For dimmed display at night
 xcompmgr & # start composition manager
 nohup mons -a > /dev/null 2>&1 & # Re-establishs the display if it detects only one monitor
+megasync &> /dev/null & # Start mega sync service
 
 # Set window/desktop manager
 exec dwm
 #exec i3
-#exec qtile
