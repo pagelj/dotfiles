@@ -28,7 +28,7 @@ bindsym $MOD+Return exec $TERM
 bindsym $MOD+Shift+q kill
 
 # start dmenu
-bindsym $MOD+d exec dmenu_run
+bindsym $MOD+d exec dmenu_run -l 20 -p Run: -fn Sans:size=9
 
 # change focus
 bindsym $MOD+$left focus left
@@ -172,7 +172,7 @@ mode "resize" {
 bindsym $MOD+r mode "resize"
 
 # Use keybinding to call the dmenu based clipmenu (ARCH AUR)
-bindsym $MOD+Insert exec clipmenu
+bindsym $MOD+Insert exec clipmenu -l 20 -p Clipmenu: -fn Sans:size=11'
 
 # b like browser
 bindsym $SECONDARYMOD+b exec firefox-nightly
