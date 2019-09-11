@@ -13,6 +13,10 @@ alias mu='__mupdf_function'
 function __evince_function { evince 2>/dev/null "$1" & }
 alias ev='__evince_function'
 
+# zathura alias
+function __zathura_start { zathura 2>/dev/null "$1" & }
+alias z="__zathura_start"
+
 # rm/cp/mv alias
 alias rm='rm -I'
 alias cp='cp -i'
