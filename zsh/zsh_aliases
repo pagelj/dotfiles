@@ -6,12 +6,12 @@
 alias sudo='sudo -H'
 
 # mupdf alias
-function __mupdf_function { mupdf 2>/dev/null "$1" & }
-alias mu='__mupdf_function'
+function __mupdf_start { mupdf 2>/dev/null "$1" & }
+alias mu='__mupdf_start'
 
 # evince alias
-function __evince_function { evince 2>/dev/null "$1" & }
-alias ev='__evince_function'
+function __evince_start { evince 2>/dev/null "$1" & }
+alias ev='__evince_start'
 
 # zathura alias
 function __zathura_start { zathura 2>/dev/null "$1" & }
