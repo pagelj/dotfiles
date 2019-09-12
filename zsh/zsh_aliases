@@ -89,6 +89,7 @@ alias gitl='git log'
 alias gitd='git diff'
 alias gitb='git branch'
 alias gitch='git checkout'
+alias gitsh='git show'
 
 alias settimezone='timedatectl set-timezone'
 
