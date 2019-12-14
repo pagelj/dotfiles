@@ -15,6 +15,7 @@ path=(~/bin $(ruby -e 'print Gem.user_dir')/bin $path[@])
 ## Variables ###
 ################
 
-# set EDITOR and VISUAL variable
+# set EDITOR, VISUAL and PAGER variable
 export EDITOR="vim"
 export VISUAL="vim"
+export PAGER="less"
