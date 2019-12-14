@@ -35,15 +35,6 @@ rsync -ac --progress $GIT_REPO/mpd.conf ~/.config/mpd/mpd.conf
 echo "$GIT_REPO/ncmpcpp/config --> ~/.config/ncmpcpp/config"
 rsync -ac --progress $GIT_REPO/ncmpcpp/config ~/.config/ncmpcpp/config
 
-echo "$GIT_REPO/conky/conkyrc_dwm --> ~/.conky/conkyrc_dwm"
-rsync -ac --progress $GIT_REPO/conky/conkyrc_dwm ~/.conky/conkyrc_dwm
-echo "$GIT_REPO/conky/conkyrc_i3 --> ~/.conky/conkyrc_i3"
-rsync -ac --progress $GIT_REPO/conky/conkyrc_i3 ~/.conky/conkyrc_i3
-echo "$GIT_REPO/conky/conkyrc_tmux --> ~/.conky/conkyrc_tmux"
-rsync -ac --progress $GIT_REPO/conky/conkyrc_tmux ~/.conky/conkyrc_tmux
-echo "$GIT_REPO/conky/conkyrc_vim --> ~/.conky/conkyrc_vim"
-rsync -ac --progress $GIT_REPO/conky/conkyrc_vim ~/.conky/conkyrc_vim
-
 echo "$GIT_REPO/tmux.conf --> ~/.tmux.conf"
 rsync -ac --progress $GIT_REPO/tmux.conf ~/.tmux.conf
 
