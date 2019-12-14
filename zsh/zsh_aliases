@@ -93,8 +93,6 @@ alias gitsh='git show'
 
 alias settimezone='timedatectl set-timezone'
 
-alias n='nnn'
-
 alias tx='tmux'
 alias txa='tmux a'
 
