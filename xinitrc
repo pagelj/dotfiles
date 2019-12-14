@@ -10,6 +10,7 @@ if test -f /usr/lib/openssh/x11-ssh-askpass
 then
 	SSH_ASKPASS=/usr/lib/openssh/x11-ssh-askpass ssh-add < /dev/null
 fi
+export BROWSER="firefox-nightly"
 
 xrdb -merge ~/.Xresources # Read Xresources
 xmodmap ~/.Xmodmap
