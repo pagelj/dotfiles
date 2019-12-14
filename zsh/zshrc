@@ -44,6 +44,11 @@ if [ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]; th
 	ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'
 fi
 
+# fzf file history
+if [ -f /usr/share/fzf/key-bindings.zsh ]; then
+	source /usr/share/fzf/key-bindings.zsh
+fi
+
 #######################
 ### Options ###########
 #######################
@@ -57,7 +62,7 @@ setopt RC_EXPAND_PARAM # Expand globbing arrays to full names
 setopt NO_BEEP # Disable system beeps
 setopt MARK_DIRS # Always append trailing / to dirs
 setopt APPEND_HISTORY # Append to history file instead of overwriting
-setopt HIST_IGNORE_DUPS # Ignore adjacent history dups
+setopt HIST_IGNORE_ALL_DUPS # Ignore all history dups
 setopt AUTO_CD # No need to type 'cd' if standard input is a valid path
 setopt PROMPT_SUBST # Enable command substitution in prompt
 
@@ -67,8 +72,8 @@ setopt PROMPT_SUBST # Enable command substitution in prompt
 
 # Set history options
 HISTFILE=~/.zhistory
-HISTSIZE=1000
-SAVEHIST=500
+HISTSIZE=10000
+SAVEHIST=10000
 
 # Source aliases
 if [ -f ~/.zsh_aliases ]; then
@@ -184,4 +189,3 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
-
