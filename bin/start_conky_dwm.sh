@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/dash
 
 conky -c ~/.conky/.conkyrc_dwm
 conky -c ~/.conky/.conkyrc_tmux

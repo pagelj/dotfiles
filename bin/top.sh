@@ -1,3 +1,3 @@
-#!/bin/sh
+#!/bin/dash
 
 st -e top
