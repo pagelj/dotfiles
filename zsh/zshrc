@@ -114,7 +114,8 @@ GIT_PROMPT_MODIFIED="+"                                         # tracked files 
 GIT_PROMPT_STAGED="->"                                          # staged changes present = ready for "git push"
 
 # Right prompt with exit status of previous command if not successful
-RPROMPT='$(bg_process) $(git_prompt_string) %(?..[%?]) (%*)'
+# Also show background process, git information and current dir
+RPROMPT='$(bg_process) $(git_prompt_string) %(?..[%?]) [%1~/]'
 
 #################
 ##### Misc ######
