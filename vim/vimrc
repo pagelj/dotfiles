@@ -69,9 +69,11 @@ nmap <Leader>d "=strftime("%Y-%m-%d")<CR>P
 " vim-plug section
 call plug#begin('~/.vim/plugged')
 Plug 'vimwiki/vimwiki'
-Plug 'chrisbra/csv.vim'
+Plug 'mechatroner/rainbow_csv'
 Plug 'w0rp/ale'
 Plug 'wincent/command-t'
 Plug 'junegunn/goyo.vim'
 Plug 'arcticicestudio/nord-vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
 call plug#end()
