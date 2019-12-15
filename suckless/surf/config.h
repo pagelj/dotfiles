@@ -49,7 +49,7 @@ static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
         .v = (const char *[]){ "/bin/sh", "-c", \
              "prop=\"`xprop -id $2 $0 " \
              "| sed \"s/^$0(STRING) = \\(\\\\\"\\?\\)\\(.*\\)\\1$/\\2/\" " \
-             "| xargs -0 printf %b | dmenu`\" &&" \
+             "| xargs -0 printf %b | dmenu -p 'Open URL:' -l 1 -fn 'Sans:size=14:weight=bold'`\" &&" \
              "xprop -id $2 -f $1 8s -set $1 \"$prop\"", \
              p, q, winid, NULL \
         } \
@@ -94,6 +94,18 @@ static SiteStyle styles[] = {
 
 #define MODKEY GDK_CONTROL_MASK
 
+#define ADDBMK { \
+	.v = (char *[]){ "/bin/sh", "-c", \
+	     "bookmarkurl $0", winid, NULL \
+	} \
+}
+
+#define LOADBMK(r, s, p) { \
+	.v = (const char *[]){ "/bin/sh", "-c", \
+	     "prop=\"$(loadbookmark $1)\" && xprop -id $1 -f $3 8s -set $3 \"$prop\"", \
+	     "surf-setprop", winid, r, s, p, NULL \
+	} \
+}
 /* hotkeys */
 /*
  * If you use anything else but MODKEY and GDK_SHIFT_MASK, don't forget to
@@ -102,14 +114,12 @@ static SiteStyle styles[] = {
 static Key keys[] = {
 	/* modifier              keyval          function    arg */
 	{ MODKEY,                GDK_KEY_g,      spawn,      SETPROP("_SURF_URI", "_SURF_GO") },
-	{ MODKEY,                GDK_KEY_f,      spawn,      SETPROP("_SURF_FIND", "_SURF_FIND") },
 	{ MODKEY,                GDK_KEY_slash,  spawn,      SETPROP("_SURF_FIND", "_SURF_FIND") },
 
-	{ 0,                     GDK_KEY_Escape, stop,       { 0 } },
-	{ MODKEY,                GDK_KEY_c,      stop,       { 0 } },
+	{ MODKEY,                GDK_KEY_c,      stop,     { 0 } },
 
-	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_r,      reload,     { .b = 1 } },
-	{ MODKEY,                GDK_KEY_r,      reload,     { .b = 0 } },
+	{ MODKEY,                GDK_KEY_r,      reload,   { .i = 1 } },
+	{ MODKEY,                GDK_KEY_r,      reload,   { .i = 0 } },
 
 	{ MODKEY,                GDK_KEY_l,      navigate,   { .i = +1 } },
 	{ MODKEY,                GDK_KEY_h,      navigate,   { .i = -1 } },
@@ -119,15 +129,12 @@ static Key keys[] = {
 	 * D: page down, U: page up */
 	{ MODKEY,                GDK_KEY_j,      scroll,     { .i = 'd' } },
 	{ MODKEY,                GDK_KEY_k,      scroll,     { .i = 'u' } },
-	{ MODKEY,                GDK_KEY_b,      scroll,     { .i = 'U' } },
+	{ MODKEY,                GDK_KEY_u,      scroll,     { .i = 'U' } },
 	{ MODKEY,                GDK_KEY_space,  scroll,     { .i = 'D' } },
-	{ MODKEY,                GDK_KEY_i,      scroll,     { .i = 'r' } },
-	{ MODKEY,                GDK_KEY_u,      scroll,     { .i = 'l' } },
+	{ MODKEY,                GDK_KEY_o,      scroll,     { .i = 'r' } },
+	{ MODKEY,                GDK_KEY_i,      scroll,     { .i = 'l' } },
 
-
-	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_j,      zoom,       { .i = -1 } },
-	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_k,      zoom,       { .i = +1 } },
-	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_q,      zoom,       { .i = 0  } },
+	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_equal,  zoom,       { .i = 0  } },
 	{ MODKEY,                GDK_KEY_minus,  zoom,       { .i = -1 } },
 	{ MODKEY,                GDK_KEY_plus,   zoom,       { .i = +1 } },
 
@@ -140,7 +147,7 @@ static Key keys[] = {
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_p,      print,      { 0 } },
 
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_a,      togglecookiepolicy, { 0 } },
-	{ 0,                     GDK_KEY_F11,    togglefullscreen, { 0 } },
+	{ MODKEY,                GDK_KEY_F11,    togglefullscreen, { 0 } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_o,      toggleinspector, { 0 } },
 
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_c,      toggle,     { .i = CaretBrowsing } },
@@ -149,8 +156,12 @@ static Key keys[] = {
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_s,      toggle,     { .i = JavaScript } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_i,      toggle,     { .i = LoadImages } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_v,      toggle,     { .i = Plugins } },
-	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_b,      toggle,     { .i = ScrollBars } },
+	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_x,      toggle,     { .i = ScrollBars } },
 	{ MODKEY|GDK_SHIFT_MASK, GDK_KEY_m,      toggle,     { .i = Style } },
+	{ MODKEY,                GDK_KEY_b,      spawn,      LOADBMK("_SURF_URI", "_SURF_GO", "PROMPT_GO") },
+        { MODKEY|GDK_SHIFT_MASK, GDK_KEY_b,      spawn,      ADDBMK },
+
+
 };
 
 /* button definitions */
@@ -163,4 +174,16 @@ static Button buttons[] = {
 	{ OnAny,        0,              8,      clicknavigate,  { .i = -1 },    1 },
 	{ OnAny,        0,              9,      clicknavigate,  { .i = +1 },    1 },
 	{ OnMedia,      MODKEY,         1,      clickexternplayer, { 0 },       1 },
+};
+
+/* Custom content */
+static SearchEngine searchengines[] = {
+	{ "d",       "https://duckduckgo.com/?q=%s"                                       },
+	{ "g",       "https://www.google.de/search?q=%s"                                  },
+	{ "linguee", "https://www.linguee.com/english-german/search?source=auto&query=%s" },
+	{ "dict",    "https://www.dict.cc/?s=%s"                                          },
+	{ "leo",     "https://dict.leo.org/ende?search=%s"                                },
+	{ "y",       "https://youtube.com/results?search_query=%s"                        },
+	{ "wen",     "https://en.wikipedia.org/wiki/%s"                                   },
+	{ "wde",     "https://de.wikipedia.org/wiki/%s"                                   },
 };
