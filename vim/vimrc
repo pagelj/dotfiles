@@ -46,7 +46,7 @@ set timeoutlen=2000
 set laststatus=2
 set statusline=
 "set statusline+=%7*\[%n]                                  "buffernr
-set statusline+=%1*\ %<%t\                                "Filename
+set statusline+=%1*\ %<%F\                                "Filename
 set statusline+=%2*\ %y\                                  "FileType
 set statusline+=%3*\ %{''.(&fenc!=''?&fenc:&enc).''}      "Encoding
 set statusline+=%3*\ %{(&bomb?\",BOM\":\"\")}\            "Encoding2
