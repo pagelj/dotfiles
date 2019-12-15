@@ -1,3 +1,15 @@
+" vim-plug section
+call plug#begin('~/.vim/plugged')
+Plug 'vimwiki/vimwiki'
+Plug 'mechatroner/rainbow_csv'
+Plug 'w0rp/ale'
+Plug 'wincent/command-t'
+Plug 'junegunn/goyo.vim'
+Plug 'arcticicestudio/nord-vim'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+call plug#end()
+
 set encoding=utf-8 " Encoding
 set number " Display line numbers
 
@@ -5,7 +17,7 @@ set number " Display line numbers
 let g:solarized_termcolors=256 " If using solarized color scheme
 if has("syntax")
   syntax on
-  colorscheme true-monochrome
+  colorscheme nord
 endif
 
 " Enable plugins
@@ -56,7 +68,7 @@ nmap <Leader>pc :RunSilent pandoc -f markdown -o /tmp/vim-pandoc-out.pdf % && pk
 nmap <Leader>pp :RunSilent mupdf /tmp/vim-pandoc-out.pdf &<CR>
 
 " Create commands for activating customized write and code modes
-command Normalmode set background=dark | colorscheme true-monochrome | Goyo! | set nolinebreak | set norelativenumber | set nospell
+command Normalmode set background=dark | colorscheme nord | Goyo! | set nolinebreak | set norelativenumber | set nospell
 command Writemode set background=light | colorscheme solarized | set linebreak | set spell | Goyo 70
 command Codemode set background=dark | colorscheme obsidian | Goyo! | set nolinebreak | set nospell
 nmap <Leader>nm :Normalmode<CR>
@@ -65,15 +77,3 @@ nmap <Leader>cm :Codemode<CR>
 
 " Macro for inserting current date
 nmap <Leader>d "=strftime("%Y-%m-%d")<CR>P
-
-" vim-plug section
-call plug#begin('~/.vim/plugged')
-Plug 'vimwiki/vimwiki'
-Plug 'mechatroner/rainbow_csv'
-Plug 'w0rp/ale'
-Plug 'wincent/command-t'
-Plug 'junegunn/goyo.vim'
-Plug 'arcticicestudio/nord-vim'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-call plug#end()
