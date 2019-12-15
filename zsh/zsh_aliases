@@ -49,7 +49,7 @@ alias enox='emacs -nw'
 alias tmux='tmux -2' # Force tmux to use 256 colors
 
 # some ls aliases
-alias ls='ls -F --group-directories-first'
+alias ls='ls -F --color --group-directories-first'
 alias ll='ls -al'
 alias la='ls -A'
 alias l='ls -lhav'

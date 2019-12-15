@@ -17,7 +17,7 @@ xmodmap ~/.Xmodmap
 setxkbmap -layout de # Set keyboard layout
 sh ~/.fehbg & # Set wallpaper
 xbindkeys # Use cumstomized keybindings
-xbacklight -set 30 # Dim screen
+xbacklight -set 50 # Dim screen
 wmname LG3D # Trick java into behaving reasonably
 
 # Autostart
