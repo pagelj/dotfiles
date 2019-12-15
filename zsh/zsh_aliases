@@ -2,6 +2,21 @@
 # Defining aliases
 ##############################
 
+# configure dotfiles
+alias dot='git --git-dir=$HOME/dotfiles/.git --work-tree=$HOME/dotfiles'
+alias dots='dot status'
+alias dotcv='dot commit -S -v'
+alias dotcm='dot commit -S -m'
+alias dotc='dot commit -S'
+alias dota='dot add'
+alias dotps='dot push'
+alias dotpl='dot pull'
+alias dotl='dot log'
+alias dotd='dot diff'
+alias dotb='dot branch'
+alias dotch='dot checkout'
+alias dotsh='dot show'
+
 # sudo alias
 alias sudo='sudo -H'
 
