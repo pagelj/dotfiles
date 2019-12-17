@@ -37,18 +37,6 @@ zstyle ':completion:*' cache-path ~/.zsh/cache
 # Get completion for hostname if in ~/.ssh/config
 _hosts() { compadd $(getent hosts | tr -s ' ' '\t' | cut -f2) }
 
-# Use autosuggestion
-if [ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
-	source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-	ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
-	ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'
-fi
-
-# fzf file history
-if [ -f /usr/share/fzf/key-bindings.zsh ]; then
-	source /usr/share/fzf/key-bindings.zsh
-fi
-
 #######################
 ### Options ###########
 #######################
@@ -80,7 +68,7 @@ if [ -f ~/.zsh_aliases ]; then
     source ~/.zsh_aliases
 fi
 
-# Use history substring search
+# Use fish-like history substring search
 if [ -f /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh ]; then
     source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
     # bind UP and DOWN arrow keys to history substring search
@@ -89,6 +77,20 @@ if [ -f /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substrin
     bindkey "$terminfo[kcud1]" history-substring-search-down
     bindkey '^[[A' history-substring-search-up			
     bindkey '^[[B' history-substring-search-down
+fi
+# Use fish-like autosuggestion
+if [ -f /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+	source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+	ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20
+	ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=2'
+fi
+# Use fish-like syntax highlighting
+#if [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+#	source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#fi
+# fzf file history
+if [ -f /usr/share/fzf/key-bindings.zsh ]; then
+	source /usr/share/fzf/key-bindings.zsh
 fi
 
 ######################
