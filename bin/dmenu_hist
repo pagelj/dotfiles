@@ -2,4 +2,4 @@
 
 HISTFILE=~/.zhistory
 set -o history
-`history | sort -nr | dmenu -p History: -l 40 -fn "Sans:size=11" | sed 's/^\s*[0-9]\+\s*//'`
+`history | sort -nr | dmenu -c -p History: -l 40 -fn "Sans:size=11" | sed 's/^\s*[0-9]\+\s*//'`
