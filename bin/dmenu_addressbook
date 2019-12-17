@@ -1,3 +1,3 @@
 #!/bin/sh
 
-cat ~/.mutt/aliases.muttrc | sed '/#/d' | sed '/^[[:space:]]*$/d' | cut -d' ' -f3- | dmenu -c -p "Address book:" -l 40 -fn "Sans:size=11" -i | xdotool type --clearmodifiers --file -
+cat ~/.mutt/aliases.muttrc | sed '/#/d' | sed '/^[[:space:]]*$/d' | cut -d' ' -f3- | dmenu -c -p "Address book:" -l 40 -fn "Sans:size=11" -i | sed -z '$ s/\n$//'| xdotool type --clearmodifiers --file -
