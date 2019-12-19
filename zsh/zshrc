@@ -158,23 +158,22 @@ unset SSH_ASKPASS
 
 # Customize tty
 if [ "$TERM" = "linux" ]; then
-	printf '\033]P01a1813'; # black 
-	printf '\033]P1991f1f'; # red
-	printf '\033]P25c991f'; # green
-	printf '\033]P3997b1f'; # yellow
-	printf '\033]P41f3e99'; # blue
-	printf '\033]P5991f70'; # magenta
-	printf '\033]P61f9999'; # cyan
-	printf '\033]P7ccbc95'; # white
-	printf '\033]P8333026'; # bright black
-	printf '\033]P9E62E2E'; # bright red
-	printf '\033]PA8AE62E'; # bright green
-	printf '\033]PBE6B82E'; # bright yellow
-	printf '\033]PC2E5CE6'; # bright blue
-	printf '\033]PDE62EA9'; # bright magenta
-	printf '\033]PE2EE6E6'; # bright cyan
-	printf '\003]PFE6D7AB'; # bright white
-	setterm --foreground green --bold on --store # set foreground color
+	printf '\033]P03b4252'; # black 
+	printf '\033]P1bf616a'; # red
+	printf '\033]P2a3be8c'; # green
+	printf '\033]P3ebcb8b'; # yellow
+	printf '\033]P481a1c1'; # blue
+	printf '\033]P5b48ead'; # magenta
+	printf '\033]P688c0d0'; # cyan
+	printf '\033]P7e5e9f0'; # white
+	printf '\033]P84c566a'; # bright black
+	printf '\033]P9bf616a'; # bright red
+	printf '\033]PAa3be8c'; # bright green
+	printf '\033]PBebcb8b'; # bright yellow
+	printf '\033]PC81a1c1'; # bright blue
+	printf '\033]PDb48ead'; # bright magenta
+	printf '\033]PE8fbcbb'; # bright cyan
+	printf '\003]PFeceff4'; # bright white
 	clear;
 fi
 
