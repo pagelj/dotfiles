@@ -196,6 +196,6 @@ unset __conda_setup
 # <<< conda initialize <<<
 
 # Start X
-if [[ "$(tty)" = "/dev/tty1" ]]; then
-	pgrep dwm || startx
-fi
+#if [[ "$(tty)" = "/dev/tty1" ]]; then
+#	pgrep dwm || startx
+#fi
