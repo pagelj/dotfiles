@@ -9,8 +9,8 @@ static const unsigned int snap      = 32;       /* snap pixel */
 static const int showtitle          = 0;        /* 0 means no title */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Sans:size=9" };
-static const char dmenufont[]       = "Sans:size=11";
+static const char *fonts[]          = { "Sans:size=11" };
+static const char dmenufont[]       = "Sans:size=12";
 static const char dmenuln[]         = "20";
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
@@ -85,20 +85,20 @@ static const char *passclipcmd[] = { "passmenu", "-c", "-p", "Pass to Clip:", "-
 static const char *browsercmd[] = { "firefox-nightly", NULL }; /* Define browser start command */
 static const char *emailcmd[] = { "st", "-e", "mutt", NULL }; /* Define email client start command */
 static const char *musicplayercmd[] = { "ncmpcpp.sh", NULL };
-static const char *statusbarcmd[] = { "dmenu_statusbar", NULL }; /* Define command for starting dmenu-based statusbar */
+static const char *statusbarcmd[] = { "dmenu_statusbar", "-c", "-p", "System Info:", "-l", "8", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; /* Define command for starting dmenu-based statusbar */
 static const char *showtimecmd[] = { "tty-clock.sh", NULL };
 static const char *showvolumecmd[] = { "cowsay_volume.sh", NULL };
 static const char *showbatterycmd[] = { "cowsay_battery.sh", NULL };
 static const char *showipcmd[] = { "cowsay_ip.sh", NULL };
 static const char *showtempcmd[] = { "cowsay_temperatur.sh", NULL };
 static const char *showsongcmd[] = { "cowsay_current_song.sh", NULL };
-static const char *histcmd[] = { "dmenu_hist", NULL }; /* Define command for searching the command history */
+static const char *histcmd[] = { "dmenu_hist", "-c", "-p", "History:", "-l", dmenuln, "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; /* Define command for searching the command history */
 static const char *lockcmd[] = { "slock", NULL }; /* Define command for locking screen */
 static const char *musiclibcmd[] = { "mpdmenu", "::", "-c", "-i", "-l", dmenuln, "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; /* Define command for browsing music collection */
 static const char *musicplcmd[] = { "mpdmenu", "-p", "::", "-c", "-i", "-l", dmenuln, "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; /* Define command for browsing music collection */
 static const char *youtubeviewercmd[] = { "youtube-viewer.sh", NULL }; /* Search YouTube*/
-static const char *mpvyoutubecmd[] = { "st", "-e", "mpv-youtube.bash", NULL }; /* Stream YouTube videos with mpv from bookmarks file*/
-static const char *addressbookcmd[] = { "dmenu_addressbook", NULL }; /* Define command to show addressbook */
+static const char *mpvyoutubecmd[] = { "st", "-e", "mpv-youtube.bash", "-c", "-p", "YouTube Bookmarks:", "-i", "-l", dmenuln, "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; /* Stream YouTube videos with mpv from bookmarks file*/
+static const char *addressbookcmd[] = { "dmenu_addressbook", "-c", "-i", "-p", "Address book:", "-l", dmenuln, "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; /* Define command to show addressbook */
 static const char *volumeupcmd[] = { "pactl", "set-sink-volume", "0", "+1%", NULL };
 static const char *volumedowncmd[] = { "pactl", "set-sink-volume", "0", "-1%", NULL };
 static const char *volumemutecmd[] = { "amixer", "-q", "-D", "pulse", "sset", "Master", "toggle", NULL };
