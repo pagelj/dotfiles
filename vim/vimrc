@@ -64,8 +64,11 @@ command! -nargs=* RunSilent
 	\ | execute ':redraw!'
 
 " markdown preview with pandoc
-nmap <Leader>pc :RunSilent pandoc -f markdown -o /tmp/vim-pandoc-out.pdf % && pkill -1 mupdf &<CR>
+nmap <Leader>pc :RunSilent pandoc -f markdown -o /tmp/vim-pandoc-out.pdf % && pkill -1 mupdf<CR>
 nmap <Leader>pp :RunSilent mupdf /tmp/vim-pandoc-out.pdf &<CR>
+
+" run make
+nmap <Leader>mk :RunSilent make<CR>
 
 " Create commands for activating customized write and code modes
 command Normalmode set background=dark | colorscheme nord | Goyo! | set nolinebreak | set norelativenumber | set nospell
