@@ -4,3 +4,5 @@ browser surf %u
 color info black blue bold
 color listfocus black white bold
 color listfocus_unread white blue bold
+
+macro y set browser "mpv %u"; open-in-browser ; set browser "surf %u"
