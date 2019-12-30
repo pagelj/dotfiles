@@ -85,6 +85,7 @@ static const char *passclipcmd[] = { "passmenu", "-c", "-p", "Pass to Clip:", "-
 static const char *browsercmd[] = { "firefox-nightly", NULL }; /* Define browser start command */
 static const char *emailcmd[] = { "st", "-e", "mutt", NULL }; /* Define email client start command */
 static const char *musicplayercmd[] = { "ncmpcpp.sh", NULL };
+static const char *newscmd[] = { "newsboat.sh", NULL }; /* Define newsfeed command */
 static const char *statusbarcmd[] = { "dmenu_statusbar", "-c", "-p", "System Info:", "-l", "8", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; /* Define command for starting dmenu-based statusbar */
 static const char *showtimecmd[] = { "tty-clock.sh", NULL };
 static const char *showvolumecmd[] = { "cowsay_volume.sh", NULL };
@@ -161,6 +162,7 @@ static Key keys[] = {
 	{ Mod1Mask,                     XK_t,      spawn,          {.v = topcmd } },
 	{ Mod1Mask|ShiftMask,           XK_y,      spawn,          {.v = youtubeviewercmd } },
 	{ Mod1Mask,                     XK_y,      spawn,          {.v = mpvyoutubecmd } },
+	{ Mod1Mask,                     XK_n,      spawn,          {.v = newscmd } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
