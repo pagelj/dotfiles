@@ -32,11 +32,11 @@ static Parameter defconfig[ParameterLast] = {
 	SETV(SpellLanguages,     ((char *[]){ "en_US", NULL })),
 	SETB(StrictSSL,          0),
 	SETB(Style,              1),
-	SETF(ZoomLevel,          1.0),
+	SETF(ZoomLevel,          1.2),
 };
 
 static UriParameters uriparams[] = {
-	{ "(://|\\.)suckless\\.org(/|$)", {
+	{ "", {
 	  FSETB(JavaScript, 0),
 	  FSETB(Plugins,    0),
 	}, },
@@ -49,7 +49,7 @@ static WebKitFindOptions findopts = WEBKIT_FIND_OPTIONS_CASE_INSENSITIVE |
         .v = (const char *[]){ "/bin/sh", "-c", \
              "prop=\"`xprop -id $2 $0 " \
              "| sed \"s/^$0(STRING) = \\(\\\\\"\\?\\)\\(.*\\)\\1$/\\2/\" " \
-             "| xargs -0 printf %b | dmenu -p 'Open URL:' -l 1 -fn 'Sans:size=14:weight=bold'`\" &&" \
+             "| xargs -0 printf %b | dmenu -p 'Open URL:' -l 1 -fn 'Sans:size=12:weight=bold'`\" &&" \
              "xprop -id $2 -f $1 8s -set $1 \"$prop\"", \
              p, q, winid, NULL \
         } \
@@ -96,13 +96,13 @@ static SiteStyle styles[] = {
 
 #define ADDBMK { \
 	.v = (char *[]){ "/bin/sh", "-c", \
-	     "bookmarkurl $0", winid, NULL \
+	     "surf_bookmarkurl $0", winid, NULL \
 	} \
 }
 
 #define LOADBMK(r, s, p) { \
 	.v = (const char *[]){ "/bin/sh", "-c", \
-	     "prop=\"$(loadbookmark $1)\" && xprop -id $1 -f $3 8s -set $3 \"$prop\"", \
+	     "prop=\"$(surf_loadbookmark $1)\" && xprop -id $1 -f $3 8s -set $3 \"$prop\"", \
 	     "surf-setprop", winid, r, s, p, NULL \
 	} \
 }

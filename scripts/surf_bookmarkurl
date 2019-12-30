@@ -1,0 +1,7 @@
+#!/bin/sh
+file=~/.surf/bookmarks
+tmp_file=~/.surf/bookmarks_new
+url=`xprop -id $1 | grep URI | awk '{print $3}' | sed 's/\"//g'`
+title=`xprop -id $1 | grep WM_ICON_NAME\(STRING\) | cut -c 40- | sed 's/.$//g'`
+echo $url $title | dmenu -c -p 'Add Bookmark' -l 50 -w $1 -fn 'Sans:size=11' >> $file
+cat $file | sort -u > $tmp_file && mv $tmp_file $file

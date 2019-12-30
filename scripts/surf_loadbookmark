@@ -1,0 +1,3 @@
+#!/bin/sh
+file=~/.surf/bookmarks
+cat $file | dmenu -c -p 'Load Bookmark' -i -l 50 -w $1 -fn 'Sans:size=11' | awk '{print $1}'
