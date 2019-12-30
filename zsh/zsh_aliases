@@ -114,3 +114,5 @@ alias txa='tmux a'
 alias yt='mpsyt'
 
 alias mk='make'
+
+alias nb='newsboat'
