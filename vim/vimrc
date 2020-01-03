@@ -12,6 +12,7 @@ call plug#end()
 
 set encoding=utf-8 " Encoding
 set number " Display line numbers
+set splitbelow splitright " Sensible splitting behavior
 
 " Enable syntax highlighting
 let g:solarized_termcolors=256 " If using solarized color scheme
