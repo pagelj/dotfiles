@@ -5,4 +5,5 @@ color info black blue bold
 color listfocus black white bold
 color listfocus_unread white blue bold
 
+bind-key SPACE next-unread
 macro y set browser "mpv %u"; open-in-browser ; set browser "surf %u"
