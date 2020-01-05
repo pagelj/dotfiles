@@ -51,13 +51,17 @@ set statusline+=%1*\ %<%F\                                "Filename
 set statusline+=%2*\ %y\                                  "FileType
 set statusline+=%3*\ %{''.(&fenc!=''?&fenc:&enc).''}      "Encoding
 set statusline+=%3*\ %{(&bomb?\",BOM\":\"\")}\            "Encoding2
-set statusline+=%4*\ %{&ff}\                              "FileFormat (dos/unix..) 
+set statusline+=%4*\ %{&ff}\                              "FileFormat (dos/unix..)
 set statusline+=%5*\ %{&spelllang}\                       "Spellanguage
 set statusline+=%8*\ %=\ %l:%v\                           "Rownr:Colnr
 set statusline+=%0*\ \ %m%r%w\ %P\ \                      "Modified? Readonly? Top/bot.
 
 " Show tabs
 set listchars=tab:>-
+
+" automatically deletes all trailing whitespace on save
+autocmd BufWritePre * %s/\s\+$//e
+
 
 " run programs silently
 command! -nargs=* RunSilent
@@ -73,7 +77,7 @@ nmap <Leader>mk :RunSilent make<CR>
 
 " Create commands for activating customized write and code modes
 command Normalmode set background=dark | colorscheme nord | Goyo! | set nolinebreak | set norelativenumber | set nospell
-command Writemode set background=light | colorscheme solarized | set linebreak | set spell | Goyo 70
+command Writemode set background=light | colorscheme solarized | set linebreak | set spell | Goyo 80
 command Codemode set background=dark | colorscheme obsidian | Goyo! | set nolinebreak | set nospell
 nmap <Leader>nm :Normalmode<CR>
 nmap <Leader>wm :Writemode<CR>
@@ -81,3 +85,6 @@ nmap <Leader>cm :Codemode<CR>
 
 " Macro for inserting current date
 nmap <Leader>d "=strftime("%Y-%m-%d")<CR>P
+
+" autocmds
+autocmd BufRead,BufNewFile ~/.mutt/temp/mutt* :Goyo 80 | set linebreak | set spell
