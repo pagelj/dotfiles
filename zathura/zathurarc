@@ -1,0 +1,11 @@
+set statusbar-home-tilde true
+set default-fg "#e5e9f0"
+set default-bg "#3b4252"
+set statusbar-fg "#e5e9f0"
+set statusbar-bg "#3b4252"
+set inputbar-fg "#a3be8c"
+set inputbar-bg "#3b4252"
+set index-fg "#e5e9f0"
+set index-bg "#3b4252"
+set index-active-fg "#2e3440"
+set index-active-bg "#a3be8c"
