@@ -1,3 +1,5 @@
 #!/bin/env dash
 
+killall wpa_supplicant
+killall dhcpcd
 wpa_supplicant -B -i wlp4s0 -c /etc/wpa_supplicant/wpa_supplicant-eduroam.conf && dhcpcd wlp4s0
