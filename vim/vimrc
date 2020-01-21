@@ -62,7 +62,7 @@ command! -nargs=* RunSilent
 
 " markdown preview with pandoc {{{
 nmap <Leader>pc :RunSilent pandoc -f markdown -o /tmp/vim-pandoc-out.pdf % && pkill -1 mupdf<CR>
-nmap <Leader>pp :RunSilent mupdf /tmp/vim-pandoc-out.pdf &<CR>
+nmap <Leader>pp :RunSilent zathura /tmp/vim-pandoc-out.pdf &<CR>
 " }}}
 
 " run make {{{
@@ -70,9 +70,9 @@ nmap <Leader>mk :RunSilent make<CR>
 "}}}
 
 " Normal, write and code modes {{{
-command Normalmode set background=dark | colorscheme nord | Goyo! | set nolinebreak | set norelativenumber | set nospell
-command Writemode set background=light | colorscheme solarized | set linebreak | set spell | Goyo 80
-command Codemode set background=dark | colorscheme obsidian | Goyo! | set nolinebreak | set nospell
+command Normalmode set background=dark | colorscheme nord | Goyo! | set nolinebreak | set norelativenumber | set nospell | set cursorline
+command Writemode set background=light | colorscheme solarized | set linebreak | set spell | set nocursorline | Goyo 80
+command Codemode set background=dark | colorscheme obsidian | Goyo! | set nolinebreak | set nospell | set cursorline
 nmap <Leader>nm :Normalmode<CR>
 nmap <Leader>wm :Writemode<CR>
 nmap <Leader>cm :Codemode<CR>
