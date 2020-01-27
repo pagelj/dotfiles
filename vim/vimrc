@@ -30,6 +30,8 @@ let mapleader = ','
 set timeoutlen=2000
 " Show tabs
 set listchars=tab:>-
+" Leave insert mode
+inoremap jk <ESC>
  " }}}
 
 " Syntax highlighting {{{
