@@ -8,10 +8,15 @@ Plug 'junegunn/goyo.vim'
 Plug 'arcticicestudio/nord-vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
+Plug 'justinmk/vim-sneak'
 call plug#end()
 if has("autocmd")
   filetype plugin indent on
 endif
+
+" Configure vim-sneak
+map f <Plug>Sneak_s
+map F <Plug>Sneak_S
  " }}}
 
 " Basics {{{
