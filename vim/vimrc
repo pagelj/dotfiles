@@ -70,6 +70,11 @@ command! -nargs=* RunSilent
 " markdown preview with pandoc {{{
 nmap <Leader>pc :RunSilent pandoc -f markdown -o /tmp/vim-pandoc-out.pdf % && pkill -1 mupdf<CR>
 nmap <Leader>pp :RunSilent zathura /tmp/vim-pandoc-out.pdf &<CR>
+ " }}}
+
+" Search through vimwiki {{{
+command! -nargs=1 Wikigrep vimgrep "<args>" $HOME/vimwiki/**/*.wiki
+nnoremap <Leader>w :Wikigrep<space>
 " }}}
 
 " run make {{{
