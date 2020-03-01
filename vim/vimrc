@@ -9,6 +9,7 @@ Plug 'arcticicestudio/nord-vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'justinmk/vim-sneak'
+Plug 'camspiers/lens.vim'
 call plug#end()
 if has("autocmd")
   filetype plugin indent on
