@@ -18,7 +18,7 @@ setxkbmap -layout de # Set keyboard layout
 sh ~/.fehbg & # Set wallpaper
 xbindkeys # Use cumstomized keybindings
 xbacklight -set 40 # Dim screen
-wmname LG3D # Trick java into behaving reasonably
+wmname compiz # Trick java into behaving reasonably
 
 # Autostart
 xautolock -time 30 -locker slock & # Automatic screen lock
