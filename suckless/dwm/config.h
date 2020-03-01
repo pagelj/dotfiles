@@ -12,7 +12,7 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = { "Sans:size=11" };
 static const char dmenufont[]       = "Sans:size=12";
 static const char dmenuln[]         = "20";
-/* Default colors 
+/* Default colors
 static const char col_gray1[]       = "#222222";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -32,7 +32,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "1:desk", "2:term", "3:code", "4:ssh", "5:top", "6", "7:media", "8:mail", "9:web" };
+static const char *tags[] = { "1:desk", "2:term", "3:code", "4:ssh", "5:top", "6:misc", "7:media", "8:mail", "9:web" };
 
 static const Rule rules[] = {
 	/* xprop(1):
