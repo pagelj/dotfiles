@@ -11,4 +11,4 @@ else
 	echo $ENTRY > $TMPFILE
 fi
 LINK=$(echo $ENTRY | tr ' ' '\n' | tail -1)
-mpv --x11-name mpv-youtube $LINK
+mpv --x11-name=mpv-youtube $LINK
