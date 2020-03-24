@@ -1,0 +1,2 @@
+set index_format="{name:40} {email:40} {url:40} {phone:20|workphone|mobile}"
+set www_command=elinks
