@@ -1,15 +1,19 @@
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
+Plug 'easymotion/vim-easymotion'
+Plug 'preservim/nerdtree'
 Plug 'vimwiki/vimwiki'
 Plug 'mechatroner/rainbow_csv'
-Plug 'w0rp/ale'
+Plug 'dense-analysis/ale'
 Plug 'wincent/command-t'
 Plug 'junegunn/goyo.vim'
 Plug 'arcticicestudio/nord-vim'
+Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'justinmk/vim-sneak'
 Plug 'camspiers/lens.vim'
+Plug 'jlanzarotta/bufexplorer'
 call plug#end()
 if has("autocmd")
   filetype plugin indent on
@@ -18,6 +22,10 @@ endif
 " Configure vim-sneak
 map f <Plug>Sneak_s
 map F <Plug>Sneak_S
+
+" Configure nerdtree
+nmap <C-n> :NERDTreeToggle<CR>
+
  " }}}
 
 " Basics {{{
@@ -42,6 +50,8 @@ inoremap jk <ESC>
 
 " Syntax highlighting {{{
 let g:solarized_termcolors=256 " If using solarized color scheme
+let g:gruvbox_contrast_dark="soft" " If using gruvbox color scheme
+let g:gruvbox_contrast_light="hard"
 if has("syntax")
   syntax on
   colorscheme nord
