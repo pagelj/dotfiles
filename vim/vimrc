@@ -5,7 +5,9 @@ Plug 'preservim/nerdtree'
 Plug 'vimwiki/vimwiki'
 Plug 'mechatroner/rainbow_csv'
 Plug 'dense-analysis/ale'
-Plug 'wincent/command-t'
+Plug 'wincent/command-t', {
+			\ 'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make'
+			\ }
 Plug 'junegunn/goyo.vim'
 Plug 'arcticicestudio/nord-vim'
 Plug 'morhetz/gruvbox'
