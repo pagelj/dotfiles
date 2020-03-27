@@ -15,7 +15,7 @@ export BROWSER="firefox-nightly"
 xrdb -merge ~/.Xresources # Read Xresources
 xmodmap ~/.Xmodmap
 setxkbmap -layout de # Set keyboard layout
-sh ~/.fehbg & # Set wallpaper
+xwallpaper --zoom ~/.wallpaper.png # Set wallpaper
 xbindkeys # Use cumstomized keybindings
 xbacklight -set 40 # Dim screen
 wmname compiz # Trick java into behaving reasonably
