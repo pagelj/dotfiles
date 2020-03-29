@@ -8,6 +8,14 @@ if [ -f ~/.zsh_functions ]; then
 fi
 
 ########################
+#### Key bindings ######
+########################
+
+bindkey '^[[P' delete-char # Delete
+bindkey '^[[5~' up-line-or-history # PageUp
+bindkey '^[[6~' down-line-or-history # PageDown
+
+########################
 #### Autocomplete ######
 ########################
 
