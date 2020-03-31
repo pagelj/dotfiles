@@ -38,8 +38,7 @@ alias cp='cp -i'
 alias mv='mv -i'
 
 # shutdown alias
-alias shut='sudo shutdown -P now'
-alias restart='sudo shutdown -r now'
+alias shut='shutdown -P now'
 
 # emacs alias
 function __emacs_function { emacs -mm "$@" & }
