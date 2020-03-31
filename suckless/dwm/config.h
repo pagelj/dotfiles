@@ -95,6 +95,7 @@ static const char *emailcmd[] = { "st", "-e", "mutt", NULL }; /* Define email cl
 static const char *musicplayercmd[] = { "ncmpcpp.sh", NULL };
 static const char *newscmd[] = { "newsboat.sh", NULL }; /* Define newsfeed command */
 static const char *statusbarcmd[] = { "dmenu_statusbar", "-c", "-p", "System Info:", "-l", "8", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; /* Define command for starting dmenu-based statusbar */
+static const char *emojicmd[] = { "dmenu_emoji", "-p", "Emoji:", "-l", "20", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *showtimecmd[] = { "tty-clock.sh", NULL };
 static const char *showvolumecmd[] = { "cowsay_volume.sh", NULL };
 static const char *showbatterycmd[] = { "cowsay_battery.sh", NULL };
@@ -127,6 +128,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_y,      spawn,          {.v = musicplcmd } }, /* Choose from music playlist */
 	{ MODKEY,                       XK_a,      spawn,          {.v = addressbookcmd } }, /* Show email addressbook */
 	{ MODKEY,                       XK_x,      togglebar,      {0} },
+	{ MODKEY,                       XK_e,      spawn,          {.v = emojicmd } },
 	{ MODKEY,			XK_b,	   spawn,	   {.v = statusbarcmd } },
 	{ MODKEY,                       XK_F1,     spawn,          {.v = showtimecmd } },
 	{ MODKEY,                       XK_F2,     spawn,          {.v = showvolumecmd } },
