@@ -35,6 +35,7 @@ zstyle ':completion:*:default' list-prompt '%S%M matches%s'
 zstyle ':completion:*' group-name ''
 zstyle ':completion:*:manuals' separate-sections true
 zstyle ':completion:*:manuals.(^1*)' insert-sections true
+zstyle ':completion:*:ssh:*' hosts off # Do not use /etc/hosts for ssh autocompletion
 zstyle ':completion:*' menu select
 zstyle ':completion:*' verbose yes
 zstyle ':completion:*' rehash true
@@ -68,8 +69,8 @@ setopt PROMPT_SUBST # Enable command substitution in prompt
 
 # Set history options
 HISTFILE=~/.zhistory
-HISTSIZE=10000
-SAVEHIST=10000
+HISTSIZE=1000000
+SAVEHIST=1000000
 
 # Source aliases
 if [ -f ~/.zsh_aliases ]; then
