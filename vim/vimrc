@@ -33,6 +33,7 @@ nmap <C-n> :NERDTreeToggle<CR>
 " Basics {{{
 set encoding=utf-8 " Encoding
 set number " Display line numbers
+set relativenumber " Enable relative line numbers
 set splitbelow splitright " Sensible splitting behavior
 set nocompatible
 set nomodeline
