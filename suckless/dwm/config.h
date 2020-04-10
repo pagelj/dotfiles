@@ -32,7 +32,7 @@ static const char *colors[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "", "", "", "", "", "", "", "", "" };
+static const char *tags[] = { "", "", "", "", "", "", "⏯", "", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -41,21 +41,22 @@ static const Rule rules[] = {
 	 */
 	/* class         instance          title               tags mask     isfloating   monitor */
 	{ "Gimp",           NULL,          NULL,               0,            1,           -1 },
-	{ "de-unistuttgart-ims-coref-annotator-Annotator", NULL, NULL, 0, 1<<2,   -1 },
-	{ "Firefox",        NULL,          NULL,               1<<8,         0,           -1 },
-        { "Nightly",        NULL,          NULL,               1<<8,         0,           -1 },
-	{ "qutebrowser",    NULL,          NULL,               1<<8,         0,           -1 },
-	{ NULL,             NULL,          "mpsyt",            1<<8,         0,           -1 },
-	{ "Thunderbird",    NULL,          NULL,               1<<7,         0,           -1 },
-	{ NULL,             NULL,          "mutt",             1<<7,         0,           -1 },
+	{ "MEGAsync",       NULL,          NULL,               1,            1,           -1 },
+	{ "de-unistuttgart-ims-coref-annotator-Annotator", NULL, NULL, 1<<2, 1,           -1 },
 	{ "Geany",          NULL,          NULL,               1<<2,         0,           -1 },
 	{ "RStudio",        NULL,          NULL,               1<<2,         0,           -1 },
 	{ "Eclipse",        NULL,          NULL,               1<<2,         0,           -1 },
 	{ NULL,             NULL,          "top",              1<<4,         0,           -1 },
-	{ "MEGAsync",       NULL,          NULL,               1,            1,           -1 },
+	{ "Skype",          NULL,          NULL,               1<<5,         0,           -1 },
 	{ NULL,             "mpv-youtube", NULL,               1<<6,         0,           -1 },
 	{ NULL,             NULL,          "mpv-youtube.bash", 1<<6,         0,           -1 },
 	{ NULL,             NULL,          "youtube-viewer",   1<<6,         0,           -1 },
+	{ "Thunderbird",    NULL,          NULL,               1<<7,         0,           -1 },
+	{ NULL,             NULL,          "mutt",             1<<7,         0,           -1 },
+	{ "Firefox",        NULL,          NULL,               1<<8,         0,           -1 },
+        { "Nightly",        NULL,          NULL,               1<<8,         0,           -1 },
+	{ "qutebrowser",    NULL,          NULL,               1<<8,         0,           -1 },
+	{ NULL,             NULL,          "mpsyt",            1<<8,         0,           -1 },
 };
 
 /* layout(s) */
@@ -85,30 +86,8 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-c", "-p", "Run:", "-l", dmenuln, "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
-static const char *topcmd[] = {"st", "-e", "top", NULL };
-static const char *screenshotcmd[] = { "maim", "-s", "/tmp/screenshot.png" };
-static const char *clipcmd[] = { "clipmenu", "-c", "-p", "Clipboard:", "-l", dmenuln, "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; /* Define clipmenu command */
-static const char *passcmd[] = { "passmenu", "--type", "-c", "-p", "Pass:", "-l", dmenuln,  "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; /* Define passmenu command */
-static const char *passclipcmd[] = { "passmenu", "-c", "-p", "Pass to Clip:", "-l", dmenuln,  "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; /* Define passmenu command */
-static const char *browsercmd[] = { "firefox-nightly", NULL }; /* Define browser start command */
-static const char *emailcmd[] = { "st", "-e", "mutt", NULL }; /* Define email client start command */
-static const char *musicplayercmd[] = { "ncmpcpp.sh", NULL };
-static const char *newscmd[] = { "newsboat.sh", NULL }; /* Define newsfeed command */
 static const char *statusbarcmd[] = { "dmenu_statusbar", "-c", "-p", "System Info:", "-l", "8", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; /* Define command for starting dmenu-based statusbar */
-static const char *emojicmd[] = { "dmenu_emoji", "-p", "Emoji:", "-l", "20", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
-static const char *showtimecmd[] = { "tty-clock.sh", NULL };
-static const char *showvolumecmd[] = { "cowsay_volume.sh", NULL };
-static const char *showbatterycmd[] = { "cowsay_battery.sh", NULL };
-static const char *showipcmd[] = { "cowsay_ip.sh", NULL };
-static const char *showtempcmd[] = { "cowsay_temperatur.sh", NULL };
-static const char *showsongcmd[] = { "cowsay_current_song.sh", NULL };
-static const char *histcmd[] = { "dmenu_hist", "-c", "-p", "History:", "-l", dmenuln, "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; /* Define command for searching the command history */
 static const char *lockcmd[] = { "slock", NULL }; /* Define command for locking screen */
-static const char *musiclibcmd[] = { "mpdmenu", "::", "-c", "-i", "-l", dmenuln, "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; /* Define command for browsing music collection */
-static const char *musicplcmd[] = { "mpdmenu", "-p", "::", "-c", "-i", "-l", dmenuln, "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; /* Define command for browsing music collection */
-static const char *youtubeviewercmd[] = { "youtube-viewer.sh", NULL }; /* Search YouTube*/
-static const char *mpvyoutubecmd[] = { "st", "-e", "mpv-youtube.bash", "-c", "-p", "YouTube Bookmarks:", "-i", "-l", dmenuln, "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; /* Stream YouTube videos with mpv from bookmarks file*/
-static const char *addressbookcmd[] = { "dmenu_addressbook", "-c", "-i", "-p", "Address book:", "-l", dmenuln, "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; /* Define command to show addressbook */
 static const char *volumeupcmd[] = { "pactl", "set-sink-volume", "0", "+1%", NULL };
 static const char *volumedowncmd[] = { "pactl", "set-sink-volume", "0", "-1%", NULL };
 static const char *volumemutecmd[] = { "amixer", "-q", "-D", "pulse", "sset", "Master", "toggle", NULL };
@@ -118,25 +97,10 @@ static const char *brightnessdowncmd[] = { "xbacklight", "-dec", "10", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ 0,                            XK_Print,  spawn,          {.v = screenshotcmd } },
-	{ MODKEY,                       XK_c,      spawn,          {.v = clipcmd } }, /* Define shortcut for clipmenu */
-	{ MODKEY,                       XK_p,      spawn,          {.v = passcmd } }, /* Define shortcut for passmenu */
-	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = passclipcmd } }, /* Define shortcut for passmenu and copy to clipboard */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,             		XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_u,      spawn,          {.v = musiclibcmd } }, /* Add from music library to playlist */
-	{ MODKEY,                       XK_y,      spawn,          {.v = musicplcmd } }, /* Choose from music playlist */
-	{ MODKEY,                       XK_a,      spawn,          {.v = addressbookcmd } }, /* Show email addressbook */
 	{ MODKEY,                       XK_x,      togglebar,      {0} },
-	{ MODKEY,                       XK_e,      spawn,          {.v = emojicmd } },
 	{ MODKEY,			XK_b,	   spawn,	   {.v = statusbarcmd } },
-	{ MODKEY,                       XK_F1,     spawn,          {.v = showtimecmd } },
-	{ MODKEY,                       XK_F2,     spawn,          {.v = showvolumecmd } },
-	{ MODKEY,                       XK_F3,     spawn,          {.v = showbatterycmd } },
-	{ MODKEY,                       XK_F4,     spawn,          {.v = showipcmd } },
-	{ MODKEY,                       XK_F5,     spawn,          {.v = showtempcmd } },
-	{ MODKEY,                       XK_F6,     spawn,          {.v = showsongcmd } },
-	{ MODKEY,                       XK_r,      spawn,          {.v = histcmd } },
 	{ 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = volumeupcmd } },
 	{ 0,                            XF86XK_AudioLowerVolume, spawn, {.v = volumedowncmd } },
 	{ 0,                            XF86XK_AudioMute, spawn, {.v = volumemutecmd } },
@@ -166,13 +130,6 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	{ Mod1Mask,                     XK_l,      spawn,          {.v = lockcmd } }, /* Define shortcut for lockcmd */
-	{ Mod1Mask,                     XK_b,      spawn,          {.v = browsercmd  } }, /* Define shortcuts for frequent applications */
-	{ Mod1Mask,                     XK_m,      spawn,          {.v = emailcmd } },
-	{ Mod1Mask,                     XK_p,      spawn,          {.v = musicplayercmd } },
-	{ Mod1Mask,                     XK_t,      spawn,          {.v = topcmd } },
-	{ Mod1Mask|ShiftMask,           XK_y,      spawn,          {.v = youtubeviewercmd } },
-	{ Mod1Mask,                     XK_y,      spawn,          {.v = mpvyoutubecmd } },
-	{ Mod1Mask,                     XK_n,      spawn,          {.v = newscmd } },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)

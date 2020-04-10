@@ -1,0 +1,65 @@
+Print
+	maim -s /tmp/screenshot.png
+
+super + c
+	clipmenu -c -p "Clipboard" -l 20
+
+super + p
+	passmenu --type -c -p "Pass" -l 20
+
+super + shift + p
+	passmenu -c -p "Pass to Clip" -l 20
+
+super + u
+	mpdmenu :: -c -i -l 20
+
+super + y
+	mpdmenu -p :: -c -i -l 20
+
+super + a
+	st -e abook
+
+super + e
+	dmenu_emoji
+
+super + F1
+	tty-clock.sh
+
+super + F2
+	cowsay_volume.sh
+
+super + F3
+	cowsay_battery.sh
+
+super + F4
+	cowsay_ip.sh
+
+super + F5
+	cowsay_temperatur.sh
+
+super + F6
+	cowsay_current_song.sh
+
+super + r
+	dmenu_hist
+
+alt + b
+	firefox-nightly
+
+alt + m
+	st -e mutt
+
+alt + p
+	st -e ncmpcpp
+
+alt + t
+	st -e top
+
+alt + shift + y
+	st -e mpv-youtube.bash -c -p "YouTube Bookmarks" -i -l 20
+
+alt + y
+	st -e youtube-viewer
+
+alt + n
+	st -e newsboat
