@@ -16,9 +16,9 @@ xrdb -merge ~/.Xresources # Read Xresources
 xmodmap ~/.Xmodmap
 setxkbmap -layout de # Set keyboard layout
 xwallpaper --zoom ~/.wallpaper.png # Set wallpaper
-xbindkeys # Use cumstomized keybindings
 xbacklight -set 40 # Dim screen
-wmname compiz # Trick java into behaving reasonably
+wmname LG3D # Trick java into behaving reasonably
+sxhkd & # Use cumstomized keybindings
 
 # Autostart
 xautolock -time 30 -locker slock & # Automatic screen lock
@@ -30,4 +30,3 @@ megasync &> /dev/null & # Start mega sync service
 
 # Set window/desktop manager
 exec dwm
-#exec i3
