@@ -56,7 +56,7 @@ alt + t
 	st -e top
 
 alt + shift + y
-	st -e mpv-youtube.bash -c -p "YouTube Bookmarks" -i -l 20
+	mpv-youtube.bash -c -p "YouTube Bookmarks" -i -l 20
 
 alt + y
 	st -e youtube-viewer
