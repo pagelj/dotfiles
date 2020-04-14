@@ -13,7 +13,7 @@ static Parameter defconfig[ParameterLast] = {
 	SETV(CookiePolicies,     "@Aa"),
 	SETB(DiskCache,          1),
 	SETB(DNSPrefetch,        0),
-	SETI(FontSize,           12),
+	SETI(FontSize,           14),
 	SETB(FrameFlattening,    0),
 	SETB(Geolocation,        0),
 	SETB(HideBackground,     0),
@@ -30,9 +30,9 @@ static Parameter defconfig[ParameterLast] = {
 	SETB(SiteQuirks,         1),
 	SETB(SpellChecking,      0),
 	SETV(SpellLanguages,     ((char *[]){ "en_US", NULL })),
-	SETB(StrictSSL,          0),
+	SETB(StrictSSL,          1),
 	SETB(Style,              1),
-	SETF(ZoomLevel,          1.2),
+	SETF(ZoomLevel,          1.5),
 };
 
 static UriParameters uriparams[] = {
