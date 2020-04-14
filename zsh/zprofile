@@ -19,4 +19,4 @@ path=(~/bin $(ruby -e 'print Gem.user_dir')/bin $path[@])
 export EDITOR="vim"
 export VISUAL="vim"
 export PAGER="less"
-export BROWSER="firefox-nightly"
+export BROWSER="qutebrowser"

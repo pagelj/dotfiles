@@ -44,7 +44,7 @@ super + r
 	dmenu_hist
 
 alt + b
-	firefox-nightly
+	qutebrowser
 
 alt + m
 	st -e mutt
