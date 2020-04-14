@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 #
 # Behavior:
-#   Userscript for qutebrowser which views the current web page in mpv using
-#   sensible mpv-flags. While viewing the page in MPV, all <video>, <embed>,
+#   Userscript for qutebrowser which views the current web page in vlc using
+#   sensible vlc-flags. While viewing the page in MPV, all <video>, <embed>,
 #   and <object> tags in the original page are temporarily removed. Clicking on
 #   such a removed video restores the respective video.
 #
@@ -10,16 +10,16 @@
 #   qutebrowser. I recommend using an alias, e.g. put this in the
 #   [alias]-section of qutebrowser.conf:
 #
-#     mpv = spawn --userscript /path/to/view_in_mpv
+#     vlc = spawn --userscript /path/to/view_in_vlc
 #
 # Background:
 #   Most of my machines are too slow to play youtube videos using html5, but
-#   they work fine in mpv (and mpv has further advantages like video scaling,
+#   they work fine in vlc (and vlc has further advantages like video scaling,
 #   etc). Of course, I don't want the video to be played (or even to be
-#   downloaded) twice — in mpv and in qwebkit. So I often close the tab after
-#   opening it in mpv. However, I actually want to keep the rest of the page
+#   downloaded) twice — in vlc and in qwebkit. So I often close the tab after
+#   opening it in vlc. However, I actually want to keep the rest of the page
 #   (comments and video suggestions), i.e. only the videos should disappear
-#   when mpv is started. And that's precisely what the present script does.
+#   when vlc is started. And that's precisely what the present script does.
 #
 # Thorsten Wißmann, 2015 (thorsten` on freenode)
 # Any feedback is welcome!
@@ -47,10 +47,10 @@ msg() {
     fi
 }
 
-MPV_COMMAND=${MPV_COMMAND:-mpv}
+VLC_COMMAND=${VLC_COMMAND:-vlc}
 # Warning: spaces in single flags are not supported
-MPV_FLAGS=${MPV_FLAGS:- --no-terminal --force-window --keep-open=yes --no-osc --ytdl --x11-name=mpv-youtube}
-IFS=" " read -r -a video_command <<< "$MPV_COMMAND $MPV_FLAGS"
+VLC_FLAGS=${VLC_FLAGS:- --qt-minimal-view}
+IFS=" " read -r -a video_command <<< "$VLC_COMMAND $VLC_FLAGS"
 
 js() {
 cat <<EOF
@@ -139,5 +139,5 @@ printjs() {
 }
 echo "jseval -q $(printjs)" >> "$QUTE_FIFO"
 
-msg info "Opening $QUTE_URL with mpv"
+msg info "Opening $QUTE_URL with vlc"
 "${video_command[@]}" "$@" "$QUTE_URL"

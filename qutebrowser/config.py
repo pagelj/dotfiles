@@ -15,6 +15,7 @@ config.load_autoconfig()
 ## aliases, while the values are the commands they map to.
 ## Type: Dict
 c.aliases = {'mpv': 'spawn --userscript qutebrowser_view_in_mpv.bash',
+             'vlc': 'spawn --userscript qutebrowser_view_in_vlc.bash',
              'w': 'session-save',
              'q': 'close',
              'qa': 'quit',
