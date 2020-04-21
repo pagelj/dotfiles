@@ -38,9 +38,10 @@ set splitbelow splitright " Sensible splitting behavior
 set nocompatible
 set nomodeline
 set cursorline
-" Enable autocompletion
+" Enable file autocompletion and fuzzy find
 set wildmode=longest,list,full
 set wildmenu
+set path+=**
 " Change leader key
 let mapleader = ','
 " Set the time the leader key is active (in ms)
@@ -123,6 +124,11 @@ nmap <Leader>cm :Codemode<CR>
 
 " Insert current date {{{
 nmap <Leader>d "=strftime("%Y-%m-%d")<CR>P
+" }}}
+
+" Commands {{{
+" Requires ctags to be installed
+command! MakeTags !ctags -R .
 " }}}
 
 " autocmds {{{
