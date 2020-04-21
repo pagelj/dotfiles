@@ -49,7 +49,7 @@ msg() {
 
 MPV_COMMAND=${MPV_COMMAND:-mpv}
 # Warning: spaces in single flags are not supported
-MPV_FLAGS=${MPV_FLAGS:- --no-terminal --force-window --keep-open=yes --no-osc --ytdl --x11-name=mpv-youtube}
+MPV_FLAGS=${MPV_FLAGS:- --no-terminal --force-window --keep-open=yes --no-osc --sub-auto=all --ytdl --ytdl-format=best --ytdl-raw-options=sub-format=srt/best,write-sub= --x11-name=mpv-youtube}
 IFS=" " read -r -a video_command <<< "$MPV_COMMAND $MPV_FLAGS"
 
 js() {
