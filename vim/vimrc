@@ -73,6 +73,23 @@ set statusline+=%4*\ %{&ff}\                              "FileFormat (dos/unix.
 set statusline+=%5*\ %{&spelllang}\                       "Spellanguage
 set statusline+=%8*\ %=\ %l:%v\                           "Rownr:Colnr
 set statusline+=%0*\ \ %m%r%w\ %P\ \                      "Modified? Readonly? Top/bot.
+ " }}}
+
+" Snippets {{{
+" Python
+nnoremap <Leader>pydef :-1read $HOME/.vim/snippets/python/skel_func.py<CR>wf(a
+nnoremap <Leader>pyclass :-1read $HOME/.vim/snippets/python/skel_class.py<CR>wi 
+" LaTeX
+nnoremap <Leader>item :-1read $HOME/.vim/snippets/latex/skel_itemize.tex<CR>1j$i
+nnoremap <Leader>enum :-1read $HOME/.vim/snippets/latex/skel_enumerate.tex<CR>1j$i
+nnoremap <Leader>fig :-1read $HOME/.vim/snippets/latex/skel_figure.tex<CR>1j$i
+nnoremap <Leader>outline :-1read $HOME/.vim/snippets/latex/skel_outline.tex<CR>1j$i
+" Markdown
+nnoremap <Leader>mdtab :-1read $HOME/.vim/snippets/markdown/skel_table.md<CR>2li
+nnoremap <Leader>mdimg :-1read $HOME/.vim/snippets/markdown/skel_image.md<CR>f[a
+nnoremap <Leader>mdlink :-1read $HOME/.vim/snippets/markdown/skel_link.md<CR>f[a
+nnoremap <Leader>mdblock :-1read $HOME/.vim/snippets/markdown/skel_codeblock.md<CR>$i
+nnoremap <Leader>mdmeta :-1read $HOME/.vim/snippets/markdown/skel_meta.md<CR>3j$"=strftime("%Y-%m-%d")<CR>Pgg01j$i
 " }}}
 
 " run programs silently {{{
@@ -114,7 +131,7 @@ if has("autocmd")
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
   autocmd BufRead,BufNewFile ~/.mutt/temp/mutt* :Goyo 80 | set linebreak | set spell
   " automatically deletes all trailing whitespace on save
-  autocmd BufWritePre * %s/\s\+$//e
+  " autocmd BufWritePre * %s/\s\+$//e
 endif
 
 " Use specific colorscheme for buffer if b:colors_name is set
