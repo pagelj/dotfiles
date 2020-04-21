@@ -37,9 +37,6 @@ alias rm='rm -I'
 alias cp='cp -i'
 alias mv='mv -i'
 
-# shutdown alias
-alias shut='shutdown -P now'
-
 # emacs alias
 function __emacs_function { emacs -mm "$@" & }
 alias e='__emacs_function'
