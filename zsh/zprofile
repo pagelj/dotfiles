@@ -15,8 +15,14 @@ path=(~/bin $(ruby -e 'print Gem.user_dir')/bin $path[@])
 ## Variables ###
 ################
 
-# set EDITOR, VISUAL, PAGER and BROWSER variable
+# default config path
+export XDG_CONFIG_HOME=~/.config
+
+# set default programs
 export EDITOR="vim"
 export VISUAL="vim"
 export PAGER="less"
 export BROWSER="qutebrowser"
+
+# Program-specific variables
+export WEECHAT_HOME=$XDG_CONFIG_HOME/weechat # weechat
