@@ -51,12 +51,13 @@ static const Rule rules[] = {
 	{ NULL,             "mpv-youtube", NULL,               1<<6,         0,           -1 },
 	{ NULL,             NULL,          "mpv-youtube.bash", 1<<6,         0,           -1 },
 	{ NULL,             NULL,          "youtube-viewer",   1<<6,         0,           -1 },
+	{ NULL,             NULL,          "mpsyt",            1<<6,         0,           -1 },
 	{ "Thunderbird",    NULL,          NULL,               1<<7,         0,           -1 },
 	{ NULL,             NULL,          "mutt",             1<<7,         0,           -1 },
 	{ "Firefox",        NULL,          NULL,               1<<8,         0,           -1 },
         { "Nightly",        NULL,          NULL,               1<<8,         0,           -1 },
 	{ "qutebrowser",    NULL,          NULL,               1<<8,         0,           -1 },
-	{ NULL,             NULL,          "mpsyt",            1<<8,         0,           -1 },
+	{ NULL,             "surf",        NULL,               1<<8,         0,           -1 },
 };
 
 /* layout(s) */
@@ -86,7 +87,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-c", "-p", "Run:", "-l", dmenuln, "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
-static const char *statusbarcmd[] = { "dmenu_statusbar", "-c", "-p", "System Info:", "-l", "8", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL }; /* Define command for starting dmenu-based statusbar */
+static const char *statusbarcmd[] = { "statusbar", NULL }; /* Define command for starting dmenu-based statusbar */
 static const char *lockcmd[] = { "slock", NULL }; /* Define command for locking screen */
 static const char *volumeupcmd[] = { "pactl", "set-sink-volume", "0", "+1%", NULL };
 static const char *volumedowncmd[] = { "pactl", "set-sink-volume", "0", "-1%", NULL };
