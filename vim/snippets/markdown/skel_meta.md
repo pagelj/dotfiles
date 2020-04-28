@@ -1,6 +1,7 @@
 ---
-Title:  
-Author:  
-Date:  
-Lang:  
+title:  
+author:  
+date:  
+lang:  
+
 ---
