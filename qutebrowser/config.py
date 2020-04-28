@@ -97,6 +97,7 @@ c.editor.command = ['st', '-e', 'vim', '{file}']
 ## Type: Dict
 c.url.searchengines = {'DEFAULT': 'https://duckduckgo.com/?q={}',
                        'aw': 'https://wiki.archlinux.org/index.php/{}',
+                       'aur': 'https://aur.archlinux.org/packages/{}',
                        'dict': 'https://www.dict.cc/?s={}',
                        'g': 'https://www.google.de/search?q={}',
                        'leo': 'https://dict.leo.org/ende?search={}',
