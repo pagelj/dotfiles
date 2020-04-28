@@ -38,6 +38,7 @@ set splitbelow splitright " Sensible splitting behavior
 set nocompatible
 set nomodeline
 set cursorline
+set clipboard+=unnamedplus " Yank and Paste directly to and from clipboard
 " Enable file autocompletion and fuzzy find
 set wildmode=longest,list,full
 set wildmenu
@@ -149,6 +150,21 @@ au BufLeave * if (exists("b:current_colors")) | execute "colorscheme " . b:curre
 " Open vimrc {{{
 nnoremap <Leader>ev :vsp ~/.vimrc<CR>
 nnoremap <Leader>sv :source ~/.vimrc <bar> :doautocmd BufRead<CR>
+" }}}
+
+" Disable arrow and page keys {{{
+noremap <Down> <Nop>
+noremap <Left> <Nop>
+noremap <Right> <Nop>
+noremap <Up> <Nop>
+noremap <PageUp> <Nop>
+noremap <PageDown> <Nop>
+noremap! <Down> <Nop>
+noremap! <Left> <Nop>
+noremap! <Right> <Nop>
+noremap! <Up> <Nop>
+noremap! <PageUp> <Nop>
+noremap! <PageDown> <Nop>
 " }}}
 
 " Folding {{{
