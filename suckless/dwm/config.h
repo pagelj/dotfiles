@@ -87,6 +87,8 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-c", "-p", "Run:", "-l", dmenuln, "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
+static const char scratchpadname[] = "scratchpad";
+static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", "-e", "/bin/sh", NULL };
 static const char *statusbarcmd[] = { "statusbar", NULL }; /* Define command for starting dmenu-based statusbar */
 static const char *lockcmd[] = { "slock", NULL }; /* Define command for locking screen */
 static const char *volumeupcmd[] = { "pactl", "set-sink-volume", "0", "+1%", NULL };
@@ -100,6 +102,7 @@ static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,             		XK_Return, spawn,          {.v = termcmd } },
+	{ Mod1Mask,                     XK_s,      togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,                       XK_x,      togglebar,      {0} },
 	{ MODKEY,			XK_b,	   spawn,	   {.v = statusbarcmd } },
 	{ 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = volumeupcmd } },
