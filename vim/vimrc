@@ -92,6 +92,9 @@ nnoremap <Leader>mdimg :-1read $HOME/.vim/snippets/markdown/skel_image.md<CR>f[a
 nnoremap <Leader>mdlink :-1read $HOME/.vim/snippets/markdown/skel_link.md<CR>f[a
 nnoremap <Leader>mdblock :-1read $HOME/.vim/snippets/markdown/skel_codeblock.md<CR>$i
 nnoremap <Leader>mdmeta :-1read $HOME/.vim/snippets/markdown/skel_meta.md<CR>3j$"=strftime("%Y-%m-%d")<CR>Pgg01j$i
+" Bibtex
+nnoremap <Leader>bibinp :-1read $HOME/.vim/snippets/bibtex/skel_inproceedings.bib<CR>f{a
+nnoremap <Leader>bibart :-1read $HOME/.vim/snippets/bibtex/skel_article.bib<CR>f{a
 " }}}
 
 " run programs silently {{{
