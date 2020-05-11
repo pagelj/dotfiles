@@ -4,7 +4,7 @@
 #include <X11/XF86keysym.h>
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showtitle          = 0;        /* 0 means no title */
 static const int showbar            = 1;        /* 0 means no bar */
@@ -25,10 +25,12 @@ static const char col_gray3[]       = "#eceff4"; /* nord6 */
 static const char col_gray4[]       = "#e5e9f0"; /* nord5 */
 static const char col_cyan[]        = "#5e81ac"; /* nord10 */
 static const char col_gray2[]       = "#81a1c1"; /* nord9 */
+static const char col_red[]         = "#bf616a"; /* nord11 */
+static const char col_yellow[]      = "#ebcb8b"; /* nord13 */
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+	[SchemeSel]  = { col_gray4, col_cyan,  col_yellow  },
 };
 
 /* tagging */
