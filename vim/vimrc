@@ -1,21 +1,39 @@
 " Plugins {{{
 call plug#begin('~/.vim/plugged')
 Plug 'easymotion/vim-easymotion'
-Plug 'preservim/nerdtree'
 Plug 'vimwiki/vimwiki'
 Plug 'mechatroner/rainbow_csv'
+
+"Coding
 Plug 'dense-analysis/ale'
+Plug 'Raimondi/delimitMate'
+
+" Search
 Plug 'wincent/command-t', {
 			\ 'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make'
 			\ }
+Plug 'justinmk/vim-sneak'
+
+" Writing text
 Plug 'junegunn/goyo.vim'
+
+" Themes
 Plug 'arcticicestudio/nord-vim'
 Plug 'morhetz/gruvbox'
+
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'justinmk/vim-sneak'
 Plug 'camspiers/lens.vim'
 Plug 'jlanzarotta/bufexplorer'
+
+" R Setup
+Plug 'jalvesaq/Nvim-R'
+Plug 'ncm2/ncm2'
+Plug 'roxma/nvim-yarp'
+Plug 'gaalcaras/ncm-R'
+if !has('nvim')
+    Plug 'roxma/vim-hug-neovim-rpc'
+endif
 call plug#end()
 if has("autocmd")
   filetype plugin indent on
@@ -25,8 +43,9 @@ endif
 map f <Plug>Sneak_s
 map F <Plug>Sneak_S
 
-" Configure nerdtree
-nmap <C-n> :NERDTreeToggle<CR>
+" Configure NCM2
+autocmd BufEnter * call ncm2#enable_for_buffer()    " To enable ncm2 for all buffers.
+set completeopt=noinsert,menuone,noselect           " :help Ncm2PopupOpen for more
 
  " }}}
 
