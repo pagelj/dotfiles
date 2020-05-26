@@ -63,3 +63,6 @@ alt + y
 
 alt + n
 	st -e newsboat
+
+alt + w
+	wifi
