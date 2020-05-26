@@ -27,16 +27,16 @@ Plug 'camspiers/lens.vim'
 Plug 'jlanzarotta/bufexplorer'
 
 " R Setup
-Plug 'jalvesaq/Nvim-R'
-Plug 'ncm2/ncm2'
-Plug 'roxma/nvim-yarp'
-Plug 'gaalcaras/ncm-R'
+"Plug 'jalvesaq/Nvim-R'
+"Plug 'ncm2/ncm2'
+"Plug 'roxma/nvim-yarp'
+"Plug 'gaalcaras/ncm-R'
 if !has('nvim')
     Plug 'roxma/vim-hug-neovim-rpc'
 endif
 
 " Python
-Plug 'ncm2/ncm2-jedi'
+"Plug 'ncm2/ncm2-jedi'
 call plug#end()
 if has("autocmd")
   filetype plugin indent on
@@ -47,8 +47,8 @@ map f <Plug>Sneak_s
 map F <Plug>Sneak_S
 
 " Configure NCM2
-autocmd BufEnter * call ncm2#enable_for_buffer()    " To enable ncm2 for all buffers.
-set completeopt=noinsert,menuone,noselect           " :help Ncm2PopupOpen for more
+"autocmd BufEnter * call ncm2#enable_for_buffer()    " To enable ncm2 for all buffers.
+"set completeopt=noinsert,menuone,noselect           " :help Ncm2PopupOpen for more
 
  " }}}
 
