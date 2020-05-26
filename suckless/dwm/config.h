@@ -43,6 +43,7 @@ static const Rule rules[] = {
 	 */
 	/* class         instance          title               tags mask     isfloating   monitor */
 	{ "Gimp",           NULL,          NULL,               0,            1,           -1 },
+	{ NULL,             NULL,          "wifi",             0,            1,           -1 },
 	{ "MEGAsync",       NULL,          NULL,               1,            1,           -1 },
 	{ "de-unistuttgart-ims-coref-annotator-Annotator", NULL, NULL, 1<<2, 1,           -1 },
 	{ "Geany",          NULL,          NULL,               1<<2,         0,           -1 },
