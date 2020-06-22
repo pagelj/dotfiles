@@ -44,9 +44,6 @@ zstyle ':completion:*' rehash true
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
 
-# Get completion for hostname if in ~/.ssh/config
-_hosts() { compadd $(getent hosts | tr -s ' ' '\t' | cut -f2) }
-
 #######################
 ### Options ###########
 #######################
@@ -134,12 +131,14 @@ RPROMPT='$(bg_process) $(git_prompt_string) %(?..[%?]) [%1~/]'
 #################
 
 # TMUX
-if [[ -z "$TMUX" ]] && [[ -n "$DISPLAY" ]]; then # Test if tmux is running
-    ID="$( tmux ls | grep -vm1 attached | cut -d: -f1 )" # get the id of a deattached session
-    if [[ -z "$ID" ]]; then # if not available create a new one
-        tmux new-session
-    else
-        tmux attach-session -t "$ID" # if available attach to it
+if [[ -z $TMUXAUTOATTACH ]]; then # Prevent from running if variable is set
+    if [[ -z "$TMUX" ]] && [[ -n "$DISPLAY" ]]; then # Test if tmux is running
+        ID="$( tmux ls | grep -vm1 attached | cut -d: -f1 )" # get the id of a deattached session
+        if [[ -z "$ID" ]]; then # if not available create a new one
+            tmux new-session
+        else
+            tmux attach-session -t "$ID" # if available attach to it
+        fi
     fi
 fi
 if [ -n "$TMUX" ]; then # If tmux is running
