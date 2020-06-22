@@ -155,6 +155,8 @@ nmap <Leader>d "=strftime("%Y-%m-%d")<CR>P
 " Commands {{{
 " Requires ctags to be installed
 command! MakeTags !ctags -R .
+command! Make !make
+nnoremap <Leader>m :Make<CR>
 " }}}
 
 " autocmds {{{
