@@ -22,7 +22,13 @@ export XDG_CONFIG_HOME=~/.config
 export EDITOR="vim"
 export VISUAL="vim"
 export PAGER="less"
-export BROWSER="qutebrowser"
+export TERMINAL="st"
+export BROWSER="firefox-nightly"
+export EMAILCLIENT="mutt"
+export MUSICPLAYER="ncmpcpp"
+export TOP="top"
+export READER="zathura"
+export RSSREADER="newsboat"
 
 # Program-specific variables
 export WEECHAT_HOME=$XDG_CONFIG_HOME/weechat # weechat
