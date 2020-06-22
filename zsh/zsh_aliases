@@ -45,10 +45,13 @@ alias enox='emacs -nw'
 alias tmux='tmux -2' # Force tmux to use 256 colors
 
 # some ls aliases
-alias ls='ls -F --color --group-directories-first'
+alias ls='ls -hNF --color=auto --group-directories-first'
 alias ll='ls -al'
 alias la='ls -A'
 alias l='ls -lhav'
+
+# grep
+alias grep='grep --color=auto'
 
 # xfst alias
 alias xfst='~/tools/xfsm_api/linux64/bin/xfst'
@@ -112,3 +115,5 @@ alias yt='mpsyt'
 alias mk='make'
 
 alias nb='newsboat'
+
+alias mpv='mpv --wid=$(xdotool getactivewindow)'
