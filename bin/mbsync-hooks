@@ -1,0 +1,5 @@
+#!/bin/sh
+
+imapfilter -v -c /home/janis/.config/imapfilter/config.lua && \
+mbsync "$@"
+notmuch new
