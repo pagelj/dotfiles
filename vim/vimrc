@@ -14,6 +14,9 @@ Plug 'wincent/command-t', {
 			\ }
 Plug 'justinmk/vim-sneak'
 
+" Sorting
+Plug 'chiedo/vim-sort-blocks-by'
+
 " Writing text
 Plug 'junegunn/goyo.vim'
 
@@ -107,6 +110,7 @@ nnoremap <Leader>pyclass :-1read $HOME/.vim/snippets/python/skel_class.py<CR>wi
 nnoremap <Leader>item :-1read $HOME/.vim/snippets/latex/skel_itemize.tex<CR>1j$i
 nnoremap <Leader>enum :-1read $HOME/.vim/snippets/latex/skel_enumerate.tex<CR>1j$i
 nnoremap <Leader>fig :-1read $HOME/.vim/snippets/latex/skel_figure.tex<CR>1j$i
+nnoremap <Leader>frame :-1read $HOME/.vim/snippets/latex/skel_frame.tex<CR>f{f{a
 nnoremap <Leader>outline :-1read $HOME/.vim/snippets/latex/skel_outline.tex<CR>1j$i
 " Markdown
 nnoremap <Leader>mdtab :-1read $HOME/.vim/snippets/markdown/skel_table.md<CR>2li
@@ -115,6 +119,7 @@ nnoremap <Leader>mdlink :-1read $HOME/.vim/snippets/markdown/skel_link.md<CR>f[a
 nnoremap <Leader>mdblock :-1read $HOME/.vim/snippets/markdown/skel_codeblock.md<CR>$i
 nnoremap <Leader>mdmeta :-1read $HOME/.vim/snippets/markdown/skel_meta.md<CR>3j$"=strftime("%Y-%m-%d")<CR>Pgg01j$i
 " Bibtex
+nnoremap <Leader>bibbook :-1read $HOME/.vim/snippets/bibtex/skel_book.bib<CR>f{a
 nnoremap <Leader>bibinp :-1read $HOME/.vim/snippets/bibtex/skel_inproceedings.bib<CR>f{a
 nnoremap <Leader>bibart :-1read $HOME/.vim/snippets/bibtex/skel_article.bib<CR>f{a
 " }}}
