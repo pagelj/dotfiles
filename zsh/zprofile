@@ -9,7 +9,7 @@ source ~/.zshrc
 typeset -U path
 # Add ~/bin to path
 # Add ruby scripts to path
-path=(~/bin ~/.local/bin $(ruby -e 'print Gem.user_dir')/bin $path[@])
+path=(~/bin ~/.local/bin $(ruby -e 'print Gem.user_dir')/bin $(go env GOPATH)/bin $path[@])
 
 ################
 ## Variables ###
@@ -32,3 +32,4 @@ export RSSREADER="newsboat"
 
 # Program-specific variables
 export WEECHAT_HOME=$XDG_CONFIG_HOME/weechat # weechat
+export IMAPFILTER_HOME=$XDG_CONFIG_HOME/imapfilter # imapfilter
