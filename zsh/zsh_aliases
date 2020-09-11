@@ -20,6 +20,9 @@ alias dotsh='dot show'
 # sudo alias
 alias sudo='sudo -H'
 
+# Default opener
+alias o='xdg-open'
+
 # mupdf alias
 function __mupdf_start { mupdf 2>/dev/null "$1" & }
 alias mu='__mupdf_start'
