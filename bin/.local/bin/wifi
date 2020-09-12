@@ -1,0 +1,4 @@
+#!/bin/env dash
+
+WIFI=$(ls ~/.local/bin/wifi-* | dmenu -c -l 5)
+[ ! -z "$WIFI" ] && st -t "wifi" -g 120x34 -e sudo "$WIFI"

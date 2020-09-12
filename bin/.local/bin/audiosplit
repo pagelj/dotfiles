@@ -1,0 +1,31 @@
+#!/bin/sh
+
+# Modified from https://github.com/LukeSmithxyz/voidrice
+# Requires ffmpeg (audio splitting)
+
+[ ! -f "$2" ] && printf "The first file should be the audio, the second should be the timecodes.\\n" && exit
+
+inputaudio="$1"
+
+filename="${1%.*}"
+ext="${1#*.}"
+
+# Get the total number of tracks from the number of lines.
+total="$(wc -l < "$2")"
+
+while read -r x;
+do
+	end="$(echo "$x" | cut -d' ' -f1)"
+	[ -n "$start" ] &&
+	echo "From $start to $end; $track $title"
+	file="./${filename}_-_${esctitle}.${ext}"
+	[ -n "$start" ] && ffmpeg -nostdin -y -loglevel -8 -i "$inputaudio" -ss "$start" -to "$end" -vn "$file"
+	title="$(echo "$x" | cut -d' ' -f 2-)"
+	esctitle="$(echo "$title" | iconv -cf UTF-8 -t ASCII//TRANSLIT | tr -d '[:punct:]' | tr '[:upper:]' '[:lower:]' | tr ' ' '_' | sed "s/_\+/_/g;s/\(^_\|_\$\)//g")"
+	track="$((track+1))"
+	start="$end"
+done < "$2"
+# The last track must be done outside the loop.
+echo "From $start to the end: $title"
+file="./${filename}_-_${esctitle}.${ext}"
+ffmpeg -nostdin -y -loglevel -8 -i "$inputaudio" -ss "$start" -vn "$file"
