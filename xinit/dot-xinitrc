@@ -17,7 +17,7 @@ xrdb -merge ~/.Xresources # Read Xresources
 xmodmap ~/.Xmodmap
 setxkbmap -layout de # Set keyboard layout
 xwallpaper --zoom ~/.wallpaper.png # Set wallpaper
-xbacklight -set 40 # Dim screen
+light -S 50 # Dim screen
 wmname LG3D # Trick java into behaving reasonably
 sxhkd & # Use cumstomized keybindings
 

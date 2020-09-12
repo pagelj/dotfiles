@@ -98,8 +98,8 @@ static const char *volumeupcmd[] = { "pactl", "set-sink-volume", "0", "+5%", NUL
 static const char *volumedowncmd[] = { "pactl", "set-sink-volume", "0", "-5%", NULL };
 static const char *volumemutecmd[] = { "amixer", "-q", "-D", "pulse", "sset", "Master", "toggle", NULL };
 static const char *audiotogglecmd[] = { "mpc", "toggle", NULL };
-static const char *brightnessupcmd[] = { "xbacklight", "-inc", "10", NULL };
-static const char *brightnessdowncmd[] = { "xbacklight", "-dec", "10", NULL };
+static const char *brightnessupcmd[] = { "light", "-A", "10", NULL };
+static const char *brightnessdowncmd[] = { "light", "-U", "10", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
