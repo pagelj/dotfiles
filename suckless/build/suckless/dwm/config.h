@@ -92,14 +92,6 @@ static const char *dmenucmd[] = { "dmenu_run", "-c", "-p", "Run:", "-l", dmenuln
 static const char *termcmd[]  = { "st", NULL };
 static const char scratchpadname[] = "scratchpad";
 static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", "-e", "/bin/tmux", "new", "-s", "scratchpad", NULL };
-static const char *statusbarcmd[] = { "statusbar", NULL }; /* Define command for starting dmenu-based statusbar */
-static const char *lockcmd[] = { "slock", NULL }; /* Define command for locking screen */
-static const char *volumeupcmd[] = { "pactl", "set-sink-volume", "0", "+5%", NULL };
-static const char *volumedowncmd[] = { "pactl", "set-sink-volume", "0", "-5%", NULL };
-static const char *volumemutecmd[] = { "amixer", "-q", "-D", "pulse", "sset", "Master", "toggle", NULL };
-static const char *audiotogglecmd[] = { "mpc", "toggle", NULL };
-static const char *brightnessupcmd[] = { "light", "-A", "10", NULL };
-static const char *brightnessdowncmd[] = { "light", "-U", "10", NULL };
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -107,13 +99,6 @@ static Key keys[] = {
 	{ MODKEY,             		XK_Return, spawn,          {.v = termcmd } },
 	{ Mod1Mask,                     XK_s,      togglescratch,  {.v = scratchpadcmd } },
 	{ MODKEY,                       XK_x,      togglebar,      {0} },
-	{ MODKEY,			XK_b,	   spawn,	   {.v = statusbarcmd } },
-	{ 0,                            XF86XK_AudioRaiseVolume, spawn, {.v = volumeupcmd } },
-	{ 0,                            XF86XK_AudioLowerVolume, spawn, {.v = volumedowncmd } },
-	{ 0,                            XF86XK_AudioMute, spawn, {.v = volumemutecmd } },
-	{ 0,                            XF86XK_AudioPlay, spawn, {.v = audiotogglecmd } },
-	{ 0,                            XF86XK_MonBrightnessUp, spawn, {.v = brightnessupcmd } },
-	{ 0,                            XF86XK_MonBrightnessDown, spawn, {.v = brightnessdowncmd } },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_Left,   focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -136,7 +121,6 @@ static Key keys[] = {
 	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	{ Mod1Mask,                     XK_l,      spawn,          {.v = lockcmd } }, /* Define shortcut for lockcmd */
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)

@@ -1,3 +1,18 @@
+XF86Audio{LowerVolume,RaiseVolume}
+	pactl set-sink-volume 0 {-,+}5%	
+
+XF86AudioMute
+	amixer -q -D pulse sset Master toggle
+
+XF86AudioPlay
+	mpc toggle
+
+XF86MonBrightness{Up,Down}
+	light -{A,U} 10	
+
+XF86ScreenSaver
+	slock
+
 Print
 	maim -s /tmp/screenshot.png
 
@@ -18,6 +33,12 @@ super + y
 
 super + e
 	dmenu_emoji
+
+super + l
+	slock
+
+super + b
+	statusbar
 
 super + F1
 	tty-clock.sh
