@@ -1,6 +1,6 @@
 #!/bin/env bash
 
-BOOKMARKS_PATH="$HOME/.bookmarks.html"
+BOOKMARKS_PATH="$HOME/.local/share/bookmarks/bookmarks.html"
 CACHEFILE=$HOME/.cache/mpv-youtube.last
 LASTENTRY=`< $CACHEFILE`
 
