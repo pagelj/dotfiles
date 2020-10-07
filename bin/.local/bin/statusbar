@@ -2,14 +2,13 @@
 
 update_statusbar() {
 
-	if [ $(amixer get Master | tail -1 | awk '{ print $6 " " }' | tr -d '[' | tr -d ']') = 'on' ]
+	if [ $(amixer get Master | tail -1 | cut -d' ' -f8 | tr -d '[' | tr -d ']') = 'on' ]
 	then
 		VOL="$(amixer get Master | tail -1 | sed 's/.*\[\([0-9]*%\)\].*/\1/')"
-	elif [ $(amixer get Master | tail -1 | awk '{ print $6 " " }' | tr -d '[' | tr -d ']') = 'off' ]
-	then
+	else
 		VOL="muted"
 	fi
-	LOCALTIME=$(date -Iseconds)
+	LOCALTIME=$(date +"%Y-%m-%d %R")
 	UTC=$(TZ=UTC date -Iseconds)
 	IP="$(for i in `ip r`; do echo $i; done | grep -A 1 src | tail -n1)"
 	if [ -d "/proc/sys/net/ipv4/conf/tun0" ]; then VPN="yes"; else VPN="no"; fi
@@ -32,7 +31,7 @@ else
 	while true
 	do
 		update_statusbar
-		sleep 1 &
+		sleep 30 &
 		wait
 	done
 fi
