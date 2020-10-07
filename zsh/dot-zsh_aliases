@@ -16,6 +16,7 @@ alias dotd='dot diff'
 alias dotb='dot branch'
 alias dotch='dot checkout'
 alias dotsh='dot show'
+alias dotpsa='dot remote | xargs -L1 -I {} zsh -ic dot push {} HEAD'
 
 # sudo alias
 alias sudo='sudo -H'
@@ -39,6 +40,9 @@ alias z="__zathura_start"
 alias rm='rm -I'
 alias cp='cp -i'
 alias mv='mv -i'
+
+# use nvim instead of vim
+alias vim='nvim'
 
 # emacs alias
 function __emacs_function { emacs -mm "$@" & }
@@ -107,6 +111,7 @@ alias gitd='git diff'
 alias gitb='git branch'
 alias gitch='git checkout'
 alias gitsh='git show'
+alias gitpsa='git remote | xargs -L1 -I {} git push {} HEAD'
 
 alias settimezone='timedatectl set-timezone'
 
