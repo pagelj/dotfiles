@@ -1,14 +1,8 @@
-##################
-#### Basics ######
-##################
-
-# Source ~/.zshrc
-source ~/.zshrc
-
 # Set path
 typeset -U path
 # Add ~/bin to path
 # Add ruby scripts to path
+# Add golang to path
 path=(~/bin ~/.local/bin $(ruby -e 'print Gem.user_dir')/bin $(go env GOPATH)/bin $path[@])
 
 ################
@@ -16,7 +10,9 @@ path=(~/bin ~/.local/bin $(ruby -e 'print Gem.user_dir')/bin $(go env GOPATH)/bi
 ################
 
 # default config path
-export XDG_CONFIG_HOME=~/.config
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_HOME=$HOME/.local/share
 
 # set default programs
 export EDITOR="vim"
@@ -31,5 +27,6 @@ export READER="zathura"
 export RSSREADER="newsboat"
 
 # Program-specific variables
+export ZDOTDIR=$XDG_CONFIG_HOME/zsh
 export WEECHAT_HOME=$XDG_CONFIG_HOME/weechat # weechat
 export IMAPFILTER_HOME=$XDG_CONFIG_HOME/imapfilter # imapfilter

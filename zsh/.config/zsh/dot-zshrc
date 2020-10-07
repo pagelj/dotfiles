@@ -3,8 +3,8 @@
 #################
 
 # Source functions
-if [ -f ~/.zsh_functions ]; then
-  source ~/.zsh_functions
+if [ -f $ZDOTDIR/.zsh_functions ]; then
+  source $ZDOTDIR/.zsh_functions
 fi
 
 ########################
@@ -21,7 +21,7 @@ bindkey '^[[6~' down-line-or-history # PageDown
 
 # Perform some sanity checks on completion option
 autoload -Uz compinit
-compinit
+compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
 
 bindkey '^i' expand-or-complete-prefix # Complete inside of string
 zstyle ':completion:*' completer _complete _match _approximate # Enable fuzzy matching
@@ -66,13 +66,13 @@ setopt PROMPT_SUBST # Enable command substitution in prompt
 ##########################
 
 # Set history options
-HISTFILE=~/.zhistory
+HISTFILE="$XDG_DATA_HOME"/zsh/history
 HISTSIZE=1000000
 SAVEHIST=1000000
 
 # Source aliases
-if [ -f ~/.zsh_aliases ]; then
-    source ~/.zsh_aliases
+if [ -f $ZDOTDIR/.zsh_aliases ]; then
+    source $ZDOTDIR/.zsh_aliases
 fi
 
 # Use fish-like history substring search
