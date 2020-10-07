@@ -1,14 +1,14 @@
 XF86Audio{LowerVolume,RaiseVolume}
-	pactl set-sink-volume 0 {-,+}5%	
+	pactl set-sink-volume 0 {-,+}5%; notify-send -t 3000 "Volume: $(amixer get Master | tail -1 | cut -d' ' -f7 | tr -d '[' | tr -d ']')"
 
 XF86AudioMute
-	amixer -q -D pulse sset Master toggle
+	amixer -q -D pulse sset Master toggle; notify-send -t 3000 "Volume: $(amixer get Master | tail -1 | cut -d' ' -f8 | tr -d '[' | tr -d ']')"
 
 XF86AudioPlay
 	mpc toggle
 
 XF86MonBrightness{Up,Down}
-	light -{A,U} 10	
+	light -{A,U} 10; notify-send -t 3000 "Brightness: $(light)"
 
 XF86ScreenSaver
 	slock
