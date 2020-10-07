@@ -13,10 +13,10 @@ then
 fi
 
 # Setup
-xrdb -merge ~/.Xresources # Read Xresources
-xmodmap ~/.Xmodmap
+xrdb -merge $XDG_CONFIG_HOME/X11/Xresources # Read Xresources
+xmodmap $XDG_CONFIG_HOME/X11/Xmodmap
 setxkbmap -layout de # Set keyboard layout
-xwallpaper --zoom ~/.wallpaper.png # Set wallpaper
+xwallpaper --zoom $XDG_DATA_HOME/wallpaper.png # Set wallpaper
 light -S 50 # Dim screen
 wmname LG3D # Trick java into behaving reasonably
 sxhkd & # Use cumstomized keybindings
