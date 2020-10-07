@@ -27,9 +27,14 @@ export READER="zathura"
 export RSSREADER="newsboat"
 
 # Program-specific variables
+mkdir -p $XDG_CACHE_HOME/zsh
 export ZDOTDIR=$XDG_CONFIG_HOME/zsh
+mkdir -p $XDG_DATA_HOME/vim/{undo,swap,backup}
 #export VIMINIT='source "$XDG_CONFIG_HOME/vim/vimrc"'
 export TASKDATA=$XDG_DATA_HOME/task
 export TASKRC=$XDG_CONFIG_HOME/task/taskrc
 export WEECHAT_HOME=$XDG_CONFIG_HOME/weechat # weechat
 export IMAPFILTER_HOME=$XDG_CONFIG_HOME/imapfilter # imapfilter
+mkdir -p $XDG_CACHE_HOME/less
+export LESSKEY=$XDG_CONFIG_HOME/less/lesskey
+export LESSHISTFILE=$XDG_CACHE_HOME/less/history
