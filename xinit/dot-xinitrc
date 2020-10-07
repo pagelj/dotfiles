@@ -22,6 +22,7 @@ wmname LG3D # Trick java into behaving reasonably
 sxhkd & # Use cumstomized keybindings
 
 # Autostart
+dunst & # Start notification manager
 xautolock -time 30 -locker slock & # Automatic screen lock
 clipmenud & # Nice clipboard using dmenu
 pgrep redshift &> /dev/null || redshift -l 48:9 -t 6500:3000 &> /dev/null & # For dimmed display at night
