@@ -1,5 +1,14 @@
+" Default Dirs {{{
+set undodir=$XDG_DATA_HOME/vim/undo
+set directory=$XDG_DATA_HOME/vim/swap
+set backupdir=$XDG_DATA_HOME/vim/backup
+set viewdir=$XDG_DATA_HOME/vim/view
+set viminfo+='1000,n$XDG_DATA_HOME/vim/viminfo
+set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
+" }}}
+
 " Plugins {{{
-call plug#begin('~/.vim/plugged')
+call plug#begin('$XDG_CONFIG_HOME/vim/plugged')
 Plug 'easymotion/vim-easymotion'
 Plug 'vimwiki/vimwiki'
 Plug 'mechatroner/rainbow_csv'
@@ -104,24 +113,24 @@ set statusline+=%0*\ \ %m%r%w\ %P\ \                      "Modified? Readonly? T
 
 " Snippets {{{
 " Python
-nnoremap <Leader>pydef :-1read $HOME/.vim/snippets/python/skel_func.py<CR>wf(a
-nnoremap <Leader>pyclass :-1read $HOME/.vim/snippets/python/skel_class.py<CR>wi 
+nnoremap <Leader>pydef :-1read $XDG_CONFIG_HOME/vim/snippets/python/skel_func.py<CR>wf(a
+nnoremap <Leader>pyclass :-1read $XDG_CONFIG_HOME/vim/snippets/python/skel_class.py<CR>wi 
 " LaTeX
-nnoremap <Leader>item :-1read $HOME/.vim/snippets/latex/skel_itemize.tex<CR>1j$i
-nnoremap <Leader>enum :-1read $HOME/.vim/snippets/latex/skel_enumerate.tex<CR>1j$i
-nnoremap <Leader>fig :-1read $HOME/.vim/snippets/latex/skel_figure.tex<CR>1j$i
-nnoremap <Leader>frame :-1read $HOME/.vim/snippets/latex/skel_frame.tex<CR>f{f{a
-nnoremap <Leader>outline :-1read $HOME/.vim/snippets/latex/skel_outline.tex<CR>1j$i
+nnoremap <Leader>item :-1read $XDG_CONFIG_HOME/vim/snippets/latex/skel_itemize.tex<CR>1j$i
+nnoremap <Leader>enum :-1read $XDG_CONFIG_HOME/vim/snippets/latex/skel_enumerate.tex<CR>1j$i
+nnoremap <Leader>fig :-1read $XDG_CONFIG_HOME/vim/snippets/latex/skel_figure.tex<CR>1j$i
+nnoremap <Leader>frame :-1read $XDG_CONFIG_HOME/vim/snippets/latex/skel_frame.tex<CR>f{f{a
+nnoremap <Leader>outline :-1read $XDG_CONFIG_HOME/vim/snippets/latex/skel_outline.tex<CR>1j$i
 " Markdown
-nnoremap <Leader>mdtab :-1read $HOME/.vim/snippets/markdown/skel_table.md<CR>2li
-nnoremap <Leader>mdimg :-1read $HOME/.vim/snippets/markdown/skel_image.md<CR>f[a
-nnoremap <Leader>mdlink :-1read $HOME/.vim/snippets/markdown/skel_link.md<CR>f[a
-nnoremap <Leader>mdblock :-1read $HOME/.vim/snippets/markdown/skel_codeblock.md<CR>$i
-nnoremap <Leader>mdmeta :-1read $HOME/.vim/snippets/markdown/skel_meta.md<CR>3j$"=strftime("%Y-%m-%d")<CR>Pgg01j$i
+nnoremap <Leader>mdtab :-1read $XDG_CONFIG_HOME/vim/snippets/markdown/skel_table.md<CR>2li
+nnoremap <Leader>mdimg :-1read $XDG_CONFIG_HOME/vim/snippets/markdown/skel_image.md<CR>f[a
+nnoremap <Leader>mdlink :-1read $XDG_CONFIG_HOME/vim/snippets/markdown/skel_link.md<CR>f[a
+nnoremap <Leader>mdblock :-1read $XDG_CONFIG_HOME/vim/snippets/markdown/skel_codeblock.md<CR>$i
+nnoremap <Leader>mdmeta :-1read $XDG_CONFIG_HOME/vim/snippets/markdown/skel_meta.md<CR>3j$"=strftime("%Y-%m-%d")<CR>Pgg01j$i
 " Bibtex
-nnoremap <Leader>bibbook :-1read $HOME/.vim/snippets/bibtex/skel_book.bib<CR>f{a
-nnoremap <Leader>bibinp :-1read $HOME/.vim/snippets/bibtex/skel_inproceedings.bib<CR>f{a
-nnoremap <Leader>bibart :-1read $HOME/.vim/snippets/bibtex/skel_article.bib<CR>f{a
+nnoremap <Leader>bibbook :-1read $XDG_CONFIG_HOME/vim/snippets/bibtex/skel_book.bib<CR>f{a
+nnoremap <Leader>bibinp :-1read $XDG_CONFIG_HOME/vim/snippets/bibtex/skel_inproceedings.bib<CR>f{a
+nnoremap <Leader>bibart :-1read $XDG_CONFIG_HOME/vim/snippets/bibtex/skel_article.bib<CR>f{a
 " }}}
 
 " run programs silently {{{
@@ -180,8 +189,8 @@ au BufLeave * if (exists("b:current_colors")) | execute "colorscheme " . b:curre
 " }}}
 
 " Open vimrc {{{
-nnoremap <Leader>ev :vsp ~/.vimrc<CR>
-nnoremap <Leader>sv :source ~/.vimrc <bar> :doautocmd BufRead<CR>
+noremap <Leader>ev :vsp $XDG_CONFIG_HOME/vim/vimrc<CR>
+nnoremap <Leader>sv :source $XDG_CONFIG_HOME/vim/vimrc <bar> :doautocmd BufRead<CR>
 " }}}
 
 " Disable arrow and page keys {{{

@@ -15,8 +15,8 @@ export XDG_CACHE_HOME=$HOME/.cache
 export XDG_DATA_HOME=$HOME/.local/share
 
 # set default programs
-export EDITOR="vim"
-export VISUAL="vim"
+export EDITOR="nvim"
+export VISUAL="nvim"
 export PAGER="less"
 export TERMINAL="st"
 export BROWSER="firefox-nightly"
@@ -28,5 +28,6 @@ export RSSREADER="newsboat"
 
 # Program-specific variables
 export ZDOTDIR=$XDG_CONFIG_HOME/zsh
+export VIMINIT='source "$XDG_CONFIG_HOME/vim/vimrc"'
 export WEECHAT_HOME=$XDG_CONFIG_HOME/weechat # weechat
 export IMAPFILTER_HOME=$XDG_CONFIG_HOME/imapfilter # imapfilter
