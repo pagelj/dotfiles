@@ -1,5 +1,5 @@
-ncmpcpp_directory = "~/.ncmpcpp"
-lyrics_directory = "~/.ncmpcpp/lyrics"
+ncmpcpp_directory = "~/.local/share/ncmpcpp"
+lyrics_directory = "~/.local/share/ncmpcpp/lyrics"
 mpd_host = "localhost"
 mpd_port = "6600"
 mpd_music_dir = "~/music"

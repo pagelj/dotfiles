@@ -24,6 +24,8 @@ alias sudo='sudo -H'
 # Default opener
 alias o='xdg-open'
 
+alias abook='abook --config "$XDG_CONFIG_HOME"/abook/abookrc --datafile "$XDG_DATA_HOME"/abook/addressbook'
+
 # mupdf alias
 function __mupdf_start { mupdf 2>/dev/null "$1" & }
 alias mu='__mupdf_start'
@@ -72,7 +74,7 @@ alias c='clear && printf "\033c"'
 alias ct='clear && printf "\033c" && tmux clearhist'
 
 # startx
-alias x='startx'
+alias x='startx "$XDG_CONFIG_HOME/X11/xinitrc"'
 
 # aliases for tar
 alias targz='tar -czf'

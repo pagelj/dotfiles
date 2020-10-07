@@ -42,7 +42,7 @@ zstyle ':completion:*' verbose yes
 zstyle ':completion:*' rehash true
 # Speed up completion by setting cache
 zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path ~/.zsh/cache
+zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zsh
 
 #######################
 ### Options ###########
@@ -157,7 +157,7 @@ export LESS_TERMCAP_us=$'\E[01;36m'
 export LESS=-r
 
 # Load DIRCOLORS
-test -r "~/.dir_colors" && eval $(dircolors ~/.dir_colors)
+test -r "$XDG_DATA_HOME/dir_colors" && eval $(dircolors $XDG_DATA_HOME/dir_colors)
 
 # Add support for GnuPG
 export GPG_TTY=$(tty)

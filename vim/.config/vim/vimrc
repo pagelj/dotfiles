@@ -174,10 +174,11 @@ nnoremap <Leader>m :Make<CR>
 " }}}
 
 " autocmds {{{
-" reopening a file at same position
 if has("autocmd")
+  " reopening a file at same position
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-  autocmd BufRead,BufNewFile ~/.mutt/temp/mutt* :Goyo 80 | set linebreak | set spell
+  " Set settings for use in mutt
+  autocmd BufRead,BufNewFile $XDG_CONFIG_HOME/mutt/temp/mutt* :Goyo 80 | set linebreak | set spell
   " automatically deletes all trailing whitespace on save
   " autocmd BufWritePre * %s/\s\+$//e
 endif
