@@ -54,6 +54,9 @@ if has("autocmd")
   filetype plugin indent on
 endif
 
+" Configure vimwiki
+let g:vimwiki_list = [{'path': '~/.local/share/vimwiki/'}]
+
 " Configure vim-sneak
 map f <Plug>Sneak_s
 map F <Plug>Sneak_S
@@ -145,7 +148,7 @@ nmap <Leader>pp :RunSilent zathura /tmp/vim-pandoc-out.pdf &<CR>
  " }}}
 
 " Search through vimwiki {{{
-command! -nargs=1 Wikigrep vimgrep "<args>" $HOME/vimwiki/**/*.wiki
+command! -nargs=1 Wikigrep vimgrep "<args>" $HOME/.local/share/vimwiki/**/*.wiki
 nnoremap <Leader>w :Wikigrep<space>
 " }}}
 
@@ -163,7 +166,7 @@ nmap <Leader>cm :Codemode<CR>
 " }}}
 
 " Insert current date {{{
-nmap <Leader>d "=strftime("%Y-%m-%d")<CR>P
+nmap <Leader>d "=strftime("%Y-%m-%d")<CR>p
 " }}}
 
 " Commands {{{
