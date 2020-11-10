@@ -26,7 +26,7 @@ super + shift + p
 	passmenu -c -p "Pass to Clip" -l 20
 
 super + u
-	mpdmenu :: -i -l 20
+	mpdmenu :: -i -l 40
 
 super + y
 	mpdmenu -p :: -i -l 20
@@ -64,6 +64,15 @@ super + F7
 super + r
 	dmenu_hist
 
+super + v
+        snippy
+
+super + n
+	$TERMINAL -t notetaker -g 120x34+200 -e notetaker
+
+super + shift + n
+	most_recent_note.sh
+
 alt + b
 	$BROWSER
 
@@ -72,6 +81,9 @@ alt + m
 
 alt + p
 	$TERMINAL -e $MUSICPLAYER
+
+alt + {period,comma,shift + comma}
+	mpc -q {toggle,next,prev}
 
 alt + t
 	$TERMINAL -e $TOP
@@ -86,10 +98,10 @@ alt + n
 	$TERMINAL -e $RSSREADER
 
 alt + w
-	wifi
+	$TERMINAL -t vimwiki -g 120x34+200 -e nvim -c "norm ,ww"
 
 alt + a
-	$TERMINAL -e abook
+	$TERMINAL -e abook --config "$XDG_CONFIG_HOME"/abook/abookrc --datafile "$XDG_DATA_HOME"/abook/addressbook
 
 super + shift + Return
 	cst
