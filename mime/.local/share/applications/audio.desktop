@@ -1,0 +1,4 @@
+[Desktop Entry]
+Type=Application
+Name=Music player
+Exec=/usr/local/bin/st -e mpv %u
