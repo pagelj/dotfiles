@@ -1,0 +1,13 @@
+#!/bin/sh
+
+noteFilename="$XDG_DATA_HOME/vimwiki/note-$(date +%Y-%m-%d).wiki"
+if [ ! -f $noteFilename ]; then
+	echo "= Notes for $(date +%Y-%m-%d) =" > $noteFilename
+fi
+
+nvim -c "set formatoptions-=cro" \
+   -c "norm Go" \
+   -c "norm Go== $(date +%H:%M) ==" \
+   -c "norm G2o" \
+   -c "norm zz" \
+   -c "startinsert" $noteFilename
