@@ -118,6 +118,9 @@ set statusline+=%0*\ \ %m%r%w\ %P\ \                      "Modified? Readonly? T
 " Python
 nnoremap <Leader>pydef :-1read $XDG_CONFIG_HOME/vim/snippets/python/skel_func.py<CR>wf(a
 nnoremap <Leader>pyclass :-1read $XDG_CONFIG_HOME/vim/snippets/python/skel_class.py<CR>wi 
+nnoremap <Leader>pyhead :-1read $XDG_CONFIG_HOME/vim/snippets/python/skel_header.py<CR>2j$a
+nnoremap <Leader>pymain :-1read $XDG_CONFIG_HOME/vim/snippets/python/skel_main.py<CR>1j$i
+nnoremap <Leader>pyopen :-1read $XDG_CONFIG_HOME/vim/snippets/python/skel_open.py<CR>f"a
 " LaTeX
 nnoremap <Leader>item :-1read $XDG_CONFIG_HOME/vim/snippets/latex/skel_itemize.tex<CR>1j$i
 nnoremap <Leader>enum :-1read $XDG_CONFIG_HOME/vim/snippets/latex/skel_enumerate.tex<CR>1j$i
@@ -181,15 +184,18 @@ if has("autocmd")
   " reopening a file at same position
   au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
   " Set settings for use in mutt
-  autocmd BufRead,BufNewFile $XDG_CONFIG_HOME/mutt/temp/mutt* :Goyo 80 | set linebreak | set spell
+  autocmd BufRead,BufNewFile $XDG_CONFIG_HOME/mutt/temp/\(neo\)\=mutt* :Writemode
   " automatically deletes all trailing whitespace on save
-  " autocmd BufWritePre * %s/\s\+$//e
+  "autocmd BufWritePre * %s/\s\+$//e
 endif
 
 " Use specific colorscheme for buffer if b:colors_name is set
 au BufEnter * if (exists("b:colors_name")) | let b:current_colors=colors_name
  \| execute "colorscheme " . b:colors_name | endif
 au BufLeave * if (exists("b:current_colors")) | execute "colorscheme " . b:current_colors | endif
+
+" Convert wiki files into pdf when saving
+autocmd BufWritePost $XDG_DATA_HOME/vimwiki/*.wiki silent !wikientry2pdf %:p
 " }}}
 
 " Open vimrc {{{
