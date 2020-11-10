@@ -1,0 +1,24 @@
+#!/usr/bin/env sh
+
+stow abook
+stow bin
+stow dunst
+stow emacs
+stow gnupg
+stow mime
+stow mpd
+stow ncmpcpp
+stow newsboat
+stow nvim
+stow python
+stow scripts
+stow snippets
+stow suckless
+stow sxhkd
+stow systemd
+stow task
+stow tmux
+stow top
+stow xinit
+stow zathura
+stow zsh
