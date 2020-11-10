@@ -32,7 +32,7 @@ pgrep redshift &> /dev/null || redshift -l 48:9 -t 6500:3000 &> /dev/null & # Fo
 #nohup mons -a > /dev/null 2>&1 & # Re-establishs the display if it detects only one monitor
 stalonetray &> /dev/null & # Starts icon tray service
 megasync &> /dev/null & # Start mega sync service
-dropbox &> /dev/null & # Start dropbox sync
+HOME=$HOME/.local/share/dropbox dropbox start &> /dev/null & # Start dropbox sync
 mpd &> /dev/null & # Start mpd
 
 # Set window/desktop manager
