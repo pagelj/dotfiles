@@ -40,11 +40,11 @@ echo '#########################################################'
 echo '################ find -xtype l -print ###################'
 echo '#########################################################'
 echo ''
-#find -xtype l -print
-#echo ''
-#echo '#########################################################'
-#echo '### pacman -Qqen > /root/pacman/pkglist.txt #############'
-#echo '#########################################################'
+find -xtype l -print
+echo ''
+echo '#########################################################'
+echo '### pacman -Qqen > /root/pacman/pkglist.txt #############'
+echo '#########################################################'
 echo ''
 pacman -Qqen > /root/pacman/pkglist.txt
 echo 'Saved package list to /root/pacman/pkglist.txt'
