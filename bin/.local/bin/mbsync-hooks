@@ -1,5 +1,5 @@
 #!/bin/sh
 
-imapfilter -v -c /home/janis/.config/imapfilter/config.lua
-mbsync -c "$XDG_CONFIG_HOME/isync/mbsyncrc" "$@"
-notmuch new
+imapfilter -v -c "$HOME/.config/imapfilter/config.lua"
+mbsync -c "$HOME/.config/isync/mbsyncrc" "$@"
+notmuch --config="$HOME/.config/notmuch/notmuchrc" new
