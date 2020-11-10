@@ -1,0 +1,10 @@
+#!/bin/sh
+
+SNIPS=${XDG_DATA_HOME}/snippets
+FILE=`ls ${SNIPS} | dmenu -c -l 30`
+if [ -f ${SNIPS}/${FILE} ]; then
+	DATA=$([ -x "${SNIPS}/${FILE}" ] && ${SHELL} "${SNIPS}/${FILE}" || head --bytes=-1 ${SNIPS}/${FILE})
+	printf "$DATA" | xsel -p -i
+	printf "$DATA" | xsel -b -i
+	xdotool key shift+Insert
+fi
