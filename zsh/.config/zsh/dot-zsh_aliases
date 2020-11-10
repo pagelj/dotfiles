@@ -3,7 +3,7 @@
 ##############################
 
 # configure dotfiles
-alias dot='git --git-dir=$HOME/dotfiles/.git --work-tree=$HOME/dotfiles'
+alias dot='git --git-dir=$HOME/df/.git --work-tree=$HOME/df'
 alias dots='dot status'
 alias dotcv='dot commit -S -v'
 alias dotcm='dot commit -S -m'
@@ -19,12 +19,14 @@ alias dotsh='dot show'
 alias dotpsa='dot remote | xargs -L1 -I {} zsh -ic dot push {} HEAD'
 
 # sudo alias
-alias sudo='sudo -H'
+alias sudo='sudo -H '
 
 # Default opener
 alias o='xdg-open'
 
 alias abook='abook --config "$XDG_CONFIG_HOME"/abook/abookrc --datafile "$XDG_DATA_HOME"/abook/addressbook'
+
+alias mbsync='mbsync -c "$XDG_CONFIG_HOME/isync/mbsyncrc"'
 
 # mupdf alias
 function __mupdf_start { mupdf 2>/dev/null "$1" & }
@@ -45,6 +47,7 @@ alias mv='mv -i'
 
 # use nvim instead of vim
 alias vim='nvim'
+alias v='vim'
 
 # emacs alias
 function __emacs_function { emacs -mm "$@" & }
@@ -52,6 +55,7 @@ alias e='__emacs_function'
 alias enox='emacs -nw'
 
 alias tmux='tmux -2' # Force tmux to use 256 colors
+alias t='tmux'
 
 # some ls aliases
 alias ls='ls -hNF --color=auto --group-directories-first'
@@ -94,6 +98,7 @@ alias hotspot='sudo sh ~/bin/start-hotspot.sh'
 alias updatemirrorlist='sudo reflector --verbose -l 5 --sort rate --save /etc/pacman.d/mirrorlist'
 
 # aliases for pacman
+alias p='pacman'
 alias aurpkgs-show='pacman -Qm'
 alias orphans-rm='sudo pacman -Rsn $(pacman -Qdtq)'
 alias pacu='sudo pacman -Syu'
