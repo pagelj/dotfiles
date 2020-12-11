@@ -99,7 +99,7 @@ fi
 if [ -f /usr/share/fzf/key-bindings.zsh ]; then
 	source /usr/share/fzf/key-bindings.zsh
 	fzf-file-widget-fd() {
-	  FZF_CTRL_T_COMMAND='fd --hidden --follow --exclude ".git" --exclude ".venv" .'
+	  FZF_CTRL_T_COMMAND='fd --hidden --follow --exclude ".git" --exclude ".venv" --search-path . --search-path ~'
 	  fzf-file-widget
 	  unset FZF_CTRL_T_COMMAND
         }
