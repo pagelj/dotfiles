@@ -55,7 +55,8 @@ alias e='__emacs_function'
 alias enox='emacs -nw'
 
 alias tmux='tmux -2' # Force tmux to use 256 colors
-alias t='tmux'
+alias tx='tmux'
+alias txa='tmux a'
 
 # some ls aliases
 alias ls='ls -hNF --color=auto --group-directories-first'
@@ -122,13 +123,11 @@ alias gitpsa='git remote | xargs -L1 -I {} git push {} HEAD'
 
 alias settimezone='timedatectl set-timezone'
 
-alias tx='tmux'
-alias txa='tmux a'
-
 alias yt='mpsyt'
 
 alias mk='make'
 
 alias nb='newsboat'
+alias t='task'
 
 alias mpv='mpv --wid=$(xdotool getactivewindow)'
