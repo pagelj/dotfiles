@@ -95,9 +95,24 @@ fi
 #if [ -f /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
 #	source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 #fi
-# fzf file history
+# fzf commands (command history, changing directory, finding files
 if [ -f /usr/share/fzf/key-bindings.zsh ]; then
 	source /usr/share/fzf/key-bindings.zsh
+	fzf-file-widget-fd() {
+	  FZF_CTRL_T_COMMAND='fd --hidden --follow --exclude ".git" --exclude ".venv" .'
+	  fzf-file-widget
+	  unset FZF_CTRL_T_COMMAND
+        }
+	fzf-cd-widget-fd() {
+	  FZF_ALT_C_COMMAND='fd --type d --hidden --follow --exclude ".git" --exclude ".venv" --search-path . --search-path ~'
+	  fzf-cd-widget
+	  unset FZF_ALT_C_COMMAND
+        }
+	# Bind fzf-fd functions
+	zle     -N   fzf-file-widget-fd
+	bindkey '^F' fzf-file-widget-fd
+        zle     -N   fzf-cd-widget-fd
+	bindkey '\ec' fzf-cd-widget-fd
 fi
 
 ######################
