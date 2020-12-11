@@ -9,5 +9,5 @@ color listfocus_unread yellow default bold
 datetime-format "%F %R"
 
 bind-key SPACE next-unread
-macro m set browser "mpv --ytdl-format=22 %u" ; open-in-browser ; set browser "$BROWSER %u"
+macro m set browser "mpv %u" ; open-in-browser ; set browser "$BROWSER %u"
 macro o set browser "$BROWSER %u" ; open-in-browser
