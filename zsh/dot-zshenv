@@ -34,6 +34,7 @@ export XINITRC=$XDG_CONFIG_HOME/X11/xinitrc
 export XAUTHORITY=$XDG_RUNTIME_DIR/Xauthority
 export GNUPGHOME=$XDG_DATA_HOME/gnupg
 export RANDFILE=$XDG_DATA_HOME/openssl/rnd
+export WGETRC=$XDG_CONFIG_HOME/wgetrc
 mkdir -p $XDG_DATA_HOME/vim/{undo,swap,backup}
 #export VIMINIT='source "$XDG_CONFIG_HOME/vim/vimrc"'
 export CCACHE_DIR=$XDG_CACHE_HOME/ccache
