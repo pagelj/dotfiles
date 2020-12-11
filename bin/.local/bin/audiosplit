@@ -2,6 +2,10 @@
 
 # Modified from https://github.com/LukeSmithxyz/voidrice
 # Requires ffmpeg (audio splitting)
+# Timecode file should be in the form of:
+# 00:00:00 Title of track 1
+# 00:00:05 Title of track 2
+# ...
 
 [ ! -f "$2" ] && printf "The first file should be the audio, the second should be the timecodes.\\n" && exit
 
