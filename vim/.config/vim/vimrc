@@ -22,6 +22,8 @@ Plug 'wincent/command-t', {
 			\ 'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make'
 			\ }
 Plug 'justinmk/vim-sneak'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 " Sorting
 Plug 'chiedo/vim-sort-blocks-by'
@@ -135,6 +137,7 @@ nnoremap <Leader>mdblock :-1read $XDG_CONFIG_HOME/vim/snippets/markdown/skel_cod
 nnoremap <Leader>mdmeta :-1read $XDG_CONFIG_HOME/vim/snippets/markdown/skel_meta.md<CR>3j$"=strftime("%Y-%m-%d")<CR>Pgg01j$i
 " Bibtex
 nnoremap <Leader>bibbook :-1read $XDG_CONFIG_HOME/vim/snippets/bibtex/skel_book.bib<CR>f{a
+nnoremap <Leader>bibpro :-1read $XDG_CONFIG_HOME/vim/snippets/bibtex/skel_proceedings.bib<CR>f{a
 nnoremap <Leader>bibinp :-1read $XDG_CONFIG_HOME/vim/snippets/bibtex/skel_inproceedings.bib<CR>f{a
 nnoremap <Leader>bibart :-1read $XDG_CONFIG_HOME/vim/snippets/bibtex/skel_article.bib<CR>f{a
 " }}}
