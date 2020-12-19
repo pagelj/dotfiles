@@ -1,16 +1,31 @@
 XF86Audio{LowerVolume,RaiseVolume}
 	pactl set-sink-volume 0 {-,+}5%; notify-send -t 3000 "Volume: $(amixer get Master | tail -1 | cut -d' ' -f7 | tr -d '[' | tr -d ']')"
 
+super + {minus,plus}
+	pactl set-sink-volume 0 {-,+}5%; notify-send -t 3000 "Volume: $(amixer get Master | tail -1 | cut -d' ' -f7 | tr -d '[' | tr -d ']')"
+
 XF86AudioMute
+	amixer -q -D pulse sset Master toggle; notify-send -t 3000 "Volume: $(amixer get Master | tail -1 | cut -d' ' -f8 | tr -d '[' | tr -d ']')"
+
+super + shift + m
 	amixer -q -D pulse sset Master toggle; notify-send -t 3000 "Volume: $(amixer get Master | tail -1 | cut -d' ' -f8 | tr -d '[' | tr -d ']')"
 
 XF86AudioPlay
 	mpc toggle
 
+alt + {period,comma,shift + comma}
+	mpc -q {toggle,next,prev}
+
 XF86MonBrightness{Up,Down}
 	light -{A,U} 10; notify-send -t 3000 "Brightness: $(light)"
 
+super + {Up,Down}
+	light -{A,U} 10; notify-send -t 3000 "Brightness: $(light)"
+
 XF86ScreenSaver
+	slock
+
+super + l
 	slock
 
 Print
@@ -34,12 +49,6 @@ super + y
 super + e
 	dmenu_emoji
 
-super + l
-	slock
-
-super + b
-	statusbar
-
 super + F1
 	tty-clock.sh
 
@@ -61,17 +70,23 @@ super + F6
 super + F7
 	cowsay_weather.sh
 
-super + r
-	dmenu_hist
+super + w
+	dmenu_surfraw
+
+super + b
+	dmenu_bookmarks
 
 super + v
-        snippy
+	snippy
 
 super + n
 	$TERMINAL -t notetaker -g 120x34+200 -e notetaker
 
 super + shift + n
 	most_recent_note.sh
+
+alt + x
+	statusbar
 
 alt + b
 	$BROWSER
@@ -81,9 +96,6 @@ alt + m
 
 alt + p
 	$TERMINAL -e $MUSICPLAYER
-
-alt + {period,comma,shift + comma}
-	mpc -q {toggle,next,prev}
 
 alt + t
 	$TERMINAL -e $TOP
@@ -97,11 +109,11 @@ alt + y
 alt + n
 	$TERMINAL -e $RSSREADER
 
-alt + w
-	$TERMINAL -t vimwiki -g 120x34+200 -e nvim -c "norm ,ww"
-
 alt + a
 	$TERMINAL -e abook --config "$XDG_CONFIG_HOME"/abook/abookrc --datafile "$XDG_DATA_HOME"/abook/addressbook
+
+alt + w
+	st -t "wiki" -g 120x34 -e /bin/tmux attach -t "wiki" || st -t "wiki" -g 120x34 -e /bin/tmux new -s "wiki" /bin/nvim -c ":VimwikiIndex"
 
 super + shift + Return
 	cst
