@@ -74,7 +74,7 @@ alias xfst='~/tools/xfsm_api/linux64/bin/xfst'
 alias lexc='~/tools/xfsm_api/linux64/bin/lexc'
 
 # Clear screen
-alias c='clear && printf "\033c"'
+alias cl='clear && printf "\033c"'
 # screen clear alias that works for tmux too
 alias ct='clear && printf "\033c" && tmux clearhist'
 
@@ -129,5 +129,6 @@ alias mk='make'
 
 alias nb='newsboat'
 alias t='task'
+alias c='calcurse'
 
 alias mpv='mpv --wid=$(xdotool getactivewindow)'
