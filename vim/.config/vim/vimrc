@@ -86,10 +86,13 @@ set path+=**
 let mapleader = ','
 " Set the time the leader key is active (in ms)
 set timeoutlen=2000
-" Show tabs
-set listchars=tab:>-
-" Leave insert mode
-inoremap jk <ESC>
+" Show whitespace
+set list listchars=nbsp:¬,tab:»·,trail:·,extends:>
+" Persistent undo history
+set undofile
+set undodir=~/.cache/vim/undo
+" Ignore whitespace whilst diffing
+set diffopt+=iwhite
  " }}}
 
 " Syntax highlighting {{{
@@ -180,12 +183,14 @@ nmap <Leader>d "=strftime("%Y-%m-%d")<CR>p
 command! MakeTags !ctags -R .
 command! Make !make
 nnoremap <Leader>m :Make<CR>
+" Remove trailing whitespace
+nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 " }}}
 
 " autocmds {{{
 if has("autocmd")
-  " reopening a file at same position
-  au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+  " reopening a file at same position, except if it is a git commit
+  autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
   " Set settings for use in mutt
   autocmd BufRead,BufNewFile $XDG_CONFIG_HOME/mutt/temp/\(neo\)\=mutt* :Writemode
   " automatically deletes all trailing whitespace on save
