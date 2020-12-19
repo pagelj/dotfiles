@@ -3,10 +3,10 @@
 filename=$1
 target="$(dirname "${filename}")/pdf"
 outputFile="$(basename "$filename" .wiki).pdf"
-mkdir -p $target
+mkdir -p "$target"
 pandoc \
    -f vimwiki \
    -t pdf \
    --pdf-engine=xelatex \
    -V "geometry:margin=1in" \
-   -o "$target/$outputFile" $filename &
+   -o "$target/$outputFile" "$filename" &

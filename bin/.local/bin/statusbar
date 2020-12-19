@@ -2,7 +2,7 @@
 
 update_statusbar() {
 
-	if [ $(amixer get Master | tail -1 | cut -d' ' -f8 | tr -d '[' | tr -d ']') = 'on' ]
+	if [ "$(amixer get Master | tail -1 | cut -d' ' -f8 | tr -d '[' | tr -d ']')" = 'on' ]
 	then
 		VOL="$(amixer get Master | tail -1 | sed 's/.*\[\([0-9]*%\)\].*/\1/')"
 	else
@@ -10,7 +10,7 @@ update_statusbar() {
 	fi
 	LOCALTIME=$(date +"%Y-%m-%d %R")
 	UTC=$(TZ=UTC date -Iseconds)
-	IP="$(for i in `ip r`; do echo $i; done | grep -A 1 src | tail -n1)"
+	IP="$(for i in $(ip r); do echo "$i"; done | grep -A 1 src | tail -n1)"
 	if [ -d "/proc/sys/net/ipv4/conf/tun0" ]; then VPN="yes"; else VPN="no"; fi
 	#TEMP="$(($(cat /sys/class/thermal/thermal_zone0/temp) / 1000))°C"
 	BAT="$(acpi -b | awk '{ print $4 " " }' | tr -d ',' | tr -d ' ')"

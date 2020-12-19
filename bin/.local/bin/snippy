@@ -1,10 +1,15 @@
-#!/bin/sh
+#!/usr/bin/env dash
 
 SNIPS=${XDG_DATA_HOME}/snippets
-FILE=`ls ${SNIPS} | dmenu -c -l 30`
-if [ -f ${SNIPS}/${FILE} ]; then
-	DATA=$([ -x "${SNIPS}/${FILE}" ] && ${SHELL} "${SNIPS}/${FILE}" || head --bytes=-1 ${SNIPS}/${FILE})
-	printf "$DATA" | xsel -p -i
-	printf "$DATA" | xsel -b -i
+FILE=$(find -L "${SNIPS}" -type f -exec basename {} \; | sort | dmenu -c -l 30)
+if [ -f "${SNIPS}"/"${FILE}" ]; then
+	if [ -x "${SNIPS}/${FILE}" ]; then
+		DATA=$(${SHELL} "${SNIPS}/${FILE}")
+	else
+		DATA=$(head --bytes=-1 "${SNIPS}/${FILE}")
+	fi
+	printf '%s' "$DATA" | xsel -p -i
+	printf '%s' "$DATA" | xsel -b -i
+	notify-send "'$DATA' copied to clipboard." &
 	xdotool key shift+Insert
 fi

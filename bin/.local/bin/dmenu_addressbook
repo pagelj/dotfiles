@@ -1,3 +1,0 @@
-#!/bin/sh
-
-cat ~/.mutt/aliases.muttrc | sed '/#/d' | sed '/^[[:space:]]*$/d' | cut -d' ' -f3- | dmenu "$@" | sed -z '$ s/\n$//'| xdotool type --clearmodifiers --file -

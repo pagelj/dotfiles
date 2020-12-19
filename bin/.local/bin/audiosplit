@@ -16,6 +16,7 @@ ext="${1#*.}"
 
 # Get the total number of tracks from the number of lines.
 total="$(wc -l < "$2")"
+echo "Processing $total tracks"
 
 while read -r x;
 do

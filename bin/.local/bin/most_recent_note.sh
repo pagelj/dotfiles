@@ -1,3 +1,3 @@
-#!/bin/sh
+#!/usr/bin/env dash
 
-ls -r $XDG_DATA_HOME/vimwiki/pdf/note-*.pdf | head -n1 | xargs zathura
+find "$XDG_DATA_HOME"/vimwiki/pdf/note-*.pdf | tac | head -n1 | xargs zathura

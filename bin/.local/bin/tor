@@ -1,4 +1,4 @@
 #!/bin/dash
 
-cd $HOME/.local/build/tor-browser_en-US/
+cd "$HOME"/.local/build/tor-browser_en-US/ || exit
 ./start-tor-browser.desktop

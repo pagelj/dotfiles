@@ -1,13 +1,12 @@
-#!/bin/sh
+#!/usr/bin/env dash
 
 # Taken from Luke Smith <https://github.com/LukeSmithxyz>
 
-# Must have xclip installed to even show menu.
-xclip -h 2>/dev/null || exit 1
+chosen=$(cut -d ';' -f1 "$XDG_DATA_HOME"/emoji | dmenu -p Emoji -c -i -l 20 | sed "s/ .*//")
 
-chosen=$(cut -d ';' -f1 ~/.local/share/emoji | dmenu -p Emoji -c -i -l 20 | sed "s/ .*//")
+[ -n "$chosen" ] || exit
 
-[ "$chosen" != "" ] || exit
-
-echo "$chosen" | tr -d '\n' | xclip -selection clipboard
-#notify-send "'$chosen' copied to clipboard." &
+printf '%s' "$chosen" | xsel -p -i
+printf '%s' "$chosen" | xsel -b -i
+notify-send "'$chosen' copied to clipboard." &
+xdotool key shift+Insert
