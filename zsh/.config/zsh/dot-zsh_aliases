@@ -45,6 +45,10 @@ alias rm='rm -I'
 alias cp='cp -i'
 alias mv='mv -i'
 
+# renameutils
+alias qmv='qmv -f do'
+alias qcp='qcp -f do'
+
 # use nvim instead of vim
 alias vim='nvim'
 alias v='vim'
@@ -132,3 +136,17 @@ alias t='task'
 alias c='calcurse'
 
 alias mpv='mpv --wid=$(xdotool getactivewindow)'
+
+alias tsp-newsboat='TS_SOCKET=/tmp/newsboat-mpv-ts tsp'
+
+alias sr='surfraw -browser=$BROWSERCLI'
+alias surfraw='surfraw -browser=$BROWSER'
+
+alias mixer='ncpamixer'
+
+alias bc='bc -qil'
+
+alias cal='cal -m'
+
+alias g++='g++ -std=c++17 -pedantic-errors -Wall -Weffc++ -Wextra -Wsign-conversion -Werror'
+alias gcc='gcc -pedantic-errors'

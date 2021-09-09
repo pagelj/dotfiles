@@ -1,2 +1,2 @@
-with open("", "r") as f:
-    pass
+with open("", "<++>") as f:
+    <++>

@@ -1,0 +1,5 @@
+#compdef timetrack tt
+
+_timetrack() {
+	_describe 'command' "('morning:Start a new day' 'break:Take a break from working' 'resume:Resume working' 'continue:Resume working, alias of resume' 'closing:End your work day' 'day:Print daily statistics' 'week:Print weekly statistics')"
+}

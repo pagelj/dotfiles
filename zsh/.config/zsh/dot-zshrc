@@ -1,24 +1,24 @@
-#################
-### Functions ###
-#################
+# Functions {{{
 
 # Source functions
 if [ -f $ZDOTDIR/.zsh_functions ]; then
   source $ZDOTDIR/.zsh_functions
 fi
 
-########################
-#### Key bindings ######
-########################
+# }}}
+
+# Key bindings {{{
 
 bindkey '^[[P' delete-char # Delete
 bindkey '^[[5~' up-line-or-history # PageUp
 bindkey '^[[6~' down-line-or-history # PageDown
 
-########################
-#### Autocomplete ######
-########################
+# }}}
 
+# Autocomplete {{{
+
+# Custom completions
+fpath=($ZDOTDIR/completions $fpath)
 # Perform some sanity checks on completion option
 autoload -Uz compinit
 compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
@@ -43,10 +43,10 @@ zstyle ':completion:*' rehash true
 # Speed up completion by setting cache
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path $XDG_CACHE_HOME/zsh
+setopt complete_aliases
+# }}}
 
-#######################
-### Options ###########
-#######################
+# Options {{{
 
 setopt CORRECT # Make suggestions for correcting spelling mistakes
 setopt EXTENDED_GLOB # Inlude ~ in globbing
@@ -61,9 +61,13 @@ setopt HIST_IGNORE_ALL_DUPS # Ignore all history dups
 setopt AUTO_CD # No need to type 'cd' if standard input is a valid path
 setopt PROMPT_SUBST # Enable command substitution in prompt
 
-##########################
-######## Basics ##########
-##########################
+# }}}
+
+# Basics {{{
+
+# Enable vim mode in console
+bindkey -v
+KEYTIMEOUT=1
 
 # Set history options
 HISTFILE="$XDG_DATA_HOME"/zsh/history
@@ -115,9 +119,9 @@ if [ -f /usr/share/fzf/key-bindings.zsh ]; then
 	bindkey '\ec' fzf-cd-widget-fd
 fi
 
-######################
-####### Prompt #######
-######################
+# }}}
+
+# Prompt {{{
 
 # set left prompt
 PROMPT='%(!.#.$>) %E'
@@ -141,9 +145,9 @@ GIT_PROMPT_STAGED="%F{2}->%f"                                   # staged changes
 # Also show background process, git information and current dir
 RPROMPT='$(bg_process) $(git_prompt_string) %(?..[%?]) [%1~/]'
 
-#################
-##### Misc ######
-#################
+# }}}
+
+# Misc {{{
 
 # TMUX
 if [[ -z $TMUXAUTOATTACH ]]; then # Prevent from running if variable is set
@@ -209,20 +213,28 @@ fi
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/home/janis/.local/build/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/home/janis/.local/build/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/home/janis/.local/build/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/home/janis/.local/build/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
+#__conda_setup="$('/home/janis/.local/build/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+#if [ $? -eq 0 ]; then
+#    eval "$__conda_setup"
+#else
+#    if [ -f "/home/janis/.local/build/anaconda3/etc/profile.d/conda.sh" ]; then
+#        . "/home/janis/.local/build/anaconda3/etc/profile.d/conda.sh"
+#    else
+#        export PATH="/home/janis/.local/build/anaconda3/bin:$PATH"
+#    fi
+#fi
+#unset __conda_setup
 # <<< conda initialize <<<
+
+# Init pyenv
+eval "$(pyenv init -)"
 
 # Start X in tty2
 if [[ "$(tty)" = "/dev/tty2" ]]; then
 	pgrep dwm || startx
 fi
+
+# }}}
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"

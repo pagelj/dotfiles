@@ -1,0 +1,13 @@
+#!/usr/bin/env dash
+
+dunst & # Start notification manager
+xautolock -time 30 -locker slock & # Automatic screen lock
+clipmenud & # Nice clipboard using dmenu
+redshift -l 48:9 -t 6500:3000 &> /dev/null & # For dimmed display at night
+#xcompmgr & # start composition manager
+#nohup mons -a > /dev/null 2>&1 & # Re-establishs the display if it detects only one monitor
+stalonetray &> /dev/null & # Starts icon tray service
+megasync &> /dev/null & # Start mega sync service
+HOME=$HOME/.local/share/dropbox dropbox start &> /dev/null & # Start dropbox sync
+blueman-applet &> /dev/null & # Start bluetooth manager
+nm-applet &> /dev/null & # Start network manager

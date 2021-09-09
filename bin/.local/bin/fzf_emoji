@@ -1,0 +1,10 @@
+#!/usr/bin/env dash
+
+chosen=$(cut -d ';' -f1 "$XDG_DATA_HOME"/emoji | fzf | sed "s/ .*//")
+
+[ -n "$chosen" ] || exit
+
+printf '%s' "$chosen" | xsel -p -i
+printf '%s' "$chosen" | xsel -b -i
+notify-send "'$chosen' copied to clipboard." &
+xdotool key shift+Insert

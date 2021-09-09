@@ -3,7 +3,7 @@ URxvt.termName: rxvt-unicode
 URxvt.scrollBar: false
 URxvt.scrollTtyOutput: false
 !! Font preferenes
-URxvt.font: xft:Inconsolata:size=14
+URxvt.font: xft:Inconsolata Regular:family=mono:pixelsize=20:antialias=true:autohint=true
 !! Larger history limit
 URxvt.saveLines: 1000000
 URxvt*urgentOnBell: true

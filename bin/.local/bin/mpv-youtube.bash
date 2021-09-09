@@ -12,7 +12,7 @@ else
 	echo "$ENTRY" > "$CACHEFILE"
 fi
 LINK=$(echo "$ENTRY" | tr ' ' '\n' | tail -1)
-mpv --no-terminal --force-window --keep-open=yes --ytdl --x11-name="mpv-youtube" "$LINK"
+[ -z "$LINK" ] || mpv --no-terminal --force-window --keep-open=yes --ytdl --x11-name="mpv-youtube" "$LINK"
 if [ $? == "2" ]; then
 	mpv --no-terminal --force-window --keep-open=yes --no-osc --x11-name="mpv-youtube" --loop=inf "$VIDEOUNAVAILABLE"
 fi

@@ -1,8 +1,17 @@
-XF86Audio{LowerVolume,RaiseVolume}
-	pactl set-sink-volume 0 {-,+}5%; notify-send -t 3000 "Volume: $(amixer get Master | tail -1 | cut -d' ' -f7 | tr -d '[' | tr -d ']')"
+Print
+	maim -s /tmp/screenshot.png
 
-super + {minus,plus}
-	pactl set-sink-volume 0 {-,+}5%; notify-send -t 3000 "Volume: $(amixer get Master | tail -1 | cut -d' ' -f7 | tr -d '[' | tr -d ']')"
+XF86AudioLowerVolume
+	pactl set-sink-volume alsa_output.pci-0000_04_00.6.analog-stereo -5%; pactl set-sink-volume bluez_sink.00_23_02_3F_86_16.a2dp_sink -5%; pactl set-sink-volume bluez_sink.1C_E6_1D_D7_7F_9C.a2dp_sink -5%; notify-send -t 3000 "Volume: $(amixer get Master | tail -1 | cut -d' ' -f7 | tr -d '[' | tr -d ']')"
+
+XF86AudioRaiseVolume
+	pactl set-sink-volume alsa_output.pci-0000_04_00.6.analog-stereo +5%; pactl set-sink-volume bluez_sink.00_23_02_3F_86_16.a2dp_sink +5%; pactl set-sink-volume bluez_sink.1C_E6_1D_D7_7F_9C.a2dp_sink +5%; notify-send -t 3000 "Volume: $(amixer get Master | tail -1 | cut -d' ' -f7 | tr -d '[' | tr -d ']')"
+
+super + minus
+	pactl set-sink-volume alsa_output.pci-0000_04_00.6.analog-stereo -5%; pactl set-sink-volume bluez_sink.00_23_02_3F_86_16.a2dp_sink -5%; pactl set-sink-volume bluez_sink.1C_E6_1D_D7_7F_9C.a2dp_sink -5%; notify-send -t 3000 "Volume: $(amixer get Master | tail -1 | cut -d' ' -f7 | tr -d '[' | tr -d ']')"
+
+super + plus
+	pactl set-sink-volume alsa_output.pci-0000_04_00.6.analog-stereo +5%; pactl set-sink-volume bluez_sink.00_23_02_3F_86_16.a2dp_sink +5%; pactl set-sink-volume bluez_sink.1C_E6_1D_D7_7F_9C.a2dp_sink +5%; notify-send -t 3000 "Volume: $(amixer get Master | tail -1 | cut -d' ' -f7 | tr -d '[' | tr -d ']')"
 
 XF86AudioMute
 	amixer -q -D pulse sset Master toggle; notify-send -t 3000 "Volume: $(amixer get Master | tail -1 | cut -d' ' -f8 | tr -d '[' | tr -d ']')"
@@ -17,10 +26,10 @@ alt + {period,comma,shift + comma}
 	mpc -q {toggle,next,prev}
 
 XF86MonBrightness{Up,Down}
-	light -{A,U} 10; notify-send -t 3000 "Brightness: $(light)"
+	light -{A,U} 5; notify-send -t 3000 "Brightness: $(light)"
 
 super + {Up,Down}
-	light -{A,U} 10; notify-send -t 3000 "Brightness: $(light)"
+	light -{A,U} 5; notify-send -t 3000 "Brightness: $(light)"
 
 XF86ScreenSaver
 	slock
@@ -28,8 +37,8 @@ XF86ScreenSaver
 super + l
 	slock
 
-Print
-	maim -s /tmp/screenshot.png
+super + shift + Return
+	cst
 
 super + c
 	clipmenu -c -p "Clipboard" -l 20
@@ -40,14 +49,8 @@ super + p
 super + shift + p
 	passmenu -c -p "Pass to Clip" -l 20
 
-super + u
-	mpdmenu :: -i -l 40
-
 super + y
 	mpdmenu -p :: -i -l 20
-
-super + e
-	dmenu_emoji
 
 super + F1
 	tty-clock.sh
@@ -70,50 +73,32 @@ super + F6
 super + F7
 	cowsay_weather.sh
 
-super + w
-	dmenu_surfraw
+super + space
+	$TERMINAL -t "surfraw" -g 120x34 -e /bin/tmux attach -t "surfraw" \; send C-c \; send ' surfraw ' || $TERMINAL -t "surfraw" -g 120x34 -e /bin/tmux new -s "surfraw" \; send 'surfraw '
 
-super + b
-	dmenu_bookmarks
+#alt + k
+#	$TERMINAL -t "wiki" -g 120x34 -e /bin/tmux attach -t "wiki" || $TERMINAL -t "wiki" -g 120x34 -e /bin/tmux new -s "wiki" /bin/nvim -c ":VimwikiIndex"
 
 super + v
 	snippy
 
-super + n
-	$TERMINAL -t notetaker -g 120x34+200 -e notetaker
+#super + n
+#	$TERMINAL -t notetaker -g 120x34+200 -e notetaker
 
-super + shift + n
+super + n
 	most_recent_note.sh
 
-alt + x
+super + shift + x
 	statusbar
 
-alt + b
+super + b
 	$BROWSER
-
-alt + m
-	$TERMINAL -e $EMAILCLIENT
-
-alt + p
-	$TERMINAL -e $MUSICPLAYER
-
-alt + t
-	$TERMINAL -e $TOP
 
 alt + shift + y
 	mpv-youtube.bash -c -p "YouTube Bookmarks" -i -l 20
 
-alt + y
-	$TERMINAL -e youtube-viewer
+alt + b
+	dmenu_bookmarks
 
-alt + n
-	$TERMINAL -e $RSSREADER
-
-alt + a
-	$TERMINAL -e abook --config "$XDG_CONFIG_HOME"/abook/abookrc --datafile "$XDG_DATA_HOME"/abook/addressbook
-
-alt + w
-	st -t "wiki" -g 120x34 -e /bin/tmux attach -t "wiki" || st -t "wiki" -g 120x34 -e /bin/tmux new -s "wiki" /bin/nvim -c ":VimwikiIndex"
-
-super + shift + Return
-	cst
+#alt + f
+#	$TERMINAL -e nnn

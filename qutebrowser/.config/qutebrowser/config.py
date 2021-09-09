@@ -71,7 +71,7 @@ c.content.headers.custom = {'accept': 'text/html,application/xhtml+xml,applicati
 ##   - true
 ##   - false
 ##   - ask
-c.content.ssl_strict = True
+#c.content.ssl_strict = True
 
 ## Enable WebGL.
 ## Type: Bool

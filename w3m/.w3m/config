@@ -1,0 +1,73 @@
+# Display
+tabstop 4
+indent_incr 4
+view_unseenobject 0
+pixel_per_char 13
+pixel_per_line 28
+indent_incr 2
+decode_url 1
+open_tab_dl_list 1
+display_lineinfo 1
+display_image 0
+display_link 1
+display_link_number 1
+auto_image 1
+max_load_image 4
+ext_image_viewer 0
+imgdisplay w3mimgdisplay
+image_map_list 1
+image_scale 100
+fold_line 1
+show_lnum 1
+show_srch_str 1
+label_topline 0
+nextpage_topline 0
+# SSL
+ssl_forbid_method 2, 3
+ssl_verify_server 1
+ssl_cert_file
+ssl_key_file
+ssl_ca_path
+ssl_ca_file
+# Cookies
+use_cookie 1
+show_cookie 0
+accept_cookie 1
+accept_bad_cookie 0
+cookie_reject_domains
+cookie_accept_domains
+cookie_avoid_wrong_number_of_dots
+# Charset
+display_charset UTF-8
+document_charset UTF-8
+system_charset UTF-8
+# Colors
+basic_color terminal
+anchor_color blue
+image_color green
+form_color white
+mark_color cyan
+bg_color terminal
+active_style 1
+active_color cyan
+visited_anchor 1
+visited_color magenta
+# Misc
+mark_all_pages 1
+use_history 1
+history 100
+save_hist 1
+keymap_file keymap
+ignorecase_search 1
+# Directory
+document_root ~/docs
+personal_document_root ~/docs
+cgi_bin /usr/lib/w3m/cgi-bin:~/.w3m/cgi-bin
+# External programs
+mime_types ~/.config/mimeapps.list
+mailcap ~/.w3m/mailcap
+editor $EDITOR
+# Network
+user_agent Roku4640X/DVP-7.70 (297.70E04154A)
+retry_http 1
+default_url 0

@@ -1,0 +1,12 @@
+#!/usr/bin/env dash
+
+ENGINE=$(sr -elvis | grep -v '^ ' | cut -f1 -d'-' | sed 's/[ \t]*$//' | sort | uniq | fzf -m)
+if [ -z "$ENGINE" ]; then 
+	exit 1
+fi
+# Check if input starts with space, use duckduckgo as default search engine then
+case "$ENGINE" in
+	" "*) OPTIONS="$ENGINE"; ENGINE="duckduckgo -j $OPTIONS"
+esac
+# $ENGINE should not be double quoted so that surfraw receives the raw input
+surfraw -browser=$BROWSERCLI $ENGINE

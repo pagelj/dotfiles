@@ -1,6 +1,7 @@
 #!/usr/bin/env sh
 
 stow abook
+stow autostart
 stow bin
 stow dunst
 stow emacs

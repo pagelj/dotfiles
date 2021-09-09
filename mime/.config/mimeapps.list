@@ -11,6 +11,7 @@ application/pdf=pdf.desktop;
 image/png=img.desktop;
 image/jpeg=img.desktop;
 image/gif=img.desktop;
+image/webp=img.desktop;
 audio/flac=audio.desktop;
 audio/mpeg=audio.desktop;
 video/mp4=video.desktop;

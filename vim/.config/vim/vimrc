@@ -1,21 +1,31 @@
-" Default Dirs {{{
+" {{{ Default Dirs
 set undodir=$XDG_DATA_HOME/vim/undo
 set directory=$XDG_DATA_HOME/vim/swap
 set backupdir=$XDG_DATA_HOME/vim/backup
 set viewdir=$XDG_DATA_HOME/vim/view
-set viminfo+='1000,n$XDG_DATA_HOME/vim/viminfo
+"set viminfofile=$XDG_DATA_HOME/vim/viminfo
 set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
 " }}}
 
-" Plugins {{{
+" {{{ Plugins
 call plug#begin('$XDG_CONFIG_HOME/vim/plugged')
-Plug 'easymotion/vim-easymotion'
+" General
 Plug 'vimwiki/vimwiki'
 Plug 'mechatroner/rainbow_csv'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'camspiers/lens.vim'
+Plug 'jlanzarotta/bufexplorer'
 
-"Coding
+" Moving
+Plug 'easymotion/vim-easymotion'
+
+" Coding
 Plug 'dense-analysis/ale'
 Plug 'Raimondi/delimitMate'
+
+" Autocomplete
+Plug 'ervandew/supertab'
 
 " Search
 Plug 'wincent/command-t', {
@@ -34,11 +44,6 @@ Plug 'junegunn/goyo.vim'
 " Themes
 Plug 'arcticicestudio/nord-vim'
 Plug 'morhetz/gruvbox'
-
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-repeat'
-Plug 'camspiers/lens.vim'
-Plug 'jlanzarotta/bufexplorer'
 
 " R Setup
 "Plug 'jalvesaq/Nvim-R'
@@ -69,7 +74,7 @@ map F <Plug>Sneak_S
 
  " }}}
 
-" Basics {{{
+" {{{ Basics
 set encoding=utf-8 " Encoding
 set number " Display line numbers
 set relativenumber " Enable relative line numbers
@@ -93,9 +98,15 @@ set undofile
 set undodir=~/.cache/vim/undo
 " Ignore whitespace whilst diffing
 set diffopt+=iwhite
+set scrolloff=10
  " }}}
 
-" Syntax highlighting {{{
+" {{{ Bindings
+" Bind backspace to switch between recent files in normal mode
+nnoremap <BS> <C-^>
+" }}}
+
+" {{{ Syntax highlighting
 let g:solarized_termcolors=256 " If using solarized color scheme
 let g:gruvbox_contrast_dark="soft" " If using gruvbox color scheme
 let g:gruvbox_contrast_light="hard"
@@ -105,7 +116,7 @@ if has("syntax")
 endif
 " }}}
 
-" Statusline {{{
+" {{{ Statusline
 set laststatus=2
 set statusline=
 "set statusline+=%7*\[%n]                                  "buffernr
@@ -119,53 +130,60 @@ set statusline+=%8*\ %=\ %l:%v\                           "Rownr:Colnr
 set statusline+=%0*\ \ %m%r%w\ %P\ \                      "Modified? Readonly? Top/bot.
  " }}}
 
-" Snippets {{{
+" {{{ Snippets
+" Navigate to special marker in snippet
+vnoremap <Leader><Tab> <Esc>/<++><Enter>"_c4l
+map <Leader><Tab> <Esc>/<++><Enter>"_c4l
 " Python
-nnoremap <Leader>pydef :-1read $XDG_CONFIG_HOME/vim/snippets/python/skel_func.py<CR>wf(a
+nnoremap <Leader>pyfunc :-1read $XDG_CONFIG_HOME/vim/snippets/python/skel_func.py<CR>f(i
 nnoremap <Leader>pyclass :-1read $XDG_CONFIG_HOME/vim/snippets/python/skel_class.py<CR>wi 
-nnoremap <Leader>pyhead :-1read $XDG_CONFIG_HOME/vim/snippets/python/skel_header.py<CR>2j$a
+nnoremap <Leader>pyhead :-1read $XDG_CONFIG_HOME/vim/snippets/python/skel_header.py<CR>3ji
 nnoremap <Leader>pymain :-1read $XDG_CONFIG_HOME/vim/snippets/python/skel_main.py<CR>1j$i
 nnoremap <Leader>pyopen :-1read $XDG_CONFIG_HOME/vim/snippets/python/skel_open.py<CR>f"a
+nnoremap <Leader>pydocstr :-1read $XDG_CONFIG_HOME/vim/snippets/python/skel_docstring.py<CR>1ji
 " LaTeX
-nnoremap <Leader>item :-1read $XDG_CONFIG_HOME/vim/snippets/latex/skel_itemize.tex<CR>1j$i
-nnoremap <Leader>enum :-1read $XDG_CONFIG_HOME/vim/snippets/latex/skel_enumerate.tex<CR>1j$i
-nnoremap <Leader>fig :-1read $XDG_CONFIG_HOME/vim/snippets/latex/skel_figure.tex<CR>1j$i
-nnoremap <Leader>frame :-1read $XDG_CONFIG_HOME/vim/snippets/latex/skel_frame.tex<CR>f{f{a
-nnoremap <Leader>outline :-1read $XDG_CONFIG_HOME/vim/snippets/latex/skel_outline.tex<CR>1j$i
+nnoremap <Leader>texitem :-1read $XDG_CONFIG_HOME/vim/snippets/latex/skel_itemize.tex<CR>1j$i
+nnoremap <Leader>texenum :-1read $XDG_CONFIG_HOME/vim/snippets/latex/skel_enumerate.tex<CR>1j$i
+nnoremap <Leader>texfig :-1read $XDG_CONFIG_HOME/vim/snippets/latex/skel_figure.tex<CR>1j$i
+nnoremap <Leader>texframe :-1read $XDG_CONFIG_HOME/vim/snippets/latex/skel_frame.tex<CR>f{f{a
+nnoremap <Leader>texoutline :-1read $XDG_CONFIG_HOME/vim/snippets/latex/skel_outline.tex<CR>1j$i
 " Markdown
 nnoremap <Leader>mdtab :-1read $XDG_CONFIG_HOME/vim/snippets/markdown/skel_table.md<CR>2li
 nnoremap <Leader>mdimg :-1read $XDG_CONFIG_HOME/vim/snippets/markdown/skel_image.md<CR>f[a
 nnoremap <Leader>mdlink :-1read $XDG_CONFIG_HOME/vim/snippets/markdown/skel_link.md<CR>f[a
-nnoremap <Leader>mdblock :-1read $XDG_CONFIG_HOME/vim/snippets/markdown/skel_codeblock.md<CR>$i
-nnoremap <Leader>mdmeta :-1read $XDG_CONFIG_HOME/vim/snippets/markdown/skel_meta.md<CR>3j$"=strftime("%Y-%m-%d")<CR>Pgg01j$i
+nnoremap <Leader>mdblock :-1read $XDG_CONFIG_HOME/vim/snippets/markdown/skel_codeblock.md<CR>f{a
+nnoremap <Leader>mdmeta :-1read $XDG_CONFIG_HOME/vim/snippets/markdown/skel_meta.md<CR>3j$"=strftime("%Y-%m-%d")<CR>Pgg01jf"a
 " Bibtex
 nnoremap <Leader>bibbook :-1read $XDG_CONFIG_HOME/vim/snippets/bibtex/skel_book.bib<CR>f{a
+nnoremap <Leader>bibinbook :-1read $XDG_CONFIG_HOME/vim/snippets/bibtex/skel_inbook.bib<CR>f{a
 nnoremap <Leader>bibpro :-1read $XDG_CONFIG_HOME/vim/snippets/bibtex/skel_proceedings.bib<CR>f{a
 nnoremap <Leader>bibinp :-1read $XDG_CONFIG_HOME/vim/snippets/bibtex/skel_inproceedings.bib<CR>f{a
 nnoremap <Leader>bibart :-1read $XDG_CONFIG_HOME/vim/snippets/bibtex/skel_article.bib<CR>f{a
+nnoremap <Leader>bibphd :-1read $XDG_CONFIG_HOME/vim/snippets/bibtex/skel_phdthesis.bib<CR>f{a
+nnoremap <Leader>bibmisc :-1read $XDG_CONFIG_HOME/vim/snippets/bibtex/skel_misc.bib<CR>f{a
 " }}}
 
-" run programs silently {{{
+" {{{ run programs silently
 command! -nargs=* RunSilent
 	\ | execute ':silent !'.'<args>'
 	\ | execute ':redraw!'
 " }}}
 
-" markdown preview with pandoc {{{
+" {{{ markdown preview with pandoc
 nmap <Leader>pc :RunSilent pandoc -f markdown -o /tmp/vim-pandoc-out.pdf % && pkill -1 mupdf<CR>
 nmap <Leader>pp :RunSilent zathura /tmp/vim-pandoc-out.pdf &<CR>
  " }}}
 
-" Search through vimwiki {{{
+" {{{ Search through vimwiki
 command! -nargs=1 Wikigrep vimgrep "<args>" $HOME/.local/share/vimwiki/**/*.wiki
 nnoremap <Leader>w :Wikigrep<space>
 " }}}
 
-" run make {{{
+" {{{ run make
 nmap <Leader>mk :RunSilent make<CR>
 "}}}
 
-" Normal, write and code modes {{{
+" {{{ Normal, write and code modes
 command Normalmode set background=dark | colorscheme nord | Goyo! | set nolinebreak | set norelativenumber | set nospell | set cursorline
 command Writemode set background=light | colorscheme solarized | set linebreak | set spell | set nocursorline | Goyo 80
 command Codemode set background=dark | colorscheme obsidian | Goyo! | set nolinebreak | set nospell | set cursorline
@@ -174,20 +192,20 @@ nmap <Leader>wm :Writemode<CR>
 nmap <Leader>cm :Codemode<CR>
 " }}}
 
-" Insert current date {{{
+" {{{ Insert current date
 nmap <Leader>d "=strftime("%Y-%m-%d")<CR>p
 " }}}
 
-" Commands {{{
+" {{{ Commands
 " Requires ctags to be installed
 command! MakeTags !ctags -R .
 command! Make !make
-nnoremap <Leader>m :Make<CR>
+nnoremap <silent> <Leader>m :Make<CR><CR>
 " Remove trailing whitespace
 nnoremap <silent> <F5> :let _s=@/<Bar>:%s/\s\+$//e<Bar>:let @/=_s<Bar>:nohl<CR>
 " }}}
 
-" autocmds {{{
+" {{{ autocmds
 if has("autocmd")
   " reopening a file at same position, except if it is a git commit
   autocmd BufReadPost * if @% !~# '\.git[\/\\]COMMIT_EDITMSG$' && line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
@@ -206,12 +224,12 @@ au BufLeave * if (exists("b:current_colors")) | execute "colorscheme " . b:curre
 autocmd BufWritePost $XDG_DATA_HOME/vimwiki/*.wiki silent !wikientry2pdf %:p
 " }}}
 
-" Open vimrc {{{
-noremap <Leader>ev :vsp $XDG_CONFIG_HOME/vim/vimrc<CR>
+" {{{ Open vimrc
+noremap <Leader>ev :e $XDG_CONFIG_HOME/vim/vimrc<CR>
 nnoremap <Leader>sv :source $XDG_CONFIG_HOME/vim/vimrc <bar> :doautocmd BufRead<CR>
 " }}}
 
-" Disable arrow and page keys {{{
+" {{{ Disable arrow and page keys
 noremap <Down> <Nop>
 noremap <Left> <Nop>
 noremap <Right> <Nop>
@@ -226,10 +244,19 @@ noremap! <PageUp> <Nop>
 noremap! <PageDown> <Nop>
 " }}}
 
-" Folding {{{
+" {{{ Folding
+function! MyCustomFoldText()
+    let line = getline(v:foldstart)
+    let folded_line_num = v:foldend - v:foldstart
+    let line_text = substitute(line, '^\s*["#%]\s*{{{\s*\d*', '', 'g')
+    let fillcharcount = &textwidth - len(line_text) - len(folded_line_num)
+    return '+'. repeat('-', 4) . line_text . repeat('.', fillcharcount) . ' (' . folded_line_num . ' L)'
+endfunction
 set foldenable
 set foldlevelstart=10
 set foldnestmax=10
-set foldmethod=syntax
-nnoremap <space> za
+set foldmethod=marker
+set foldtext=MyCustomFoldText()
+nnoremap <silent> <Space> @=(foldlevel('.')?'za':"\<Space>")<CR>
+vnoremap <Space> zf
 " }}}
