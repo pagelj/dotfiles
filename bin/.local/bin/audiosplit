@@ -10,6 +10,7 @@
 [ ! -f "$2" ] && printf "The first file should be the audio, the second should be the timecodes.\\n" && exit
 
 inputaudio="$1"
+[ ! -f "$inputaudio" ] && printf "The first file should be the audio, the second should be the timecodes.\\n" && exit
 
 filename="${1%.*}"
 ext="${1#*.}"

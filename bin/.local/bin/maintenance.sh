@@ -1,15 +1,15 @@
 #!/bin/dash
 
 echo ''
-echo '########################################################'
-echo '################ systemctl --failed ####################'
-echo '########################################################'
+echo '#########################################################'
+echo '################ systemctl --failed #####################'
+echo '#########################################################'
 echo ''
 systemctl --failed
 echo ''
-echo '########################################################'
-echo '################ journalctl -p 0 -xb ###################'
-echo '########################################################'
+echo '#########################################################'
+echo '################ journalctl -p 0 -xb ####################'
+echo '#########################################################'
 echo ''
 journalctl -p 0 -xb
 echo ''
@@ -38,10 +38,10 @@ echo ''
 journalctl -xb | grep -i ufw
 echo ''
 echo '#########################################################'
-echo '################ find ~ -xtype l -print ##################'
+echo '################ find /home -xtype l -print #############'
 echo '#########################################################'
 echo ''
-find ~ -xtype l -print
+find /home -xtype l -print
 echo ''
 echo '#########################################################'
 echo '### pacman -Qqen > /root/pacman/pkglist.txt #############'
@@ -51,7 +51,7 @@ pacman -Qqen > /root/pacman/pkglist.txt
 echo 'Saved package list to /root/pacman/pkglist.txt'
 echo ''
 echo '#########################################################'
-echo '### pacman -Qqem > /home/pagel/.pacman/pkglist_aur.txt ##'
+echo '### pacman -Qqem > /root/pacman/pkglist_aur.txt #########'
 echo '#########################################################'
 echo ''
 pacman -Qqem > /root/pacman/pkglist_aur.txt
@@ -64,7 +64,7 @@ echo ''
 paccache -r -v -k 2
 echo ''
 echo '##########################################################################################'
-echo '####### reflector --verbose -l 15 --sort rate --save /etc/pacman.d/mirrorlist #############'
+echo '####### reflector --verbose -l 15 --sort rate --save /etc/pacman.d/mirrorlist ############'
 echo '##########################################################################################'
 echo ''
 reflector --verbose -l 15 --sort rate --save /etc/pacman.d/mirrorlist

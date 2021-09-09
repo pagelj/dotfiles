@@ -1,6 +1,6 @@
 #!/usr/bin/env dash
 
-ENGINE=$(sr -elvis | grep -v '^ ' | cut -f1 -d'-' | sed 's/[ \t]*$//' | sort | uniq | dmenu -l 40 -p "Surfraw Engine:")
+ENGINE=$(sr -elvis | cut -s -f1 -d'-' | sed 's/[ \t]*$//' | sort | uniq | dmenu -l 40 -p "Surfraw Engine:")
 if [ -z "$ENGINE" ]; then 
 	exit 1
 fi

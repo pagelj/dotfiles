@@ -1,0 +1,11 @@
+[Unit]
+Description=Autostart applications
+After=network.target network-online.target dbus.socket
+
+[Service]
+Type=simple
+ExecStart=/home/janis/.config/autostart/autostartrc
+TimeoutStartSec=60
+
+[Install]
+WantedBy=default.target

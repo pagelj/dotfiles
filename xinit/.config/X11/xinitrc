@@ -6,34 +6,24 @@ xset fp rehash
 xset -b # disable system bell
 xset r rate 300 50 & # Speed xrate up
 
-eval `/usr/bin/ssh-agent`
-if test -f /usr/lib/openssh/x11-ssh-askpass
-then
-	SSH_ASKPASS=/usr/lib/openssh/x11-ssh-askpass ssh-add < /dev/null
-fi
+eval "$(/usr/bin/ssh-agent)"
+test -f /usr/lib/openssh/x11-ssh-askpass && SSH_ASKPASS=/usr/lib/openssh/x11-ssh-askpass ssh-add < /dev/null
 
 # Setup
-xrdb -merge $XDG_CONFIG_HOME/X11/Xresources # Read Xresources
-xmodmap $XDG_CONFIG_HOME/X11/Xmodmap
+xrdb -merge "$XDG_CONFIG_HOME"/X11/Xresources # Read Xresources
+xmodmap "$XDG_CONFIG_HOME"/X11/Xmodmap
 setxkbmap -option caps:super # Treat capslock as super key
 killall xcape 2>/dev/null ; xcape -e 'Super_L=Escape' # Use capslock as escape when pressed once
 setxkbmap -layout de # Set keyboard layout
-xwallpaper --zoom $XDG_DATA_HOME/wallpaper.png # Set wallpaper
+xwallpaper --zoom "$XDG_DATA_HOME"/wallpaper.png # Set wallpaper
+#"$HOME"/.fehbg
 light -S 50 # Dim screen
 wmname LG3D # Trick java into behaving reasonably
 sxhkd & # Use cumstomized keybindings
 
 # Autostart
-dunst & # Start notification manager
-xautolock -time 30 -locker slock & # Automatic screen lock
-clipmenud & # Nice clipboard using dmenu
-pgrep redshift &> /dev/null || redshift -l 48:9 -t 6500:3000 &> /dev/null & # For dimmed display at night
-#xcompmgr & # start composition manager
-#nohup mons -a > /dev/null 2>&1 & # Re-establishs the display if it detects only one monitor
-stalonetray &> /dev/null & # Starts icon tray service
-megasync &> /dev/null & # Start mega sync service
-HOME=$HOME/.local/share/dropbox dropbox start &> /dev/null & # Start dropbox sync
-mpd &> /dev/null & # Start mpd
+test -f "$XDG_CONFIG_HOME"/autostart/xautostartrc && "$XDG_CONFIG_HOME"/autostart/xautostartrc
+test -f "$XDG_CONFIG_HOME"/autostart/autostartrc && "$XDG_CONFIG_HOME"/autostart/autostartrc
 
 # Set window/desktop manager
 exec dwm

@@ -5,4 +5,5 @@ After=network.target network-online.target dbus.socket
 [Service]
 Type=oneshot
 ExecStart=/home/janis/.local/bin/mbsync-hooks -Va
+TimeoutStartSec=180
 #ExecStartPost=/usr/bin/notmuch new

@@ -1,7 +1,9 @@
 ---
-title:  
-author:  
+title: ""
+author: <++>
 date:  
-lang:  
+lang: <++>
 
 ---
+
+<++>

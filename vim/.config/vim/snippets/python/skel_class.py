@@ -1,2 +1,3 @@
-class:
-    def __init__(self):
+class :
+    def __init__(self, <++>):
+        <++>

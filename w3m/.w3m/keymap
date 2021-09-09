@@ -1,0 +1,27 @@
+keymap C-f NEXT_PAGE
+keymap SPC NEXT_PAGE
+keymap C-b PREV_PAGE
+keymap yy  EXTERN_LINK '(printf %s | xsel -b)'
+keymap YY  EXTERN      '(printf %s | xsel -b)'
+keymap o   GOTO
+keymap O   TAB_GOTO
+keymap K   NEXT_TAB
+keymap J   PREV_TAB
+keymap F   TAB_LINK
+keymap d   CLOSE_TAB
+keymap :e  LOAD
+keymap @   READ_SHELL
+keymap #   PIPE_SHELL
+keymap |   PIPE_BUF
+keymap n   SEARCH_NEXT
+keymap N   SEARCH_PREV
+keymap /   ISEARCH
+keymap ?   ISEARCH_BACK
+keymap :H  HELP
+keymap :O  OPTIONS
+keymap :V  VERSION
+keymap :q  QUIT
+keymap ZZ  QUIT
+keymap ZQ  EXIT
+keymap Q   EXIT
+keymap ,r  COMMAND "SHELL 'python3 -m readability.readability -u $W3M_URL > /tmp/readability.html' ; LOAD /tmp/readability.html" # https://github.com/buriy/python-readability

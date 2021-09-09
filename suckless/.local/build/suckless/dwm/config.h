@@ -42,8 +42,9 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class         instance          title               tags mask     isfloating   monitor */
-	{ "Gimp",           NULL,          NULL,               0,            1,           -1 },
-	{ NULL,             NULL,          "wifi",             0,            1,           -1 },
+	//{ "Gimp",           NULL,          NULL,               0,            1,           -1 },
+	{ "Skype",          NULL,          NULL,               0,            1,           -1 },
+	{ NULL,             NULL,          "surfraw",          0,            1,           -1 },
 	{ "MEGAsync",       NULL,          NULL,               1,            1,           -1 },
 	{ "de-unistuttgart-ims-coref-annotator-Annotator", NULL, NULL, 1<<2, 1,           -1 },
 	{ NULL,             NULL,          "notetaker",        0,            1,           -1 },
@@ -54,9 +55,11 @@ static const Rule rules[] = {
 	{ NULL,             NULL,          "top",              1<<4,         0,           -1 },
 	{ "Skype",          NULL,          NULL,               1<<5,         0,           -1 },
 	{ NULL,             "mpv-youtube", NULL,               1<<6,         0,           -1 },
-	{ NULL,             NULL,          "mpv-youtube.bash", 1<<6,         0,           -1 },
 	{ NULL,             NULL,          "youtube-viewer",   1<<6,         0,           -1 },
 	{ NULL,             NULL,          "mpsyt",            1<<6,         0,           -1 },
+	{ NULL,             "mpv-newsboat",NULL,               1<<6,         0,           -1 },
+	{ NULL,             "mpv-ytfzf",   NULL,               1<<6,         0,           -1 },
+	{ "vlc",            NULL,          NULL,               1<<6,         0,           -1 },
 	{ "Thunderbird",    NULL,          NULL,               1<<7,         0,           -1 },
 	{ NULL,             NULL,          "mutt",             1<<7,         0,           -1 },
 	{ NULL,             NULL,          "firejail mutt",    1<<7,         0,           -1 },
@@ -118,7 +121,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
 	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_space,  setlayout,      {0} },
+	//{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },

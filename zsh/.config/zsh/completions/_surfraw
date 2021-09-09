@@ -1,0 +1,140 @@
+#compdef surfraw sr
+
+_surfraw_archwiki() {
+	local I="-h -help"
+	_arguments -w -C -s -S -n \
+		'(- 1 *)'{-h,-help}"[Local options]: :->full" \
+		"($I -l -language)"{-l=,-language=}'[Two letter language code (resambles ISO country codes)]:isocode:((
+			en\:Main\ Arch\ Wiki\ site
+			fr\:\ French
+			de\:\ German
+			he\:\ Hebrew
+			pl\:\ Polish
+			pt\:\ Portugese
+			ro\:\ Romanian
+			es\:\ Spanish
+			sv\:\ Swedish
+			uk\:\ Ukranian
+		))'
+}
+
+_surfraw_dictcc() {
+	local I="-h -help"
+	_arguments -w -C -s -S -n \
+		'(- 1 *)'{-h,-help}"[Local options]: :->full" \
+		"($I -l -language)"{-l=,-language=}'[Two letter language code (resambles ISO country codes)]:isocode:((
+			en\:German\-English\ translation
+			sv\:German\-Swedish\ translation
+			is\:German\-Icelandic\ translation
+			ru\:German\-Russian\ translation
+			ro\:German\-Romanian\ translation
+			fr\:German\-French\ translation
+			it\:German\-Italian\ translation
+			sk\:German\-Slovakian\ translation
+			pt\:German\-Portugese\ translation
+			nl\:German\-Dutch\ translation
+			hu\:German\-Hungarian\ translation
+			fi\:German\-Finnish\ translation
+			la\:German\-Latin\ translation
+			es\:German\-Spanish\ translation
+			bg\:German\-Bulgarian\ translation
+			hr\:German\-Croatian\ translation
+			no\:German\-Norwegian\ translation
+			cs\:German\-Czech\ translation
+			da\:German\-Danish\ translation
+			tr\:German\-Turkish\ translation
+			pl\:German\-Polish\ translation
+			eo\:German\-Esperanto\ translation
+			sr\:German\-Serbian\ translation
+			el\:German\-Greek\ translation
+		))'
+}
+
+_surfraw_duckduckgo() {
+	local I="-h -help"
+	_arguments -w -C -s -S -n \
+		'(- 1 *)'{-h,-help}"[Local options]: :->full" \
+		"($I -d -ducky -l -lucky)"{-d,-ducky,-l,-lucky}'[use in case of overwhelming feeling of duckiness]' \
+		"($I -j -javascript)"{-j,-javascript}'[use javascript]' \
+		"($I -safe)"-safe'[enable safe search]' \
+		"($I -r -redirect)"{-r,-redirect}'[use redirection]' \
+		"($I -s -insecure)"{-s,-insecure}'[disable SSL search]' \
+		"($I -c -category)"{-c=,-category=}'[specify category (only works with javascript enabled)]:category:((
+			web\:\ Search\ the\ web\ \(default\)
+			images\:\ Search\ images
+			videos\:\ Search\ videos
+			news\:\ Search\ the\ news
+			maps\:\ Search\ maps
+		))'
+}
+
+_surfraw_wikipedia() {
+	local I="-h -help"
+	_arguments -w -C -s -S -n \
+		'(- 1 *)'{-h,-help}"[Local options]: :->full" \
+		"($I -l -language)"{-l=,-language=}'[Two letter language code (resambles ISO country codes)]:isocode:'
+}
+
+_surfraw() {
+	local curcontext="$curcontext" ret=1
+	local -a state line commands
+	local I="-h -help -version"
+	
+	IFS=$'\n' commands=($(surfraw -elvis | cut -s -d'-' -f1,3 --output-delimiter=':' | sed 's/	//g' | sed 's/[[:space:]]*:[[:space:]]/:/g' | sort | uniq))
+	_arguments -w -C -s -S -n \
+		'(- 1 *)'{-h,-help}"[This help]: :->full" \
+		'(- 1 *)'{-lh,-local-help}"[Just show elvi-specific help, not the global options]: :->full" \
+		'(- 1 *)'-version"[Display Surfraw version]: :->full" \
+		"($I -bookmark-search-elvis)"-bookmark-search-elvis="[If args are passed to a non-searchable bookmark, search with this elvis instead.]:ELVIS:" \
+		"($I -browser)"-browser="[Set browser]:EXECUTABLE:" \
+		"($I -custom-search)"-custom-search="[Use PROVIDER for custom searches. Supported: google, duckduckgo]:PROVIDER:((
+			google
+			duckduckgo
+		))" \
+		"($I -elvi)"-elvi"[List Surfraw mechanism for conquering evil]" \
+		"($I -escape-url-args)"-escape-url-args="[Apply url escaping to arguments]:bool:((
+			yes
+			no
+		))" \
+		"($I -g -graphical)"{-g,-graphical}"[Get some windowed sin]" \
+		"($I -p -print)"{-p,-print}"[Just print search URL, don't pass to browser]" \
+		"($I -o)"{-o,-o=}"[Fetch URL and dump to stdout or FILE]" \
+		"($I -new)"-new="[Start in a new window]:bool:((
+			yes
+			no
+		))" \
+		"($I -ns -newscreen)"{-ns=,-newscreen=}"[Start in a new screen]:bool:((
+			yes
+			no
+		))" \
+		"($I -t -text *)"{-t,-text}"[Back to the yellow brick road]" \
+		"($I -q -quote *)"{-q,-quote}"[Quote arguments with \" characters]" \
+		"($I 1 *)"--"[End of options]: :->cmds" \
+		'1:cmd:->cmds' \
+		'*:: :->args' && ret=0
+
+	case "$state" in
+		(cmds)
+			_describe -t commands 'commands' commands
+		;;
+		(args)
+			case $words[1] in
+				(archwiki)
+					_surfraw_archwiki && ret=0
+				;;
+				(dictcc)
+					_surfraw_dictcc && ret=0
+				;;
+				(duckduckgo)
+					_surfraw_duckduckgo && ret=0
+				;;
+				(wikipedia)
+					_surfraw_wikipedia && ret=0
+				;;
+			esac
+		;;
+	esac
+	return ret
+}
+
+_surfraw
