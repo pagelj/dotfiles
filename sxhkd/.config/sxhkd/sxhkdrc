@@ -100,5 +100,11 @@ alt + shift + y
 alt + b
 	dmenu_bookmarks
 
+super + r
+	cast.sh screencast
+
+super + shift + r
+	cast.sh killrecording
+
 #alt + f
 #	$TERMINAL -e nnn
