@@ -2,6 +2,14 @@
 # Defining aliases
 ##############################
 
+# cd aliases
+function cd_up() {
+  cd $(printf "%0.0s../" $(seq 1 $1));
+}
+alias cd..='cd_up'
+alias ..='cd ..'
+alias ...='cd ../..'
+
 # configure dotfiles
 alias dot='git --git-dir=$HOME/df/.git --work-tree=$HOME/df'
 alias dots='dot status'
