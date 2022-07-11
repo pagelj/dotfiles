@@ -35,13 +35,13 @@ super + shift + Return
 	cst
 
 super + c
-	clipmenu -c -p "Clipboard" -l 20
+	clipmenu -p "Clipboard" -l 20
 
 super + p
-	passmenu --type -c -p "Pass" -l 20
+	passmenu --type -p "Pass" -l 20
 
 super + shift + p
-	passmenu -c -p "Pass to Clip" -l 20
+	passmenu -p "Pass to Clip" -l 20
 
 super + y
 	mpdmenu -p :: -i -l 20
@@ -89,7 +89,7 @@ super + b
 	$BROWSER
 
 alt + shift + y
-	mpv-youtube.bash -c -p "YouTube Bookmarks" -i -l 20
+	mpv-youtube.bash -p "YouTube Bookmarks" -i -l 20
 
 alt + b
 	dmenu_bookmarks
