@@ -65,7 +65,7 @@ export ELINKS_CONFDIR=$XDG_CONFIG_HOME/elinks
 export WWW_HOME="https://lite.duckduckgo.com"
 mkdir -p $XDG_CONFIG_HOME/simplescreenrecorder
 export IMAPFILTER_HOME=$XDG_CONFIG_HOME/imapfilter
-export NOTMUCH_CONFIG=$XDG_CONFIG_HOME/notmuch/notmuchrc
+export NOTMUCH_CONFIG=$XDG_CONFIG_HOME/notmuch/default/config
 export BOGOFILTER_DIR=$XDG_DATA_HOME/bogofilter
 export NMBGIT=$XDG_DATA_HOME/notmuch/nmbug
 mkdir -p $XDG_CACHE_HOME/less
