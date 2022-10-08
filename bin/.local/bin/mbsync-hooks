@@ -2,4 +2,4 @@
 
 imapfilter -v -c "$HOME/.config/imapfilter/config.lua"
 mbsync -c "$HOME/.config/isync/mbsyncrc" "$@"
-notmuch --config="$HOME/.config/notmuch/notmuchrc" new
+notmuch new
