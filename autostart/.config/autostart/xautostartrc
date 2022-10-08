@@ -10,5 +10,5 @@ redshift -l 48:9 -t 6500:3000 &> /dev/null & # For dimmed display at night
 trayer --edge top --align right --distance 20 --distancefrom top --widthtype request --heighttype request --transparent true &> /dev/null &
 megasync &> /dev/null & # Start mega sync service
 HOME=$HOME/.local/share/dropbox dropbox start &> /dev/null & # Start dropbox sync
-blueman-applet &> /dev/null & # Start bluetooth manager
+blueberry-tray &> /dev/null & # Start bluetooth manager
 nm-applet &> /dev/null & # Start network manager
