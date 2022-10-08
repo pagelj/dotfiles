@@ -156,6 +156,7 @@ nnoremap <Leader>mdmeta :-1read $XDG_CONFIG_HOME/vim/snippets/markdown/skel_meta
 " Bibtex
 nnoremap <Leader>bibbook :-1read $XDG_CONFIG_HOME/vim/snippets/bibtex/skel_book.bib<CR>f{a
 nnoremap <Leader>bibinbook :-1read $XDG_CONFIG_HOME/vim/snippets/bibtex/skel_inbook.bib<CR>f{a
+nnoremap <Leader>bibincoll :-1read $XDG_CONFIG_HOME/vim/snippets/bibtex/skel_incollection.bib<CR>f{a
 nnoremap <Leader>bibpro :-1read $XDG_CONFIG_HOME/vim/snippets/bibtex/skel_proceedings.bib<CR>f{a
 nnoremap <Leader>bibinp :-1read $XDG_CONFIG_HOME/vim/snippets/bibtex/skel_inproceedings.bib<CR>f{a
 nnoremap <Leader>bibart :-1read $XDG_CONFIG_HOME/vim/snippets/bibtex/skel_article.bib<CR>f{a
