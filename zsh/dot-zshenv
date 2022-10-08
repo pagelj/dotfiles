@@ -27,6 +27,7 @@ export MUSICPLAYER="ncmpcpp"
 export TOP="top"
 export READER="zathura"
 export RSSREADER="newsboat"
+export IRCCLIENT="irssi"
 export FILEMANAGER="nnn"
 
 # Program-specific variables
