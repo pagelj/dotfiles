@@ -1,7 +1,7 @@
 #!/usr/bin/env dash
 
 SNIPS=${XDG_DATA_HOME}/snippets
-FILE=$(find -L "${SNIPS}" -type f -exec basename {} \; | sort | uniq | dmenu -c -l 30)
+FILE=$(find -L "${SNIPS}" -type f -exec basename {} \; | sort | uniq | dmenu -l 30)
 if [ -f "${SNIPS}"/"${FILE}" ]; then
 	if [ -x "${SNIPS}/${FILE}" ]; then
 		DATA=$(${SHELL} "${SNIPS}/${FILE}")
