@@ -25,6 +25,7 @@ bind-key l open
 bind-key L toggle-show-read-feeds
 #macro m set browser "TS_SOCKET=/tmp/newsboat-mpv-ts tsp mpv --no-terminal --ontop --no-focus-on-open --no-border --force-window --x11-name=\"mpv-newsboat\" %u" ; open-in-browser ; set browser "$BROWSER %u"
 macro m set browser "TS_SOCKET=/tmp/newsboat-vlc-ts tsp vlc --play-and-exit --preferred-resolution -1 --qt-minimal-view %u" ; open-in-browser ; set browser "$BROWSER %u"
+macro r set browser "tuir %u"; open-in-browser ; set browser "$BROWSER %u"
 macro s set browser "nnn ~/.local/share/newsboat/saved_articles" ; open-in-browser ; set browser "$BROWSER %u"
 macro y set browser "echo -n %u | xclip -selection clipboard" ; open-in-browser ; set browser "$BROWSER %u"
 macro o set browser "$BROWSER %u" ; open-in-browser
