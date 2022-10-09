@@ -1,7 +1,7 @@
 #!/usr/bin/env dash
 
 STREAMUNAVAILABLE="$XDG_DATA_HOME/stream-offline.jpg"
-CHANNEL=$(dmenu -c -l 20 < "$XDG_DATA_HOME"/twitch/channels)
+CHANNEL=$(dmenu -l 20 < "$XDG_DATA_HOME"/twitch/channels)
 [ -z "$CHANNEL" ] || mpv --no-terminal --force-window https://www.twitch.tv/"$CHANNEL"
 if [ $? = "2" ]; then
 	mpv --no-terminal --force-window --keep-open=yes --no-osc --loop=inf "$STREAMUNAVAILABLE"
