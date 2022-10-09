@@ -15,7 +15,7 @@ update_statusbar() {
 	#TEMP="$(($(cat /sys/class/thermal/thermal_zone0/temp) / 1000))°C"
 	BAT="$(acpi -b | awk '{ print $4 " " }' | tr -d ',' | tr -d ' ')"
 	CURRENT_SONG="$(mpc --format "[[%composer%|%artist%][ - %album%][ - %title%] | [%file%]]" current)"
-	VERSION="dwm-6.2"
+	VERSION="dwm-6.4"
 
 	xsetroot -name " 🕓 $LOCALTIME | 🔊 $VOL |   $IP | 🚆 $VPN |   $TEMP |   $BAT | 🎼 $CURRENT_SONG | $VERSION"
 }
