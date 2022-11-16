@@ -160,6 +160,7 @@ nnoremap <Leader>bibincoll :-1read $XDG_CONFIG_HOME/vim/snippets/bibtex/skel_inc
 nnoremap <Leader>bibpro :-1read $XDG_CONFIG_HOME/vim/snippets/bibtex/skel_proceedings.bib<CR>f{a
 nnoremap <Leader>bibinp :-1read $XDG_CONFIG_HOME/vim/snippets/bibtex/skel_inproceedings.bib<CR>f{a
 nnoremap <Leader>bibart :-1read $XDG_CONFIG_HOME/vim/snippets/bibtex/skel_article.bib<CR>f{a
+nnoremap <Leader>bibonline :-1read $XDG_CONFIG_HOME/vim/snippets/bibtex/skel_online.bib<CR>f{a
 nnoremap <Leader>bibphd :-1read $XDG_CONFIG_HOME/vim/snippets/bibtex/skel_phdthesis.bib<CR>f{a
 nnoremap <Leader>bibthesis :-1read $XDG_CONFIG_HOME/vim/snippets/bibtex/skel_thesis.bib<CR>f{a
 nnoremap <Leader>bibmasters :-1read $XDG_CONFIG_HOME/vim/snippets/bibtex/skel_mastersthesis.bib<CR>f{a
