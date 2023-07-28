@@ -4,9 +4,10 @@ ENGINE=$(sr -elvis | grep -v '^ ' | cut -f1 -d'-' | sed 's/[ \t]*$//' | sort | u
 if [ -z "$ENGINE" ]; then 
 	exit 1
 fi
-# Check if input starts with space, use duckduckgo as default search engine then
-case "$ENGINE" in
-	" "*) OPTIONS="$ENGINE"; ENGINE="duckduckgo -j $OPTIONS"
-esac
-# $ENGINE should not be double quoted so that surfraw receives the raw input
-surfraw -browser=$BROWSERCLI $ENGINE
+OPTIONS=$(sr "$ENGINE" --help | sed -n '/Local options:/,/Global options:/{/Local options:/b;/Global options:/b;p}' | sed 's/^ *//g' | fzf -m --prompt="surfraw $ENGINE " | awk -F',| ' '{print $1}' | tr '\n' ' ')
+QUERY=$(echo "" | fzf --prompt="surfraw $ENGINE $OPTIONS " --print-query)
+if [ -z "$QUERY" ]; then 
+	exit 1
+fi
+# $QUERY should not be double quoted so that surfraw receives the raw input
+surfraw -browser="$BROWSERCLI" "$ENGINE" "$OPTIONS" $QUERY

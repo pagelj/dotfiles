@@ -1,3 +1,3 @@
 #!/usr/bin/env dash
 
-tmux display-popup -E "fzf_surfraw"
+tmux new-window -n surfraw fzf_surfraw

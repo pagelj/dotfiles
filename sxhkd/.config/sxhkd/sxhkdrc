@@ -1,8 +1,8 @@
 Print
-	maim -s /tmp/screenshot.png
+	maim -f png -m 10 -s /tmp/screenshot.png
 
 XF86Audio{Lower,Raise}Volume
-	amixer -q -M -D pipewire sset Master 1%{-,+}; notify-send -t 3000 "Volume: $(amixer get Master | tail -1 | cut -d' ' -f7 | tr -d '[' | tr -d ']')"
+	amixer -q -M -D pipewire sset Master 5%{-,+}; notify-send -t 3000 "Volume: $(amixer get Master | tail -1 | cut -d' ' -f7 | tr -d '[' | tr -d ']')"
 
 super + {minus,plus}
 	amixer -q -M -D pipewire sset Master 1%{-,+}; notify-send -t 3000 "Volume: $(amixer get Master | tail -1 | cut -d' ' -f7 | tr -d '[' | tr -d ']')"
@@ -90,9 +90,6 @@ super + b
 
 alt + shift + y
 	mpv-youtube.bash -p "YouTube Bookmarks" -i -l 20
-
-alt + b
-	dmenu_bookmarks
 
 super + r
 	cast.sh screencast

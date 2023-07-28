@@ -55,6 +55,7 @@ setopt GLOB_COMPLETE # Use pattern matching for wildcards and ~
 setopt NUMERIC_GLOB_SORT # Sort numerically if numbers are present in globbing
 setopt RC_EXPAND_PARAM # Expand globbing arrays to full names
 setopt NO_BEEP # Disable system beeps
+unsetopt BEEP
 setopt MARK_DIRS # Always append trailing / to dirs
 setopt APPEND_HISTORY # Append to history file instead of overwriting
 setopt HIST_IGNORE_ALL_DUPS # Ignore all history dups

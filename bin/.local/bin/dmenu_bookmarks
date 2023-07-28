@@ -1,7 +1,0 @@
-#!/usr/bin/env dash
-
-file="$XDG_DATA_HOME/bookmarks/bookmarks"
-bookmark=$( sort < "$file" | uniq | dmenu -p 'Load Bookmark' -i -l 50 | awk '{print $1}')
-[ -n "$bookmark" ] || exit 1
-# $bookmark should not be double quoted so that surfraw receives the raw input
-surfraw $bookmark

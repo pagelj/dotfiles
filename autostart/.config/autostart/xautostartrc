@@ -1,14 +1,16 @@
 #!/usr/bin/env dash
 
+#stalonetray &> /dev/null & # Starts icon tray service
+trayer --edge top --align right --distance 20 --distancefrom top --widthtype request --heighttype request --transparent true &> /dev/null &
+nm-applet &> /dev/null & # Start network manager
 dunst & # Start notification manager
 xautolock -time 30 -locker slock & # Automatic screen lock
 clipmenud & # Nice clipboard using dmenu
 redshift -l 48:9 -t 6500:3000 &> /dev/null & # For dimmed display at night
 #xcompmgr & # start composition manager
-#nohup mons -a > /dev/null 2>&1 & # Re-establishs the display if it detects only one monitor
-#stalonetray &> /dev/null & # Starts icon tray service
-trayer --edge top --align right --distance 20 --distancefrom top --widthtype request --heighttype request --transparent true &> /dev/null &
+nohup mons -a > /dev/null 2>&1 & # Re-establishs the display if it detects only one monitor
 megasync &> /dev/null & # Start mega sync service
 HOME=$HOME/.local/share/dropbox dropbox start &> /dev/null & # Start dropbox sync
 blueberry-tray &> /dev/null & # Start bluetooth manager
-nm-applet &> /dev/null & # Start network manager
+safeeyes &> /dev/null & # Start eye exercise app
+ibus-daemon -drxR &> /dev/null & # Start keyboard layout switcher

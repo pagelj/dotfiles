@@ -11,6 +11,7 @@ set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
 call plug#begin('$XDG_CONFIG_HOME/vim/plugged')
 " General
 Plug 'vimwiki/vimwiki'
+let g:vimwiki_list = [{'path': '~/.local/share/vimwiki/'}]
 Plug 'mechatroner/rainbow_csv'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -22,6 +23,9 @@ Plug 'easymotion/vim-easymotion'
 
 " Coding
 Plug 'dense-analysis/ale'
+let g:ale_echo_msg_error_str = 'E'
+let g:ale_echo_msg_warning_str = 'W'
+let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 Plug 'Raimondi/delimitMate'
 
 " Autocomplete
@@ -29,9 +33,14 @@ Plug 'ervandew/supertab'
 
 " Search
 Plug 'wincent/command-t', {
-			\ 'do': 'cd ruby/command-t/ext/command-t && ruby extconf.rb && make'
+			\ 'do': 'cd lua/wincent/commandt/lib && make'
 			\ }
+"cd ruby/command-t/ext/command-t && ruby extconf.rb && make
+let g:CommandTPreferredImplementation='lua'
 Plug 'justinmk/vim-sneak'
+" Configure vim-sneak
+map f <Plug>Sneak_s
+map F <Plug>Sneak_S
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
@@ -40,6 +49,11 @@ Plug 'chiedo/vim-sort-blocks-by'
 
 " Writing text
 Plug 'junegunn/goyo.vim'
+Plug 'instant-markdown/vim-instant-markdown', {'for': ['markdown', 'markdown.pandoc']}
+let g:instant_markdown_python = 1
+let g:instant_markdown_autostart = 0
+let g:instant_markdown_slow = 1
+let g:instant_markdown_logfile = '/tmp/instant_markdown.log'
 
 " Themes
 Plug 'arcticicestudio/nord-vim'
@@ -50,23 +64,17 @@ Plug 'morhetz/gruvbox'
 "Plug 'ncm2/ncm2'
 "Plug 'roxma/nvim-yarp'
 "Plug 'gaalcaras/ncm-R'
-if !has('nvim')
-    Plug 'roxma/vim-hug-neovim-rpc'
-endif
+"if !has('nvim')
+"    Plug 'roxma/vim-hug-neovim-rpc'
+"endif
 
 " Python
 "Plug 'ncm2/ncm2-jedi'
 call plug#end()
+
 if has("autocmd")
   filetype plugin indent on
 endif
-
-" Configure vimwiki
-let g:vimwiki_list = [{'path': '~/.local/share/vimwiki/'}]
-
-" Configure vim-sneak
-map f <Plug>Sneak_s
-map F <Plug>Sneak_S
 
 " Configure NCM2
 "autocmd BufEnter * call ncm2#enable_for_buffer()    " To enable ncm2 for all buffers.
@@ -104,6 +112,10 @@ set scrolloff=10
 " {{{ Bindings
 " Bind backspace to switch between recent files in normal mode
 nnoremap <BS> <C-^>
+" start fzf file search
+nnoremap <Leader>sf :Files<CR>
+" start fzf buffer search
+nnoremap <Leader>sb :Buffers<CR>
 " }}}
 
 " {{{ Syntax highlighting
@@ -119,7 +131,7 @@ endif
 " {{{ Statusline
 set laststatus=2
 set statusline=
-"set statusline+=%7*\[%n]                                  "buffernr
+set statusline+=%7*\[%n]                                  "buffernr
 set statusline+=%1*\ %<%F\                                "Filename
 set statusline+=%2*\ %y\                                  "FileType
 set statusline+=%3*\ %{''.(&fenc!=''?&fenc:&enc).''}      "Encoding
@@ -127,6 +139,7 @@ set statusline+=%3*\ %{(&bomb?\",BOM\":\"\")}\            "Encoding2
 set statusline+=%4*\ %{&ff}\                              "FileFormat (dos/unix..)
 set statusline+=%5*\ %{&spelllang}\                       "Spellanguage
 set statusline+=%8*\ %=\ %l:%v\                           "Rownr:Colnr
+set statusline+=0x%B\                                     "Unicode code point of character under cursor in hexadecimal"
 set statusline+=%0*\ \ %m%r%w\ %P\ \                      "Modified? Readonly? Top/bot.
  " }}}
 

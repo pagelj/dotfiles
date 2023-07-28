@@ -48,6 +48,7 @@ static const Rule rules[] = {
 	{ "de-unistuttgart-ims-coref-annotator-Annotator", NULL, NULL, 1<<2, 1,           -1 },
 	{ NULL,             NULL,          "notetaker",        0,            1,           -1 },
 	{ NULL,             NULL,          "wiki",             0,            1,           -1 },
+	{ "Safeeyes",       NULL,          NULL,               0,            1,           -1 },
 	{ "Geany",          NULL,          NULL,               1<<2,         0,           -1 },
 	{ "RStudio",        NULL,          NULL,               1<<2,         0,           -1 },
 	{ "Eclipse",        NULL,          NULL,               1<<2,         0,           -1 },

@@ -1,0 +1,4 @@
+#!/usr/bin/env dash
+
+~/.local/scripts/convert_bookmarks_html2text.sh
+surfraw "$(uniq < "$XDG_DATA_HOME"/bookmarks/bookmarks | fzf --layout=reverse | awk '{print $1}')"
