@@ -1,13 +1,12 @@
-#!/usr/bin/env dash
+#!/usr/bin/env bash
 
 ENGINE=$(sr -elvis | grep -v '^ ' | cut -f1 -d'-' | sed 's/[ \t]*$//' | sort | uniq | fzf -m)
 if [ -z "$ENGINE" ]; then 
 	exit 1
 fi
-OPTIONS=$(sr "$ENGINE" --help | sed -n '/Local options:/,/Global options:/{/Local options:/b;/Global options:/b;p}' | sed 's/^ *//g' | fzf -m --prompt="surfraw $ENGINE " | awk -F',| ' '{print $1}' | tr '\n' ' ')
-QUERY=$(echo "" | fzf --prompt="surfraw $ENGINE $OPTIONS " --print-query)
+QUERY=$(sr "$ENGINE" --help | sed -n '/Local options:/,/Global options:/{/Local options:/b;/Global options:/b;p}' | sed 's/^ *//g' | cat <(echo "") - | fzf --disabled --no-sort --prompt="surfraw $ENGINE " --print-query)
 if [ -z "$QUERY" ]; then 
 	exit 1
 fi
 # $QUERY should not be double quoted so that surfraw receives the raw input
-surfraw -browser="$BROWSERCLI" "$ENGINE" "$OPTIONS" $QUERY
+surfraw -browser="$BROWSERCLI" "$ENGINE" $QUERY
