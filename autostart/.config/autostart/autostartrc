@@ -1,3 +1,4 @@
-#!/usr/bin/env dash
+#!/usr/bin/env bash
 
 mpd &> /dev/null & # Start mpd
+docker_searxng.sh &> /dev/null & # Start searx server inside docker container

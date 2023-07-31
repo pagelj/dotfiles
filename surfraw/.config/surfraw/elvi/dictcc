@@ -1,1 +1,91 @@
-/home/janis/.config/surfraw/elvi/dictcc
+#!/bin/sh
+# $Id$
+# elvis: dictcc		-- Look up translations using https://www.dict.cc
+. surfraw || exit 1
+
+w3_config_hook () {
+def   SURFRAW_dictcc_from	"$SURFRAW_lang"
+def   SURFRAW_dictcc_to		"$SURFRAW_lang"
+}
+
+w3_usage_hook () {
+    cat <<EOF
+Usage: $w3_argv0 [options] [words]
+Description:
+  Look up translations using https://www.dict.cc
+Local options:
+
+  -from=LANGUAGE	Source language
+					Environment: SURFRAW_dictcc_from, SURFRAW_lang
+
+  -to=LANGUAGE		Destination language
+				Environment: SURFRAW_dictcc_to, SURFRAW_lang
+
+Possible Source Languages:
+  de				German
+  en				English
+
+Possible Destination Languages:
+  bg				Bulgarian
+  bs				Bosnian
+  cs				Czech
+  da				Danish
+  de				German
+  el				Greek
+  en				English
+  eo				Esperanto
+  es				Spanish
+  fi				Finnish
+  fr				French
+  hr				Croatian
+  hu				Hungarian
+  is				Icelandic
+  it				Italian
+  la				Latin
+  nl				Dutch
+  no				Norwegian
+  pl				Polish
+  pt				Portuguese
+  ro				Romanian
+  ru				Russian
+  sk				Slovak
+  sq				Albanian
+  sr				Serbian
+  sv				Swedish
+  tr				Turkish
+
+Examples:
+  $w3_argv0 -from=de -to=en Beispiel
+EOF
+    w3_global_usage
+}
+
+w3_parse_option_hook () {
+    opt="$1"
+    optarg="$2"
+    case "$opt" in
+	-from=*)	setopt SURFRAW_dictcc_from		$optarg ;;
+	-to=*)		setopt SURFRAW_dictcc_to		$optarg ;;
+	*) return 1 ;;
+    esac
+    return 0
+}
+
+w3_config
+w3_parse_args "$@"
+# w3_args now contains a list of arguments
+if test -z "$w3_args"
+    then w3_browse_url "https://www.dict.cc/"
+else
+    if [ -z "$SURFRAW_dictcc_to" ];
+    then
+        SURFRAW_dictcc_to="en"
+    fi
+    if [ -z "$SURFRAW_dictcc_from" ];
+    then
+        SURFRAW_dictcc_from="de"
+    fi
+    w3_browse_url "https://${SURFRAW_dictcc_from}${SURFRAW_dictcc_to}.dict.cc/?s=${w3_args}"
+fi
+
+exit $?

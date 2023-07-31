@@ -1,4 +1,4 @@
-#!/usr/bin/env dash
+#!/usr/bin/env bash
 
 #stalonetray &> /dev/null & # Starts icon tray service
 trayer --edge top --align right --distance 20 --distancefrom top --widthtype request --heighttype request --transparent true &> /dev/null &
