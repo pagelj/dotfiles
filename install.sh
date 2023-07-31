@@ -10,6 +10,7 @@ stow emacs
 stow gnupg
 stow mime
 mkdir -p "$XDG_DATA_HOME"/mpd/playlists
+mkdir -p "$XDG_CACHE_HOME"/mpd
 stow mpd
 stow ncmpcpp
 stow newsboat
