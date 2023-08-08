@@ -27,6 +27,7 @@ let g:ale_echo_msg_error_str = 'E'
 let g:ale_echo_msg_warning_str = 'W'
 let g:ale_echo_msg_format = '[%linter%] %s [%severity%]'
 Plug 'Raimondi/delimitMate'
+Plug 'AndrewRadev/splitjoin.vim'
 
 " Autocomplete
 Plug 'ervandew/supertab'
@@ -107,6 +108,9 @@ set undodir=~/.cache/vim/undo
 " Ignore whitespace whilst diffing
 set diffopt+=iwhite
 set scrolloff=10
+" enable smartindent
+set autoindent
+set smartindent
  " }}}
 
 " {{{ Bindings
