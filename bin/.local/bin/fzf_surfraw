@@ -9,4 +9,4 @@ if [ -z "$QUERY" ]; then
 	exit 1
 fi
 # $QUERY should not be double quoted so that surfraw receives the raw input
-surfraw -browser="$BROWSER" "$ENGINE" $QUERY
+surfraw -browser="$BROWSERLIGHT" "$ENGINE" $QUERY
