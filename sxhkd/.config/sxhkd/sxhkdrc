@@ -85,6 +85,9 @@ super + n
 super + shift + x
 	statusbar
 
+super + o
+	obsidian
+
 super + b
 	$BROWSER
 
