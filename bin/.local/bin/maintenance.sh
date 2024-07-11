@@ -41,7 +41,7 @@ echo '#########################################################'
 echo '################ find /home -xtype l -print #############'
 echo '#########################################################'
 echo ''
-find /home -xtype l -print
+#find /home -xtype l -print
 echo ''
 echo '#########################################################'
 echo '### pacman -Qqen > /root/pacman/pkglist.txt #############'

@@ -35,4 +35,4 @@ complete.all.tags=yes
 list.all.tags=yes
 weekstart=Monday
 urgency.user.tag.later.coefficient=-15.0
-news.version=2.6.0
+#news.version=2.6.0

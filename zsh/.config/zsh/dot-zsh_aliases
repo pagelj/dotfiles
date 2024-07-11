@@ -9,6 +9,7 @@ function cd_up() {
 alias cd..='cd_up'
 alias ..='cd ..'
 alias ...='cd ../..'
+alias ....='cd ../../..'
 
 # configure dotfiles
 alias dot='git --git-dir=$HOME/df/.git --work-tree=$HOME/df'
@@ -36,6 +37,8 @@ alias abook='abook --config "$XDG_CONFIG_HOME"/abook/abookrc --datafile "$XDG_DA
 
 alias mbsync='mbsync -c "$XDG_CONFIG_HOME/isync/mbsyncrc"'
 
+alias cb='export CM_LAUNCHER="fzf"; clipmenu'
+
 # mupdf alias
 function __mupdf_start { mupdf 2>/dev/null "$1" & }
 alias mu='__mupdf_start'
@@ -46,7 +49,7 @@ alias ev='__evince_start'
 
 # zathura alias
 function __zathura_start { zathura 2>/dev/null "$1" & }
-alias z="__zathura_start"
+alias zt="__zathura_start"
 
 # rm/cp/mv alias
 alias rm='rm -I'
@@ -94,6 +97,7 @@ alias ct='clear && printf "\033c" && tmux clearhist'
 alias x='startx "$XDG_CONFIG_HOME/X11/xinitrc"'
 
 # aliases for tar
+alias untar='tar -xf'
 alias targz='tar -czf'
 alias untargz='tar -xzf'
 alias tarxz='tar -cJf'
@@ -118,6 +122,9 @@ alias pacu='sudo pacman -Syu'
 alias pacs='sudo pacman -S'
 alias pacr='sudo pacman -Rns'
 
+# python aliases
+alias black='black -l 79'
+
 # git aliases
 alias gits='git status'
 alias gitcv='git commit -S -v'
@@ -140,7 +147,7 @@ alias yt='mpsyt'
 alias mk='make'
 
 alias nb='newsboat'
-alias t='task'
+alias t='taskwarrior-tui'
 alias c='calcurse'
 
 alias mpv='mpv --wid=$(xdotool getactivewindow)'
@@ -158,3 +165,5 @@ alias cal='cal -m'
 
 alias g++='g++ -std=c++17 -pedantic-errors -Wall -Weffc++ -Wextra -Wsign-conversion -Werror'
 alias gcc='gcc -pedantic-errors'
+
+alias zfzf='cd "$(fasd -d -l | fzf)" || exit'

@@ -1,4 +1,4 @@
-export PORT=8080
+export PORT=22223
 docker pull searxng/searxng
 docker run --rm \
            -d -p ${PORT}:8080 \

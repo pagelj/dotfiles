@@ -1,3 +1,9 @@
+# Modules {{{
+
+zmodload zsh/zprof
+
+# }}}
+
 # Functions {{{
 
 # Source functions
@@ -21,7 +27,7 @@ bindkey '^[[6~' down-line-or-history # PageDown
 fpath=($ZDOTDIR/completions $fpath)
 # Perform some sanity checks on completion option
 autoload -Uz compinit
-compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
+#compinit -d $XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION
 
 bindkey '^i' expand-or-complete-prefix # Complete inside of string
 zstyle ':completion:*' completer _complete _match _approximate # Enable fuzzy matching
@@ -239,3 +245,20 @@ fi
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
+
+# Init fasd
+fasd_cache="$HOME/.cache/fasd-init-zsh"
+if [ "$(command -v fasd)" -nt "$fasd_cache" -o ! -s "$fasd_cache" ]; then
+	eval "$(fasd --init posix-alias zsh-hook zsh-ccomp zsh-ccomp-install)" >| "$fasd_cache"
+fi
+source "$fasd_cache"
+unset fasd_cache
+fasd-fzf-widget () { 
+	FZF_ALT_C_COMMAND='fasd -d -l'
+	fzf-cd-widget
+	unset FZF_ALT_C_COMMAND
+}
+zle -N fasd-fzf-widget
+bindkey "^[z" fasd-fzf-widget
+
+#zprof > /tmp/zsh-prof
