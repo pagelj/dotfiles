@@ -167,3 +167,5 @@ alias g++='g++ -std=c++17 -pedantic-errors -Wall -Weffc++ -Wextra -Wsign-convers
 alias gcc='gcc -pedantic-errors'
 
 alias zfzf='cd "$(fasd -d -l | fzf)" || exit'
+
+alias cisco-secure-client='/opt/cisco/secureclient/bin/vpnui'

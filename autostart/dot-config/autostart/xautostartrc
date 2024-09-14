@@ -12,5 +12,6 @@ nohup mons -a > /dev/null 2>&1 & # Re-establishs the display if it detects only 
 megasync &> /dev/null & # Start mega sync service
 HOME=$HOME/.local/share/dropbox dropbox start &> /dev/null & # Start dropbox sync
 blueberry-tray &> /dev/null & # Start bluetooth manager
-safeeyes &> /dev/null & # Start eye exercise app
+# snixembed --fork &> /dev/null & Start icon dependency for safeeyes
+#safeeyes &> /dev/null & # Start eye exercise app
 ibus-daemon -drxR &> /dev/null & # Start keyboard layout switcher

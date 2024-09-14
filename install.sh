@@ -20,10 +20,10 @@ stow scripts
 stow snippets
 #stow suckless
 mkdir -p "$XDG_CONFIG_HOME"/surfraw/elvi
-ln ./surfraw/.config/surfraw/elvi/currency "$XDG_CONFIG_HOME"/surfraw/elvi/currency
-ln ./surfraw/.config/surfraw/elvi/dictcc "$XDG_CONFIG_HOME"/surfraw/elvi/dictcc
-ln ./surfraw/.config/surfraw/elvi/duckduckgo "$XDG_CONFIG_HOME"/surfraw/elvi/duckduckgo
-ln ./surfraw/.config/surfraw/elvi/searx "$XDG_CONFIG_HOME"/surfraw/elvi/searx
+ln ./surfraw/dot-config/surfraw/elvi/currency "$XDG_CONFIG_HOME"/surfraw/elvi/currency
+ln ./surfraw/dot-config/surfraw/elvi/dictcc "$XDG_CONFIG_HOME"/surfraw/elvi/dictcc
+ln ./surfraw/dot-config/surfraw/elvi/duckduckgo "$XDG_CONFIG_HOME"/surfraw/elvi/duckduckgo
+ln ./surfraw/dot-config/surfraw/elvi/searx "$XDG_CONFIG_HOME"/surfraw/elvi/searx
 stow sxhkd
 stow systemd
 stow task
