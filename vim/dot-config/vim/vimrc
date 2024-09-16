@@ -151,6 +151,8 @@ set statusline+=%0*\ \ %m%r%w\ %P\ \                      "Modified? Readonly? T
 " Navigate to special marker in snippet
 vnoremap <Leader><Tab> <Esc>/<++><Enter>"_c4l
 map <Leader><Tab> <Esc>/<++><Enter>"_c4l
+" sh
+nnoremap <Leader>shhead :-1read $XDG_CONFIG_HOME/vim/snippets/sh/skel_header.sh<CR>1ji
 " Python
 nnoremap <Leader>pyfunc :-1read $XDG_CONFIG_HOME/vim/snippets/python/skel_func.py<CR>f(i
 nnoremap <Leader>pyclass :-1read $XDG_CONFIG_HOME/vim/snippets/python/skel_class.py<CR>wi 
