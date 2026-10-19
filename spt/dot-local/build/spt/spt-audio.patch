@@ -1,12 +1,13 @@
 --- a/spt.c
 +++ b/spt.c
-@@ -1,4 +1,5 @@
+@@ -1,4 +1,6 @@
  /* See LICENSE file for copyright and license details. */
 +#include <errno.h>
++#include <fcntl.h>
  #include <stdarg.h>
  #include <stdio.h>
  #include <stdlib.h>
-@@ -6,6 +7,7 @@
+@@ -6,6 +8,7 @@
  #include <unistd.h>
  #include <signal.h>
  #include <time.h>
@@ -14,7 +15,7 @@
  #ifdef NOTIFY
  #include <libnotify/notify.h>
  #endif /* NOTIFY */
-@@ -20,20 +22,19 @@
+@@ -20,20 +23,19 @@
  
  typedef struct {
  	unsigned int tmr;
@@ -30,7 +31,7 @@
  /* function declarations */
  static void die(const char *errstr, ...);
 -static void spawn(char *argv[]);
-+static pid_t spawn(char *argv[]);
++static pid_t spawn(char *argv[], int quiet);
  static void notify_send(char *cmt);
  static void display_state(int remaining, int suspend);
 -static void toggle_display(int sigint);
@@ -38,20 +39,31 @@
  static void usage(void);
  
  /* functions implementations */
-@@ -48,16 +49,21 @@
+@@ -48,23 +50,37 @@
  	exit(1);
  }
  
 -void
-+pid_t
- spawn(char *argv[])
- {
+-spawn(char *argv[])
+-{
 -	if (fork() == 0) {
++pid_t
++spawn(char *argv[], int quiet)
++{
 +	pid_t pid;
++	int fd;
 +
 +	if ((pid = fork()) == 0) {
  		setsid();
 +		sigprocmask(SIG_UNBLOCK, &mask, NULL);
++		if (quiet) {
++			if ((fd = open("/dev/null", O_WRONLY)) == -1
++			    || dup2(fd, STDOUT_FILENO) == -1
++			    || dup2(fd, STDERR_FILENO) == -1)
++				_exit(1);
++			if (fd != STDOUT_FILENO && fd != STDERR_FILENO)
++				close(fd);
++		}
  		execvp(argv[0], argv);
 -		die("spt: execvp %s\n", argv[0]);
 -		perror(" failed");
@@ -65,7 +77,24 @@
  }
  
  void
-@@ -91,36 +97,26 @@
+ notify_send(char *cmt)
+ {
+ 	if (strcmp(notifycmd, ""))
+-		spawn((char *[]) { notifycmd, "spt", cmt, NULL });
++		spawn((char *[]) { notifycmd, "spt", cmt, NULL }, 0);
+ #ifdef NOTIFY
+ 	else {
+ 		notify_init("spt");
+@@ -77,7 +93,7 @@
+ #endif /* NOTIFY */
+ 
+ 	if (strcmp(notifyext, "")) /* extra commands to use */
+-		spawn((char *[]) { "/bin/sh", "-c", notifyext, NULL });
++		spawn((char *[]) { "/bin/sh", "-c", notifyext, NULL }, 0);
+ }
+ 
+ void
+@@ -91,36 +107,26 @@
  		 (suspend) ? "◼" : "▶");
  
  	notify_send(buf);
@@ -110,7 +139,7 @@
  		case 'e':
  			notifyext = EARGF(usage());
  			break;
-@@ -134,40 +130,66 @@
+@@ -134,40 +140,66 @@
  			usage();
  	} ARGEND;
  
@@ -118,16 +147,7 @@
 -	sa.sa_handler = toggle_display;
 -	sigemptyset(&sa.sa_mask);
 -	sa.sa_flags = 0;
-+	/* Wait for signals in the timer loop, without a check/sleep race. */
-+	sigemptyset(&mask);
-+	sigaddset(&mask, SIGUSR1);
-+	sigaddset(&mask, SIGUSR2);
-+	sigaddset(&mask, SIGINT);
-+	sigaddset(&mask, SIGTERM);
-+	sigaddset(&mask, SIGHUP);
-+	if (sigprocmask(SIG_BLOCK, &mask, NULL) == -1)
-+		die("cannot block timer signals\n");
- 
+-
 -	if (sigaction(SIGUSR1, &sa, NULL) == -1)
 -		die("cannot associate SIGUSR1 to handler\n");
 -
@@ -142,13 +162,23 @@
 -	sigemptyset(&emptymask);
 -
 -	for (i = 0; ; i = (i + 1) % LEN(timers)) {
++	/* Wait for signals in the timer loop, without a check/sleep race. */
++	sigemptyset(&mask);
++	sigaddset(&mask, SIGUSR1);
++	sigaddset(&mask, SIGUSR2);
++	sigaddset(&mask, SIGINT);
++	sigaddset(&mask, SIGTERM);
++	sigaddset(&mask, SIGHUP);
++	if (sigprocmask(SIG_BLOCK, &mask, NULL) == -1)
++		die("cannot block timer signals\n");
++
 +	for (i = 0; !done; i = (i + 1) % LEN(timers)) {
  		printf("%s\n", timers[i].cmt);
  		notify_send(timers[i].cmt);
 +		player = 0;
 +		if (timers[i].work && *audiofile) {
 +			player = spawn((char *[]) { "mplayer", "-really-quiet",
-+				"-noconsolecontrols", "-loop", "0", "--", audiofile, NULL });
++				"-noconsolecontrols", "-loop", "0", "--", audiofile, NULL }, 1);
 +			if (player > 0 && suspend)
 +				kill(player, SIGSTOP);
 +		}
@@ -202,8 +232,9 @@
  	}
  
 -	return 0;
+-}
 +	return 128 + done;
- }
++}
 --- a/config.h
 +++ b/config.h
 @@ -3,19 +3,20 @@
@@ -246,7 +277,7 @@
  
  Installation
  ------------
-@@ -27,6 +28,31 @@
+@@ -27,6 +28,32 @@
  (re)compiling the source code. By default, the timer runs by 4
  pomodoro timer (25 mins) with subsequent rests in between (5 mins)
  followed by a long rest (15 mins) in an infinite loop.
@@ -265,6 +296,7 @@
 +setting is needed. SIGUSR2 pauses/resumes both the timer and the player;
 +SIGUSR1 shows the remaining time without starting another player. Exiting
 +with Ctrl-C, SIGTERM, or SIGHUP also stops the player.
++MPlayer's standard output and standard error are redirected to `/dev/null`.
 +
 +The generic `-e` command keeps its existing behavior: it runs for every
 +notification, including work starts, break starts, and SIGUSR1 status
@@ -289,7 +321,7 @@
  .RB [ \-e
  .IR notifyext ]
  .RB [ \-n
-@@ -13,21 +15,31 @@
+@@ -13,21 +15,32 @@
  is a simple timer that uses pomodoro technique with desktop notification to
  double your efficiency.
  .B spt
@@ -314,6 +346,7 @@
 +Playback pauses with the timer and stops before a break or on SIGINT,
 +SIGTERM, or SIGHUP.
 +The argument is a filename, not a shell command.
++The player's standard output and standard error are redirected to /dev/null.
  .TP
  .BI \-e " notifyext"
  Execute
@@ -324,7 +357,7 @@
  .TP
  .BI \-n " notifycmd"
  Execute
-@@ -45,7 +57,13 @@
+@@ -45,7 +58,13 @@
  ) and followed by a long rest (
  .B 15 min.
  ) in an infinite loop.

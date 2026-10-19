@@ -1,0 +1,341 @@
+--- a/spt.c
++++ b/spt.c
+@@ -1,6 +1,7 @@
+ /* See LICENSE file for copyright and license details. */
+ #include <errno.h>
+ #include <fcntl.h>
++#include <poll.h>
+ #include <stdarg.h>
+ #include <stdio.h>
+ #include <stdlib.h>
+@@ -8,6 +9,7 @@
+ #include <unistd.h>
+ #include <signal.h>
+ #include <time.h>
++#include <sys/socket.h>
+ #include <sys/wait.h>
+ #ifdef NOTIFY
+ #include <libnotify/notify.h>
+@@ -34,6 +36,10 @@
+ /* function declarations */
+ static void die(const char *errstr, ...);
+ static pid_t spawn(char *argv[], int quiet);
++static int track(char *action);
++static int watch_tracker(int fd, pid_t parent);
++static pid_t start_tracker(int *fd);
++static int track_state(int fd, int work);
+ static void notify_send(char *cmt);
+ static void display_state(int remaining, int suspend);
+ static void usage(void);
+@@ -59,6 +65,7 @@
+ 	if ((pid = fork()) == 0) {
+ 		setsid();
+ 		sigprocmask(SIG_UNBLOCK, &mask, NULL);
++		signal(SIGPIPE, SIG_DFL);
+ 		if (quiet) {
+ 			if ((fd = open("/dev/null", O_WRONLY)) == -1
+ 			    || dup2(fd, STDOUT_FILENO) == -1
+@@ -74,6 +81,96 @@
+ 	if (pid < 0)
+ 		perror("spt: fork");
+ 	return pid;
++}
++
++int
++track(char *action)
++{
++	pid_t pid, waited;
++	int status;
++
++	if ((pid = spawn((char *[]) { trackcmd, action, NULL }, 0)) > 0) {
++		while ((waited = waitpid(pid, &status, 0)) == -1 && errno == EINTR)
++			;
++		if (waited == pid && WIFEXITED(status) && !WEXITSTATUS(status))
++			return 1;
++	}
++	fprintf(stderr, "spt: %s %s failed\n", trackcmd, action);
++	return 0;
++}
++
++int
++watch_tracker(int fd, pid_t parent)
++{
++	struct pollfd pfd = { fd, POLLIN, 0 };
++	int ready, work, started = 0, active = 0, failed = 0;
++	char state;
++
++	while (getppid() == parent) {
++		if ((ready = poll(&pfd, 1, 1000)) < 0) {
++			if (errno == EINTR)
++				continue;
++			failed = 1;
++			break;
++		}
++		if (!ready)
++			continue;
++		if (read(fd, &state, 1) != 1 || getppid() != parent)
++			break;
++		work = state == 'W';
++		if (work != active) {
++			if (!track(work ? (started ? "resume" : "morning") : "break")) {
++				failed = 1;
++				break;
++			}
++			active = work;
++			started = 1;
++		}
++		if (write(fd, "1", 1) != 1)
++			break;
++	}
++	if (started && !track("closing"))
++		failed = 1;
++	return failed;
++}
++
++pid_t
++start_tracker(int *fd)
++{
++	int sockets[2], i;
++	pid_t pid, parent = getpid();
++
++	if (socketpair(AF_UNIX, SOCK_STREAM, 0, sockets) == -1)
++		die("spt: cannot create tracker connection: %s\n", strerror(errno));
++	for (i = 0; i < 2; i++)
++		if (fcntl(sockets[i], F_SETFD, FD_CLOEXEC) == -1)
++			die("spt: cannot protect tracker connection: %s\n", strerror(errno));
++	if ((pid = fork()) == 0) {
++		close(sockets[0]);
++		setsid();
++		/* Keep control signals blocked; the helper exits when spt does. */
++		_exit(watch_tracker(sockets[1], parent));
++	}
++	close(sockets[1]);
++	if (pid == -1)
++		die("spt: cannot start tracker: %s\n", strerror(errno));
++	*fd = sockets[0];
++	return pid;
++}
++
++int
++track_state(int fd, int work)
++{
++	char state = work ? 'W' : 'B', ack;
++	struct pollfd pfd = { fd, POLLIN, 0 };
++
++	if (fd < 0)
++		return 1;
++	if (write(fd, &state, 1) == 1 && poll(&pfd, 1, 10000) > 0
++	    && read(fd, &ack, 1) == 1 && ack == '1')
++		return 1;
++	fputs("spt: time tracker failed; stopping timer\n", stderr);
++	return 0;
+ }
+ 
+ void
+@@ -112,16 +209,16 @@
+ void
+ usage(void)
+ {
+-	die("usage: %s [-a audiofile] [-e notifyext] [-n notifycmd] [-v]\n", argv0);
++	die("usage: %s [-a audiofile] [-e notifyext] [-n notifycmd] [-t tracker] [-v]\n", argv0);
+ }
+ 
+ int
+ main(int argc, char *argv[])
+ {
+ 	struct timespec remaining, before, after;
+-	pid_t player;
++	pid_t player, waited, tracker = 0;
+ 	long long ns;
+-	int i, sig, suspend = 0, done = 0;
++	int i, sig, status, trackfd = -1, suspend = 0, done = 0;
+ 
+ 	ARGBEGIN {
+ 		case 'a':
+@@ -132,6 +229,9 @@
+ 			break;
+ 		case 'n':
+ 			notifycmd = EARGF(usage());
++			break;
++		case 't':
++			trackcmd = EARGF(usage());
+ 			break;
+ 		case 'v':
+ 			die("spt " VERSION " © 2015-2020 spt engineers, "
+@@ -149,8 +249,15 @@
+ 	sigaddset(&mask, SIGHUP);
+ 	if (sigprocmask(SIG_BLOCK, &mask, NULL) == -1)
+ 		die("cannot block timer signals\n");
++	signal(SIGPIPE, SIG_IGN);
++	if (*trackcmd)
++		tracker = start_tracker(&trackfd);
+ 
+ 	for (i = 0; !done; i = (i + 1) % LEN(timers)) {
++		if (!track_state(trackfd, timers[i].work && !suspend)) {
++			done = -1;
++			break;
++		}
+ 		printf("%s\n", timers[i].cmt);
+ 		notify_send(timers[i].cmt);
+ 		player = 0;
+@@ -185,6 +292,8 @@
+ 				suspend ^= 1;
+ 				if (player > 0)
+ 					kill(player, suspend ? SIGSTOP : SIGCONT);
++				if (!track_state(trackfd, timers[i].work && !suspend))
++					done = -1;
+ 				break;
+ 			case SIGINT:
+ 			case SIGTERM:
+@@ -201,5 +310,12 @@
+ 		}
+ 	}
+ 
+-	return 128 + done;
+-}
++	if (trackfd >= 0) {
++		close(trackfd); /* The spt helper closes the session on EOF or parent death. */
++		while ((waited = waitpid(tracker, &status, 0)) == -1 && errno == EINTR)
++			;
++		if (waited == -1 || !WIFEXITED(status) || WEXITSTATUS(status))
++			done = -1;
++	}
++	return done < 0 ? 1 : 128 + done;
++}
+--- a/config.h
++++ b/config.h
+@@ -4,6 +4,7 @@
+ static char *notifycmd = "notify-send"; /* Uses given command if not compiled by DNOTIFY */
+ static char *notifyext = "aplay -q ~/.local/foghorn.wav"; /* Notify with extra command (eg. play an alarm) */
+ static char *audiofile = ""; /* Work soundtrack; overridden by -a */
++static char *trackcmd = "timetrack"; /* Tracker executable; -t overrides, empty disables */
+ 
+ /*
+  * This is the array which defines all the timer that will be used.
+--- a/README.md
++++ b/README.md
+@@ -9,6 +9,7 @@
+ - Keeps you free like a dog
+ - Able to show remaining time
+ - Optional work soundtrack, silent during breaks
++- Work-time tracking through the standalone timetrack tool
+ 
+ Installation
+ ------------
+@@ -55,6 +56,50 @@
+ The `-a` value is a filename, not a shell command; quote paths containing
+ spaces. A default soundtrack can also be set with `audiofile` in config.h.
+ 
++Time tracking
++-------------
++spt uses a separately installed `timetrack` executable, found through PATH.
++It calls the existing `morning`, `break`, `resume` and `closing` commands;
++the tracker must allow `closing` during a break. Install the tracker
++separately; it is not built or installed with spt.
++
++With `timetrack` available in PATH, tracking is enabled by default:
++
++    spt -a "$CONCENTRATION_SOUNDTRACK" -e '' -n notify-send
++
++If the executable has another name or lives elsewhere, use `-t`:
++
++    spt -t "$HOME/.local/bin/timetrack.py" -a "$CONCENTRATION_SOUNDTRACK" -e ''
++
++The `-t` value is an executable name or path, not a shell command. It need not
++be in the spt directory. Change `trackcmd` in config.h to set another default,
++or use `-t ''` to disable tracking.
++
++One spt run uses one tracker session, starting with its first work period:
++
++- The first work period starts: `timetrack morning`.
++- A break or manual pause starts: `timetrack break`.
++- Work resumes after a break or pause: `timetrack resume`.
++- spt exits after tracking has started: `timetrack closing`.
++
++Resuming a scheduled break and SIGUSR1 status requests do not change
++tracking. Starting or exiting spt during an initial break creates no session
++until work starts.
++
++On exit during work, a break or a manual pause, spt calls `closing` once.
++Closing during a break records departure without restarting work: work time
++already stopped at the `break` entry. The tracker must support this sequence.
++
++A small helper process inside spt runs these commands and closes the session
++if the main timer disappears, including after SIGKILL. No tracker process
++stays running between commands. The spt helper must survive to perform that
++cleanup. A failed tracker command stops spt with an error.
++
++Statistics remain available directly through the standalone tracker. Its
++monthly, yearly and all-time reports are independent of this integration.
++Start with a closed tracker session, and avoid changing the same session
++manually or running another timer while spt controls it.
++
+ Links
+ -----
+ http://pomodorotechnique.com/
+--- a/spt.1
++++ b/spt.1
+@@ -9,6 +9,8 @@
+ .IR notifyext ]
+ .RB [ \-n
+ .IR notifycmd ]
++.RB [ \-t
++.IR tracker ]
+ .RB [ \-v ]
+ .SH DESCRIPTION
+ .B spt
+@@ -22,7 +24,7 @@
+ \- show remaining time, state
+ .br
+ .B SIGUSR2
+-\- play/pause the timer and work soundtrack
++\- play/pause the timer, work soundtrack, and work-time tracking
+ .RE
+ .SH OPTIONS
+ .TP
+@@ -48,6 +50,14 @@
+ if not compiled with
+ .IR "-DNOTIFY".
+ .TP
++.BI \-t " tracker"
++Use the standalone tracker executable (default: timetrack, found in PATH).
++The argument may be an executable name or a full path; it is not a shell
++command. An empty string disables tracking.
++The executable may be installed anywhere. spt calls its existing morning,
++break, resume and closing commands. The tracker must allow closing during a
++break and is installed separately from spt.
++.TP
+ .BI \-v
+ Prints version information to stderr, then exits.
+ .SH TIMER
+@@ -60,6 +70,22 @@
+ ) in an infinite loop.
+ Each entry in config.h contains a duration in seconds, a work flag
+ (1 for work, 0 for break), and a notification message.
++.SH TIME TRACKING
++The first work period starts a session with morning. Breaks and manual work
++pauses use break; returning to work uses resume. Exiting spt uses closing
++once tracking has started. Status requests, initial breaks and resuming a
++scheduled break do not change tracking.
++.PP
++On shutdown during work, a break or a pause, spt calls closing once. Closing
++a break records departure without restarting work or counting any break
++time. The standalone tracker must support this sequence.
++.PP
++A helper inside spt closes the session if the main timer disappears,
++including after SIGKILL, provided that helper survives. Tracker commands
++exit after each update. A failed command stops the timer with an error.
++.PP
++Read statistics directly through the standalone tracker. Start with a closed
++session, and avoid concurrent manual changes or timers for the same session.
+ .SH EXAMPLES
+ Use system notify_send and play a music without libnotify:
+ .IP
+@@ -68,3 +94,7 @@
+ Play a work soundtrack and disable the extra notification command:
+ .IP
+ spt -a "$CONCENTRATION_SOUNDTRACK" -e '' -n 'notify-send'
++.PP
++Use a standalone tracker installed at another path:
++.IP
++spt -t "$HOME/.local/bin/timetrack.py" -a "$CONCENTRATION_SOUNDTRACK" -e ''

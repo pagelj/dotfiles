@@ -4,6 +4,7 @@
 static char *notifycmd = "notify-send"; /* Uses given command if not compiled by DNOTIFY */
 static char *notifyext = "aplay -q ~/.local/foghorn.wav"; /* Notify with extra command (eg. play an alarm) */
 static char *audiofile = ""; /* Work soundtrack; overridden by -a */
+static char *trackcmd = "timetrack"; /* Tracker executable; -t overrides, empty disables */
 
 /*
  * This is the array which defines all the timer that will be used.

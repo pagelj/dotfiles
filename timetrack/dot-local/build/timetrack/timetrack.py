@@ -4,10 +4,15 @@
 from datetime import datetime, date, time, timedelta
 
 import argparse
+import fcntl
 import os
 import sqlite3
 import sys
 import random
+
+sqlite3.register_adapter(datetime, lambda value: value.isoformat(' '))
+sqlite3.register_converter('timestamp',
+                           lambda value: datetime.fromisoformat(value.decode()))
 
 ACT_ARRIVE = 'arrive'
 ACT_BREAK = 'break'
@@ -289,21 +294,27 @@ def randomMessage(type, *args):
     return random.choice(messageList)
 
 
+def databasePath():
+    return os.path.expanduser(os.environ.get(
+        'TIMETRACK_DB', '~/.local/share/timetrack/timetrack.db'))
+
+
 def dbSetup():
     """
     Create a new SQLite database in the user's home, creating and initializing
     the database if it doesn't exist. Returns an sqlite3 connection object.
     """
-    con = sqlite3.connect(os.path.expanduser(
-        "~/.local/share/timetrack/timetrack.db"),
-                          detect_types=sqlite3.PARSE_DECLTYPES)
+    path = databasePath()
+    os.makedirs(os.path.dirname(os.path.abspath(path)), exist_ok=True)
+    con = sqlite3.connect(path, detect_types=sqlite3.PARSE_DECLTYPES)
     con.row_factory = sqlite3.Row
 
     dbVersion = con.execute("PRAGMA user_version").fetchone()['user_version']
     if dbVersion == 0:
         # database is uninitialized, create the tables we need
         con.execute("BEGIN EXCLUSIVE")
-        con.execute("""
+        if con.execute("PRAGMA user_version").fetchone()[0] == 0:
+            con.execute("""
                 CREATE TABLE times (
                       type TEXT NOT NULL CHECK (
                            type == "{}"
@@ -314,7 +325,7 @@ def dbSetup():
                     , PRIMARY KEY (type, ts)
                 )
             """.format(ACT_ARRIVE, ACT_BREAK, ACT_RESUME, ACT_LEAVE))
-        con.execute("PRAGMA user_version = 1")
+            con.execute("PRAGMA user_version = 1")
         con.commit()
     # database upgrade code would go here
 
@@ -327,7 +338,7 @@ def addEntry(con, type, ts):
 
 
 def getLastType(con):
-    cur = con.execute("SELECT type FROM times ORDER BY ts DESC LIMIT 1")
+    cur = con.execute("SELECT type FROM times ORDER BY ts DESC, rowid DESC LIMIT 1")
     row = cur.fetchone()
     if row is None:
         return None
@@ -335,7 +346,7 @@ def getLastType(con):
 
 
 def getLastTime(con):
-    cur = con.execute("SELECT ts FROM times ORDER BY ts DESC LIMIT 1")
+    cur = con.execute("SELECT ts FROM times ORDER BY ts DESC, rowid DESC LIMIT 1")
     row = cur.fetchone()
     if row is None:
         return None
@@ -399,7 +410,7 @@ def endTracking(con):
     # Make sure you've actually been at work. Can't leave if you're not even
     # here!
     lastType = getLastType(con)
-    if lastType not in [ACT_ARRIVE, ACT_RESUME]:
+    if lastType not in [ACT_ARRIVE, ACT_RESUME, ACT_BREAK]:
         error(randomMessage(MSG_ERR_NOT_WORKING, lastType), None)
 
     leaveTime = datetime.now()
@@ -408,57 +419,54 @@ def endTracking(con):
 
 
 def getEntries(con, d):
-    # Get the arrival for the date
-    cur = con.execute("SELECT ts FROM times WHERE type = ? AND ts >= ? AND ts "
-                      "< ? ORDER BY ts ASC LIMIT 1",
-                      (ACT_ARRIVE, datetime.combine(d, time()),
-                       datetime.combine(d + timedelta(days=1), time())))
-    res = cur.fetchone()
-    if not res:
-        error("There is no arrival on {:%d.%m.%Y}".format(d), None)
-    startTime = res['ts']
-
-    # Use the end of the day as endtime
-    endTime = datetime.combine(d + timedelta(days=1), time())
-
-    # Get all entries between the start time, and the end time (if applicable)
-    cur = con.execute("SELECT type, ts FROM times WHERE ts >= ? AND ts <= "
-                      "? ORDER BY ts ASC", (startTime, endTime))
-    return cur
+    return con.execute("SELECT type, ts FROM times WHERE ts >= ? AND ts < ? "
+                       "ORDER BY ts, rowid",
+                       (datetime.combine(d, time()),
+                        datetime.combine(d + timedelta(days=1), time())))
 
 
-def getWorkTimeForDay(con, d=date.today()):
-    summaryTime = timedelta(0)
-    arrival = None
-    for type, ts in getEntries(con, d):
-        if not arrival:
-            if type not in [ACT_ARRIVE, ACT_RESUME]:
-                error("Expected arrival while computing presence time, got {}"
-                      " at {}".format(type, ts), None)
-            arrival = ts
-        else:
-            if type not in [ACT_BREAK, ACT_LEAVE]:
-                error("Expected break/leave while computing presence time, got"
-                      " {} at {}".format(type, ts), None)
-            summaryTime += ts - arrival
-            arrival = None
-    if arrival:
-        # open end
-        summaryTime += datetime.now() - arrival
+def getWorkIntervals(con, now=None):
+    """Read work intervals, ending an unfinished interval at the current time."""
+    now = now or datetime.now()
+    intervals = []
+    start = None
+    for type, ts in con.execute("SELECT type, ts FROM times WHERE ts <= ? "
+                                "ORDER BY ts, rowid", (now,)):
+        if type in [ACT_ARRIVE, ACT_RESUME]:
+            if start is None:
+                start = ts
+        elif start is not None:
+            intervals.append((start, ts))
+            start = None
+    if start is not None:
+        intervals.append((start, now))
+    return intervals, start is not None
 
-    return (arrival is not None, summaryTime)
+
+def workTime(intervals, start, end):
+    """Count only the portions of work intervals inside [start, end)."""
+    return sum((max(timedelta(0), min(b, end) - max(a, start))
+                for a, b in intervals), timedelta(0))
+
+
+def getWorkTimeForDay(con, d=None, now=None):
+    now = now or datetime.now()
+    d = d or now.date()
+    start = datetime.combine(d, time())
+    intervals, active = getWorkIntervals(con, now)
+    total = workTime(intervals, start, start + timedelta(days=1))
+    if not total and getEntries(con, d).fetchone() is None:
+        error("There are no work entries on {:%d.%m.%Y}".format(d), None)
+    return active and d == now.date(), total
 
 
 def dayStatistics(con, offset=0):
-    headerPrinted = False
     targetDay = date.today() + timedelta(days=offset)
+    currentlyHere, totalTime = getWorkTimeForDay(con, targetDay)
+    message("Time tracking entries for {:%d.%m.%Y}:".format(targetDay))
     for type, ts in getEntries(con, targetDay):
-        if not headerPrinted:
-            message("Time tracking entries for {:%d.%m.%Y}:".format(targetDay))
-            headerPrinted = True
         message("  {:<10} {:%d.%m.%Y %H:%M}".format(type, ts))
 
-    currentlyHere, totalTime = getWorkTimeForDay(con)
     if currentlyHere:
         message("You are currently at work.")
     message("You have worked {} h {} min".format(
@@ -549,62 +557,111 @@ def weekStatistics(con, offset=0):
             message("      Daily:   {:>2d} h {:>02d} min"
                     .format(remainingPerDayHours, remainingPerDayMinutes))
 
-parser = argparse.ArgumentParser(description='Track your work time')
+def monthStart(d, offset=0):
+    year, month = divmod(d.year * 12 + d.month - 1 + offset, 12)
+    return datetime(year, month + 1, 1)
 
-commands = parser.add_subparsers(title='subcommands', dest='action',
-                                 help='description', metavar='action')
-parser_morning = commands.add_parser('morning',
-                                     help='Start a new day')
-parser_break = commands.add_parser('break',
-                                   help='Take a break from working')
-parser_resume = commands.add_parser('resume',
-                                    help='Resume working')
-parser_continue = commands.add_parser('continue',
-                                      help='Resume working, alias of "resume"')
-parser_closing = commands.add_parser('closing',
-                                     help='End your work day')
-parser_day = commands.add_parser('day',
-                                 help='Print daily statistics')
-parser_day.add_argument('offset', nargs='?', default=0, type=int,
-                        help='Offset in days to the current one to analyze. '
-                             'Note only negative values make sense here.')
-parser_week = commands.add_parser('week',
-                                  help='Print weekly statistics')
-parser_week.add_argument('offset', nargs='?', default=0, type=int,
-                         help='Offset in weeks to the current one to analyze. '
-                              'Note only negative values make sense here.')
 
-args = parser.parse_args()
+def periodStatistics(con, start, end, advance, dateFormat, label):
+    now = datetime.now()
+    intervals, active = getWorkIntervals(con, now)
+    end = min(end, now) if end is not None else now
+    message(label + ":")
+    current = start
+    total = timedelta(0)
+    while current < end:
+        following = advance(current)
+        duration = workTime(intervals, current, min(following, end))
+        total += duration
+        hours, minutes = divmod(int(duration.total_seconds()) // 60, 60)
+        message("  {}   {:>4d} h {:02d} min".format(
+            current.strftime(dateFormat), hours, minutes))
+        current = following
+    hours, minutes = divmod(int(total.total_seconds()) // 60, 60)
+    message("  Total: {} h {:02d} min".format(hours, minutes))
+    if active and start <= now == end:
+        message("You are currently at work; the total includes time so far.")
 
-actions = {
-    'morning':  (startTracking, []),
-    'break':    (suspendTracking, []),
-    'resume':   (resumeTracking, []),
-    'continue': (resumeTracking, []),
-    'day':      (dayStatistics, ['offset']),
-    'week':     (weekStatistics, ['offset']),
-    'closing':  (endTracking, [])
-}
 
-if args.action not in actions:
-    message('Unsupported action "{}". Use --help to get usage information.'
-            .format(args.action), file=sys.stderr)
-    sys.exit(1)
+def monthStatistics(con, offset=0):
+    start = monthStart(date.today(), offset)
+    periodStatistics(con, start, monthStart(start, 1),
+                     lambda d: d + timedelta(days=1), "%d.%m.%Y",
+                     "Statistics for month {:%Y-%m}".format(start))
 
-try:
-    connection = dbSetup()
 
-    extraArgs = {}
-    handler, extraArgNames = actions[args.action]
-    for extraArgName in extraArgNames:
-        if extraArgName in args:
-            extraArgs[extraArgName] = getattr(args, extraArgName)
+def yearStatistics(con, offset=0):
+    start = datetime(date.today().year + offset, 1, 1)
+    periodStatistics(con, start, datetime(start.year + 1, 1, 1),
+                     lambda d: monthStart(d, 1), "%Y-%m",
+                     "Statistics for year {}".format(start.year))
 
-    handler(connection, **extraArgs)
-    sys.exit(0)
-except ProgramAbortError as e:
-    print(str(e), file=sys.stderr)
-    sys.exit(1)
-except KeyboardInterrupt as e:
-    print()
-    sys.exit(255)
+
+def allStatistics(con):
+    first = con.execute("SELECT ts FROM times ORDER BY ts, rowid LIMIT 1").fetchone()
+    start = datetime(first['ts'].year if first else date.today().year, 1, 1)
+    periodStatistics(con, start, None,
+                     lambda d: datetime(d.year + 1, 1, 1), "%Y",
+                     "All-time statistics")
+
+
+def main(argv=None):
+    parser = argparse.ArgumentParser(description='Track your work time')
+    commands = parser.add_subparsers(title='subcommands', dest='action',
+                                    help='description', metavar='action')
+    actions = {
+        'morning': (startTracking, 'Start a new day', None, []),
+        'break': (suspendTracking, 'Take a break from working', None, []),
+        'resume': (resumeTracking, 'Resume working', None, ['continue']),
+        'closing': (endTracking, 'End your work day', None, []),
+        'day': (dayStatistics, 'Print daily statistics', 'days', []),
+        'week': (weekStatistics, 'Print weekly statistics', 'weeks', []),
+        'month': (monthStatistics, 'Print monthly statistics', 'months',
+                  ['monthly']),
+        'year': (yearStatistics, 'Print yearly statistics', 'years', ['yearly']),
+        'all': (allStatistics, 'Print all-time statistics', None, ['all-time'])
+    }
+    for name, (handler, helpText, unit, aliases) in actions.items():
+        sub = commands.add_parser(name, help=helpText, aliases=aliases)
+        sub.set_defaults(handler=handler)
+        if unit:
+            sub.add_argument('offset', nargs='?', default=0, type=int,
+                             help='Offset in {} from the current period '
+                                  '(e.g. -1 for the previous one).'.format(unit))
+    args = parser.parse_args(argv)
+    if not hasattr(args, 'handler'):
+        parser.print_help()
+        return 1
+
+    connection = None
+    lock = None
+    try:
+        if args.handler in (startTracking, suspendTracking, resumeTracking,
+                            endTracking):
+            path = os.path.realpath(databasePath())
+            os.makedirs(os.path.dirname(path), exist_ok=True)
+            lock = open(path + '.lock', 'a')
+            try:
+                fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            except BlockingIOError:
+                error("Another timer or tracking command controls this "
+                      "database. Stop it before changing the session.", None)
+        connection = dbSetup()
+        extraArgs = {'offset': args.offset} if hasattr(args, 'offset') else {}
+        args.handler(connection, **extraArgs)
+        return 0
+    except (ProgramAbortError, sqlite3.Error, OSError, ValueError) as e:
+        print(str(e), file=sys.stderr)
+        return 1
+    except KeyboardInterrupt:
+        print(file=sys.stderr)
+        return 255
+    finally:
+        if connection is not None:
+            connection.close()
+        if lock is not None:
+            lock.close()
+
+
+if __name__ == '__main__':
+    sys.exit(main())

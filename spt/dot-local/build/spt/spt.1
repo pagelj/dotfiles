@@ -9,6 +9,8 @@ spt \- simple pomodoro timer
 .IR notifyext ]
 .RB [ \-n
 .IR notifycmd ]
+.RB [ \-t
+.IR tracker ]
 .RB [ \-v ]
 .SH DESCRIPTION
 .B spt
@@ -22,7 +24,7 @@ accepts the following control signals:
 \- show remaining time, state
 .br
 .B SIGUSR2
-\- play/pause the timer and work soundtrack
+\- play/pause the timer, work soundtrack, and work-time tracking
 .RE
 .SH OPTIONS
 .TP
@@ -47,6 +49,14 @@ Execute
 if not compiled with
 .IR "-DNOTIFY".
 .TP
+.BI \-t " tracker"
+Use the standalone tracker executable (default: timetrack, found in PATH).
+The argument may be an executable name or a full path; it is not a shell
+command. An empty string disables tracking.
+The executable may be installed anywhere. spt calls its existing morning,
+break, resume and closing commands. The tracker must allow closing during a
+break and is installed separately from spt.
+.TP
 .BI \-v
 Prints version information to stderr, then exits.
 .SH TIMER
@@ -59,6 +69,22 @@ Prints version information to stderr, then exits.
 ) in an infinite loop.
 Each entry in config.h contains a duration in seconds, a work flag
 (1 for work, 0 for break), and a notification message.
+.SH TIME TRACKING
+The first work period starts a session with morning. Breaks and manual work
+pauses use break; returning to work uses resume. Exiting spt uses closing
+once tracking has started. Status requests, initial breaks and resuming a
+scheduled break do not change tracking.
+.PP
+On shutdown during work, a break or a pause, spt calls closing once. Closing
+a break records departure without restarting work or counting any break
+time. The standalone tracker must support this sequence.
+.PP
+A helper inside spt closes the session if the main timer disappears,
+including after SIGKILL, provided that helper survives. Tracker commands
+exit after each update. A failed command stops the timer with an error.
+.PP
+Read statistics directly through the standalone tracker. Start with a closed
+session, and avoid concurrent manual changes or timers for the same session.
 .SH EXAMPLES
 Use system notify_send and play a music without libnotify:
 .IP
@@ -67,3 +93,7 @@ spt -e 'aplay alarm.wav' -n 'notify-send'
 Play a work soundtrack and disable the extra notification command:
 .IP
 spt -a "$CONCENTRATION_SOUNDTRACK" -e '' -n 'notify-send'
+.PP
+Use a standalone tracker installed at another path:
+.IP
+spt -t "$HOME/.local/bin/timetrack.py" -a "$CONCENTRATION_SOUNDTRACK" -e ''
