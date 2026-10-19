@@ -1,4 +1,5 @@
 /* See LICENSE file for copyright and license details. */
+#include <errno.h>
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -6,6 +7,7 @@
 #include <unistd.h>
 #include <signal.h>
 #include <time.h>
+#include <sys/wait.h>
 #ifdef NOTIFY
 #include <libnotify/notify.h>
 #endif /* NOTIFY */
@@ -20,20 +22,19 @@ char *argv0;
 
 typedef struct {
 	unsigned int tmr;
+	int work;
 	char *cmt;
 } Timers;
 
 #include "config.h"
 
-volatile static sig_atomic_t display, suspend;
+static sigset_t mask;
 
 /* function declarations */
 static void die(const char *errstr, ...);
-static void spawn(char *argv[]);
+static pid_t spawn(char *argv[]);
 static void notify_send(char *cmt);
 static void display_state(int remaining, int suspend);
-static void toggle_display(int sigint);
-static void toggle_suspend(int sigint);
 static void usage(void);
 
 /* functions implementations */
@@ -48,16 +49,21 @@ die(const char *errstr, ...)
 	exit(1);
 }
 
-void
+pid_t
 spawn(char *argv[])
 {
-	if (fork() == 0) {
+	pid_t pid;
+
+	if ((pid = fork()) == 0) {
 		setsid();
+		sigprocmask(SIG_UNBLOCK, &mask, NULL);
 		execvp(argv[0], argv);
-		die("spt: execvp %s\n", argv[0]);
-		perror(" failed");
-		exit(0);
+		perror(argv[0]);
+		_exit(1);
 	}
+	if (pid < 0)
+		perror("spt: fork");
+	return pid;
 }
 
 void
@@ -91,36 +97,26 @@ display_state(int remaining, int suspend)
 		 (suspend) ? "◼" : "▶");
 
 	notify_send(buf);
-	display = 0;
-}
-
-void
-toggle_display(int sigint)
-{
-	display = 1;
-}
-
-void
-toggle_suspend(int sigint)
-{
-	suspend ^= 1;
 }
 
 void
 usage(void)
 {
-	die("usage: %s [-e notifyext] [-n notifycmd] [-v]\n", argv0);
+	die("usage: %s [-a audiofile] [-e notifyext] [-n notifycmd] [-v]\n", argv0);
 }
 
 int
 main(int argc, char *argv[])
 {
-	struct timespec remaining;
-	struct sigaction sa;
-	sigset_t emptymask;
-	int i;
+	struct timespec remaining, before, after;
+	pid_t player;
+	long long ns;
+	int i, sig, suspend = 0, done = 0;
 
 	ARGBEGIN {
+		case 'a':
+			audiofile = EARGF(usage());
+			break;
 		case 'e':
 			notifyext = EARGF(usage());
 			break;
@@ -134,40 +130,66 @@ main(int argc, char *argv[])
 			usage();
 	} ARGEND;
 
-	/* add SIGUSR1 handler: remaining_time */
-	sa.sa_handler = toggle_display;
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = 0;
+	/* Wait for signals in the timer loop, without a check/sleep race. */
+	sigemptyset(&mask);
+	sigaddset(&mask, SIGUSR1);
+	sigaddset(&mask, SIGUSR2);
+	sigaddset(&mask, SIGINT);
+	sigaddset(&mask, SIGTERM);
+	sigaddset(&mask, SIGHUP);
+	if (sigprocmask(SIG_BLOCK, &mask, NULL) == -1)
+		die("cannot block timer signals\n");
 
-	if (sigaction(SIGUSR1, &sa, NULL) == -1)
-		die("cannot associate SIGUSR1 to handler\n");
-
-	/* add SIGUSR2 handler: toggle */
-	sa.sa_handler = toggle_suspend;
-	sigemptyset(&sa.sa_mask);
-	sa.sa_flags = 0;
-
-	if (sigaction(SIGUSR2, &sa, NULL) == -1)
-		die("cannot associate SIGUSR2 to handler\n");
-
-	sigemptyset(&emptymask);
-
-	for (i = 0; ; i = (i + 1) % LEN(timers)) {
+	for (i = 0; !done; i = (i + 1) % LEN(timers)) {
 		printf("%s\n", timers[i].cmt);
 		notify_send(timers[i].cmt);
+		player = 0;
+		if (timers[i].work && *audiofile) {
+			player = spawn((char *[]) { "mplayer", "-really-quiet",
+				"-noconsolecontrols", "-loop", "0", "--", audiofile, NULL });
+			if (player > 0 && suspend)
+				kill(player, SIGSTOP);
+		}
 		remaining.tv_sec = timers[i].tmr;
 		remaining.tv_nsec = 0;
-		while (remaining.tv_sec) {
-			if (display)
+		while ((remaining.tv_sec || remaining.tv_nsec) && !done) {
+			if (!suspend)
+				clock_gettime(CLOCK_MONOTONIC, &before);
+			sig = suspend ? sigwaitinfo(&mask, NULL)
+			              : sigtimedwait(&mask, NULL, &remaining);
+			if (!suspend) {
+				clock_gettime(CLOCK_MONOTONIC, &after);
+				ns = remaining.tv_sec * 1000000000LL + remaining.tv_nsec;
+				ns -= (after.tv_sec - before.tv_sec) * 1000000000LL
+				      + after.tv_nsec - before.tv_nsec;
+				if (ns < 0)
+					ns = 0;
+				remaining.tv_sec = ns / 1000000000LL;
+				remaining.tv_nsec = ns % 1000000000LL;
+			}
+			switch (sig) {
+			case SIGUSR1:
 				display_state(remaining.tv_sec, suspend);
-
-			if (suspend)
-				sigsuspend(&emptymask);
-			else
-				if (nanosleep(&remaining, &remaining) == 0)
-					remaining.tv_sec = remaining.tv_nsec = 0;
+				break;
+			case SIGUSR2:
+				suspend ^= 1;
+				if (player > 0)
+					kill(player, suspend ? SIGSTOP : SIGCONT);
+				break;
+			case SIGINT:
+			case SIGTERM:
+			case SIGHUP:
+				done = sig;
+				break;
+			}
+		}
+		if (player > 0) {
+			kill(player, SIGTERM);
+			kill(player, SIGCONT); /* A paused player must run to exit. */
+			while (waitpid(player, NULL, 0) == -1 && errno == EINTR)
+				;
 		}
 	}
 
-	return 0;
+	return 128 + done;
 }

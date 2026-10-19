@@ -1,0 +1,69 @@
+.TH SPT 1 spt\-VERSION
+.SH NAME
+spt \- simple pomodoro timer
+.SH SYNOPSIS
+.B spt
+.RB [ \-a
+.IR audiofile ]
+.RB [ \-e
+.IR notifyext ]
+.RB [ \-n
+.IR notifycmd ]
+.RB [ \-v ]
+.SH DESCRIPTION
+.B spt
+is a simple timer that uses pomodoro technique with desktop notification to
+double your efficiency.
+.B spt
+accepts the following control signals:
+.P
+.RS
+.B SIGUSR1
+\- show remaining time, state
+.br
+.B SIGUSR2
+\- play/pause the timer and work soundtrack
+.RE
+.SH OPTIONS
+.TP
+.BI \-a " audiofile"
+Play
+.I audiofile
+using mplayer during work intervals only.
+The file loops until the interval ends and restarts at the next work interval.
+Playback pauses with the timer and stops before a break or on SIGINT,
+SIGTERM, or SIGHUP.
+The argument is a filename, not a shell command.
+.TP
+.BI \-e " notifyext"
+Execute
+.I notifyext
+for every notification, including work starts, break starts, and SIGUSR1
+status requests. Pass an empty string to disable the configured command.
+.TP
+.BI \-n " notifycmd"
+Execute
+.I notifycmd
+if not compiled with
+.IR "-DNOTIFY".
+.TP
+.BI \-v
+Prints version information to stderr, then exits.
+.SH TIMER
+4 pomodoro timer (
+.B 25 min.
+) with subsequent rests in between (
+.B 5 min.
+) and followed by a long rest (
+.B 15 min.
+) in an infinite loop.
+Each entry in config.h contains a duration in seconds, a work flag
+(1 for work, 0 for break), and a notification message.
+.SH EXAMPLES
+Use system notify_send and play a music without libnotify:
+.IP
+spt -e 'aplay alarm.wav' -n 'notify-send'
+.PP
+Play a work soundtrack and disable the extra notification command:
+.IP
+spt -a "$CONCENTRATION_SOUNDTRACK" -e '' -n 'notify-send'
