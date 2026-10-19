@@ -1,5 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 #include <errno.h>
+#include <fcntl.h>
 #include <stdarg.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -32,7 +33,7 @@ static sigset_t mask;
 
 /* function declarations */
 static void die(const char *errstr, ...);
-static pid_t spawn(char *argv[]);
+static pid_t spawn(char *argv[], int quiet);
 static void notify_send(char *cmt);
 static void display_state(int remaining, int suspend);
 static void usage(void);
@@ -50,13 +51,22 @@ die(const char *errstr, ...)
 }
 
 pid_t
-spawn(char *argv[])
+spawn(char *argv[], int quiet)
 {
 	pid_t pid;
+	int fd;
 
 	if ((pid = fork()) == 0) {
 		setsid();
 		sigprocmask(SIG_UNBLOCK, &mask, NULL);
+		if (quiet) {
+			if ((fd = open("/dev/null", O_WRONLY)) == -1
+			    || dup2(fd, STDOUT_FILENO) == -1
+			    || dup2(fd, STDERR_FILENO) == -1)
+				_exit(1);
+			if (fd != STDOUT_FILENO && fd != STDERR_FILENO)
+				close(fd);
+		}
 		execvp(argv[0], argv);
 		perror(argv[0]);
 		_exit(1);
@@ -70,7 +80,7 @@ void
 notify_send(char *cmt)
 {
 	if (strcmp(notifycmd, ""))
-		spawn((char *[]) { notifycmd, "spt", cmt, NULL });
+		spawn((char *[]) { notifycmd, "spt", cmt, NULL }, 0);
 #ifdef NOTIFY
 	else {
 		notify_init("spt");
@@ -83,7 +93,7 @@ notify_send(char *cmt)
 #endif /* NOTIFY */
 
 	if (strcmp(notifyext, "")) /* extra commands to use */
-		spawn((char *[]) { "/bin/sh", "-c", notifyext, NULL });
+		spawn((char *[]) { "/bin/sh", "-c", notifyext, NULL }, 0);
 }
 
 void
@@ -146,7 +156,7 @@ main(int argc, char *argv[])
 		player = 0;
 		if (timers[i].work && *audiofile) {
 			player = spawn((char *[]) { "mplayer", "-really-quiet",
-				"-noconsolecontrols", "-loop", "0", "--", audiofile, NULL });
+				"-noconsolecontrols", "-loop", "0", "--", audiofile, NULL }, 1);
 			if (player > 0 && suspend)
 				kill(player, SIGSTOP);
 		}
